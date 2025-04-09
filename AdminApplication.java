@@ -11,7 +11,7 @@ public class AdminApplication extends Application {
     public void start(Stage stage) throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(AdminApplication.class.getResource("admin-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load(), 500, 500);
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
