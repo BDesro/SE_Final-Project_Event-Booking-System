@@ -1,29 +1,67 @@
-
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import org.w3c.dom.Text;
+
+import javax.swing.*;
 
 public class AdminController {
+
     @FXML
-    private Event slectedEvent = new Event();
+    private Label name;
     @FXML
-    private Label myLabel;
+    private Label description;
+    @FXML
+    private Label date;
+    @FXML
+    private TextArea nameTextArea;
+    @FXML
+    private TextArea descriptionTextArea;
+    @FXML
+    private TextArea dateTextArea;
+
+    private Event selectedEvent;
+    public int eventIndex = -1;
+    private ObservableList<Event> listOfEvents = FXCollections.observableArrayList();
 
 
-    public void nameButton(ActionEvent e)
+    public void createEvent(ActionEvent e)
     {
-        myLabel.setText(slectedEvent.getEventName());
+        selectedEvent = new Event();
+        refreshText();
+        listOfEvents.add(selectedEvent);
+        eventIndex++;
     }
 
-    public void descriptionButton(ActionEvent e)
+    public void editName(ActionEvent e) {
+        selectedEvent.setEventName(nameTextArea.getText());
+        refreshText();}
+
+    public void editDescription(ActionEvent e) {
+        selectedEvent.setEventDescription(descriptionTextArea.getText());
+        refreshText();}
+
+    public void editDate(ActionEvent e) {
+        selectedEvent.setEventDate(dateTextArea.getText());
+        refreshText();}
+
+    public void nextEvent(ActionEvent e)
     {
-        myLabel.setText(slectedEvent.getEventDescription());
+        if(eventIndex + 1 == listOfEvents.size())
+            eventIndex = 0;
+        else
+            eventIndex++;
+        selectedEvent = listOfEvents.get(eventIndex);
+        refreshText();
     }
 
 
-    public void dateButton(ActionEvent e)
-    {
-        myLabel.setText(slectedEvent.getEventDate());
+    private void refreshText(){
+        date.setText(selectedEvent.getEventDate());
+        name.setText(selectedEvent.getEventName());
+        description.setText(selectedEvent.getEventDescription());
     }
-
 }
