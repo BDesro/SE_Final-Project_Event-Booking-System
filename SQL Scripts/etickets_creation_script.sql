@@ -91,7 +91,7 @@ CREATE TABLE etickets.bookings
 INSERT INTO users
 	(username, password_hash, email_address, user_role)
 VALUES
-	('Guest User', 'N/A', 'N/A', DEFAULT);
+	('Guest User', '$2a$10$O39LWmBVdc9qzYt5FI62quQSPbvPfwzZdGTLWcWnh//Zqm0mldBie', 'N/A', DEFAULT);
 	
 	INSERT INTO users
     (username, password_hash, email_address, user_role)

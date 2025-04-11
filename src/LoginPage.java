@@ -3,6 +3,11 @@ import javafx.scene.Parent;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.*;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 // No longer extends Application, since it is plugged into SceneManager.switchTo()
 public class LoginPage {
 
@@ -45,11 +50,35 @@ public class LoginPage {
         return root;
     }
     public static boolean checkLogin(String username, String password){
-        //Default username and password until database is configured
-        String validUsername = "user";
-        String validPassword = "password123";
+        /* This will only work properly once passwords are properly
+            hashed during account creation using
+                PasswordUtils.hashPassword("the password goes here");
 
-        return username.equals(validUsername) && password.equals(validPassword);
+           For now, use "Guest User" for username and "N/A" for password
+           to test login functionality (remember to update locally to
+                                        current db creation script)
+         */
+        String query = "SELECT password_hash FROM users WHERE username = ?";
+
+        try (Connection connection = JDBC.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(query))
+        {
+            stmt.setString(1, username);
+            ResultSet rs = stmt.executeQuery();
+
+            if(rs.next())
+            {
+                String storedHashPassword = rs.getString("password_hash");
+                return PasswordUtils.checkPassword(password, storedHashPassword);
+            } else {
+                return false;
+            }
+        } catch(SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+
+        //return username.equals(validUsername) && password.equals(validPassword);
     }
     public static void clearLogInFields(TextField user, PasswordField pass){
         user.clear();
