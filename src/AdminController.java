@@ -69,7 +69,6 @@ public class AdminController {
             publicity.setText("It's public");
             selectedEvent.setIsVisible(true);
     }
-
     private void refreshText(){
         date.setText(formatter.format(selectedEvent.getEventDate()));
         name.setText(selectedEvent.getEventName());
@@ -135,4 +134,8 @@ public class AdminController {
 
 
      */
+    // Temp function to go back to login screen for easy viewing/testing
+    public void goToLogin(ActionEvent e){
+        SceneManager.switchTo(SceneID.LOGIN_SCREEN);
+    }
 }
