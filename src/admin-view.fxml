@@ -28,6 +28,7 @@
             <DatePicker fx:id="datePicker" layoutX="257.0" layoutY="237.0" />
             <Label fx:id="publicity" layoutX="311.0" layoutY="459.0" text="Public Label" />
             <Button layoutX="14.0" layoutY="415.0" mnemonicParsing="false" onAction="#makePublic" text="Publish" />
+            <Button layoutX="14.0" layoutY="436.0" mnemonicParsing="false" onAction="#goToLogin" text="Temp return to Login Screen" />
          </children>
       </AnchorPane>
    </children>

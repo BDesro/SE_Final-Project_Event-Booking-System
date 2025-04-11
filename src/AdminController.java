@@ -78,7 +78,10 @@ public class AdminController {
             publicity.setText("It's public");
         else publicity.setText("It's not public");
     }
-
+    // Temp function to go back to login screen for easy viewing/testing
+    public void goToLogin(ActionEvent e){
+        SceneManager.switchTo(SceneID.LOGIN_SCREEN);
+    }
    // ==============================================================================================
    //                                    PREPARED STATEMENTS
    // ==============================================================================================
