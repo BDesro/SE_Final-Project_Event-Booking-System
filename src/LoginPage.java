@@ -1,13 +1,14 @@
-import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import javafx.scene.control.*;
-import javafx.scene.Scene;
-public class LoginPage extends Application {
 
-    @Override
-    public void start(Stage stage) throws Exception {
+// No longer extends Application, since it is plugged into SceneManager.switchTo()
+public class LoginPage {
+
+    // Creates and returns the root needed to set up the screen (in SceneManager)
+    // All functionality except for stage and scene remains the same
+    public static Parent getRootNode() {
 
 
         Label usernameLabel = new Label("Username: ");
@@ -18,6 +19,8 @@ public class LoginPage extends Application {
 
         Button login = new Button("Login");
         Button createNewAccount = new Button ("Make a new account"); //Case to add to user table with set action
+
+        Button tempAdmin = new Button("Temp goto Admin Screen");
 
         login.setOnAction(e ->{
             String user = username.getText();
@@ -32,29 +35,24 @@ public class LoginPage extends Application {
 
         });
 
+        tempAdmin.setOnAction(e -> SceneManager.switchTo(SceneID.ADMIN_SCREEN));
+
         VBox root = new VBox(10);
         root.setPadding(new Insets(20));
-        root.getChildren().addAll(usernameLabel, username, passwordLabel, passwordField,
-                login, createNewAccount);
-        Scene scene = new Scene(root, 500, 500);
-        stage.setTitle("Log In Screen");
-        stage.setScene(scene);
-        stage.show();
 
+        root.getChildren().addAll(usernameLabel, username, passwordLabel, passwordField,
+                login, createNewAccount, tempAdmin);
+        return root;
     }
-    public boolean checkLogin(String username, String password){
+    public static boolean checkLogin(String username, String password){
         //Default username and password until database is configured
         String validUsername = "user";
         String validPassword = "password123";
 
         return username.equals(validUsername) && password.equals(validPassword);
     }
-    public void clearLogInFields(TextField user, PasswordField pass){
+    public static void clearLogInFields(TextField user, PasswordField pass){
         user.clear();
         pass.clear();
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }
