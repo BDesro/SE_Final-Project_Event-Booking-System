@@ -134,8 +134,4 @@ public class AdminController {
 
 
      */
-    // Temp function to go back to login screen for easy viewing/testing
-    public void goToLogin(ActionEvent e){
-        SceneManager.switchTo(SceneID.LOGIN_SCREEN);
-    }
 }
