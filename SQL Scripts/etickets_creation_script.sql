@@ -92,3 +92,8 @@ INSERT INTO users
 	(username, password_hash, email_address, user_role)
 VALUES
 	('Guest User', 'N/A', 'N/A', DEFAULT);
+	
+	INSERT INTO users
+    (username, password_hash, email_address, user_role)
+    VALUES
+    ('King Rhoam Bosphoramus ','N/A', 'N/A1', 'admin')

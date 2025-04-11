@@ -131,7 +131,5 @@ public class AdminController {
         Connection connection = JDBC.getConnection();
         PreparedStatement statement = connection.prepareStatement(deletePrepStatement());
     }
-
-
      */
 }
