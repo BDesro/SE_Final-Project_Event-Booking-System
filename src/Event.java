@@ -1,23 +1,24 @@
+import java.time.LocalDate;
 
 public class Event {
 
     private String eventName;
     private String eventDescription;
-    private String eventDate;
+    private LocalDate eventDate;
     private Boolean isVisible;
 
     public Event()
     {
         eventName = "Default Name";
         eventDescription = "Default Description";
-        eventDate = "Default Date";
+        eventDate = LocalDate.now();
         isVisible = false;
     }
 
 
 
 
-    public String getEventDate() {
+    public LocalDate getEventDate() {
         return eventDate;
     }
     public String getEventName() {
@@ -38,8 +39,8 @@ public class Event {
         if (!newDescription.isEmpty())
             eventDescription = newDescription;
     }
-    public void setEventDate(String newDate) {
-        if (!newDate.isEmpty())
+    public void setEventDate(LocalDate newDate) {
+        if (newDate != null)
             eventDate = newDate;
     }
     public void setIsVisible(Boolean newVisibility)

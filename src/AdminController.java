@@ -2,11 +2,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import org.w3c.dom.Text;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.time.format.DateTimeFormatter;
 
-import javax.swing.*;
 
 public class AdminController {
 
@@ -17,15 +19,19 @@ public class AdminController {
     @FXML
     private Label date;
     @FXML
+    private Label publicity;
+    @FXML
     private TextArea nameTextArea;
     @FXML
     private TextArea descriptionTextArea;
     @FXML
-    private TextArea dateTextArea;
+    private DatePicker datePicker;
 
     private Event selectedEvent;
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     public int eventIndex = -1;
     private ObservableList<Event> listOfEvents = FXCollections.observableArrayList();
+    private JDBC jdbc = new JDBC();
 
 
     public void createEvent(ActionEvent e)
@@ -45,7 +51,7 @@ public class AdminController {
         refreshText();}
 
     public void editDate(ActionEvent e) {
-        selectedEvent.setEventDate(dateTextArea.getText());
+        selectedEvent.setEventDate(datePicker.getValue());
         refreshText();}
 
     public void nextEvent(ActionEvent e)
@@ -58,12 +64,76 @@ public class AdminController {
         refreshText();
     }
 
+    public void makePublic(ActionEvent e)
+    {
+            publicity.setText("It's public");
+            selectedEvent.setIsVisible(true);
+    }
     private void refreshText(){
-        date.setText(selectedEvent.getEventDate());
+        date.setText(formatter.format(selectedEvent.getEventDate()));
         name.setText(selectedEvent.getEventName());
         description.setText(selectedEvent.getEventDescription());
+        if (selectedEvent.getIsVisible())
+            publicity.setText("It's public");
+        else publicity.setText("It's not public");
+    }
+    // Temp function to go back to login screen for easy viewing/testing
+    public void goToLogin(ActionEvent e){
+        SceneManager.switchTo(SceneID.LOGIN_SCREEN);
+    }
+   // ==============================================================================================
+   //                                    PREPARED STATEMENTS
+   // ==============================================================================================
+    private String publishPrepStatement()
+    {
+        String sqlCode = ("INSERT INTO event_list (event_name, event_description, " +
+                "event_date, is_active) VALUES ('"
+                + selectedEvent.getEventName() + "', '"
+                + selectedEvent.getEventDescription() + "', '"
+                + formatter.format(selectedEvent.getEventDate()) + "', '"
+                + selectedEvent.getIsVisible() + "');");
+        return sqlCode;
+    }
+    private String editPrepStatement()
+    {
+        String sqlCode = ("UPDATE event_list " +
+                "SET event_name = '" + nameTextArea.getText() + "', "+
+                "event_description = '" + descriptionTextArea.getText() +"', "+
+                "event_date = '" + formatter.format(selectedEvent.getEventDate()) + "'," +
+                "is_active = '" + selectedEvent.getIsVisible() + "' "+
+                "WHERE event_name = '" + selectedEvent.getEventName() + "';");
+        return sqlCode;
+    }
+    private String deletePrepStatement()
+    {
+        String sqlCode ="DELETE FROM event_list WHERE event_name = '" + selectedEvent.getEventName() + "';";
+                //DELETE FROM table_name WHERE condition LIMIT 1;
+        return sqlCode;
     }
 
+    // ==============================================================================================
+    //                                    DATA BASE CONNECTION
+    // ==============================================================================================
+    /*
+    private void publishEvent()
+    {
+       // selectedEvent.setIsVisible(true);
+        Connection connection = JDBC.getConnection();
+        PreparedStatement statement = connection.prepareStatement(publishPrepStatement());
+    }
+    private void editEvent()
+    {
+        Connection connection = JDBC.getConnection();
+        PreparedStatement statement = connection.prepareStatement(editPrepStatement());
+    }
+    private void deleteEvent()
+    {
+        Connection connection = JDBC.getConnection();
+        PreparedStatement statement = connection.prepareStatement(deletePrepStatement());
+    }
+
+
+     */
     // Temp function to go back to login screen for easy viewing/testing
     public void goToLogin(ActionEvent e){
         SceneManager.switchTo(SceneID.LOGIN_SCREEN);
