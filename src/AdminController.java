@@ -58,10 +58,14 @@ public class AdminController {
         refreshText();
     }
 
-
     private void refreshText(){
         date.setText(selectedEvent.getEventDate());
         name.setText(selectedEvent.getEventName());
         description.setText(selectedEvent.getEventDescription());
+    }
+
+    // Temp function to go back to login screen for easy viewing/testing
+    public void goToLogin(ActionEvent e){
+        SceneManager.switchTo(SceneID.LOGIN_SCREEN);
     }
 }
