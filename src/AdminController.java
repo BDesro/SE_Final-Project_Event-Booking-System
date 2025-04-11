@@ -115,6 +115,7 @@ public class AdminController {
     // ==============================================================================================
     //                                    DATA BASE CONNECTION
     // ==============================================================================================
+    /*
     private void publishEvent()
     {
        // selectedEvent.setIsVisible(true);
@@ -132,4 +133,6 @@ public class AdminController {
         PreparedStatement statement = connection.prepareStatement(deletePrepStatement());
     }
 
+
+     */
 }

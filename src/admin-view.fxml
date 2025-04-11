@@ -27,8 +27,8 @@
             <Text layoutX="296.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select The Date" />
             <DatePicker fx:id="datePicker" layoutX="257.0" layoutY="237.0" />
             <Label fx:id="publicity" layoutX="311.0" layoutY="459.0" text="Public Label" />
-            <Button layoutX="14.0" layoutY="415.0" mnemonicParsing="false" onAction="#makePublic" text="Publish" />
-            <Button layoutX="14.0" layoutY="436.0" mnemonicParsing="false" onAction="#goToLogin" text="Temp return to Login Screen" />
+            <Button layoutX="19.0" layoutY="406.0" mnemonicParsing="false" onAction="#makePublic" text="Publish" />
+            <Button layoutX="14.0" layoutY="444.0" mnemonicParsing="false" onAction="#goToLogin" text="Temp return to Login Screen" />
          </children>
       </AnchorPane>
    </children>
