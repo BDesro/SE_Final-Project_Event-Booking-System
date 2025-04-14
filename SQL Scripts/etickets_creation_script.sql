@@ -93,8 +93,11 @@ INSERT INTO users
 VALUES
 <<<<<<< Updated upstream
 	('Guest User', 'N/A', 'N/A', DEFAULT);
+<<<<<<< Updated upstream
 =======
 	('Guest User', 'N/A', 'N/A', DEFAULT);
+=======
+>>>>>>> Stashed changes
 
 	INSERT INTO users
     (username, password_hash, email_address, user_role)

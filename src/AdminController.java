@@ -156,10 +156,13 @@ public class AdminController {
         }
     }
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
 
      */
 =======
+=======
+>>>>>>> Stashed changes
     private boolean validateEvent()
     {
         boolean valid =false;
@@ -217,5 +220,8 @@ public class AdminController {
         }
     }
 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 }
