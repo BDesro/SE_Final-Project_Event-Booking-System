@@ -14,6 +14,15 @@ public class Event {
         eventDate = LocalDate.now();
         isVisible = false;
     }
+    public Event(String name, String description, LocalDate date, Boolean visible)
+    {
+        eventName = name;
+        eventDescription = description;
+        eventDate = date;
+        isVisible = visible;
+    }
+
+
 
 
 

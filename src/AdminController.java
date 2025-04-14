@@ -7,6 +7,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 
@@ -32,27 +35,16 @@ public class AdminController {
     public int eventIndex = -1;
     private ObservableList<Event> listOfEvents = FXCollections.observableArrayList();
     private JDBC jdbc = new JDBC();
+    private String sqlCode;
 
 
     public void createEvent(ActionEvent e)
     {
         selectedEvent = new Event();
-        refreshText();
         listOfEvents.add(selectedEvent);
+        refreshText();
         eventIndex++;
     }
-
-    public void editName(ActionEvent e) {
-        selectedEvent.setEventName(nameTextArea.getText());
-        refreshText();}
-
-    public void editDescription(ActionEvent e) {
-        selectedEvent.setEventDescription(descriptionTextArea.getText());
-        refreshText();}
-
-    public void editDate(ActionEvent e) {
-        selectedEvent.setEventDate(datePicker.getValue());
-        refreshText();}
 
     public void nextEvent(ActionEvent e)
     {
@@ -64,11 +56,7 @@ public class AdminController {
         refreshText();
     }
 
-    public void makePublic(ActionEvent e)
-    {
-            publicity.setText("It's public");
-            selectedEvent.setIsVisible(true);
-    }
+
     private void refreshText(){
         date.setText(formatter.format(selectedEvent.getEventDate()));
         name.setText(selectedEvent.getEventName());
@@ -77,61 +65,157 @@ public class AdminController {
             publicity.setText("It's public");
         else publicity.setText("It's not public");
     }
+
+    private void quickUpdate()
+    {
+        selectedEvent.setEventName(nameTextArea.getText());
+        selectedEvent.setEventDescription(descriptionTextArea.getText());
+        selectedEvent.setEventDate(datePicker.getValue());
+    }
+
     // Temp function to go back to login screen for easy viewing/testing
     public void goToLogin(ActionEvent e){
         SceneManager.switchTo(SceneID.LOGIN_SCREEN);
     }
-   // ==============================================================================================
-   //                                    PREPARED STATEMENTS
-   // ==============================================================================================
-    private String publishPrepStatement()
-    {
-        String sqlCode = ("INSERT INTO event_list (event_name, event_description, " +
-                "event_date, is_active) VALUES ('"
-                + selectedEvent.getEventName() + "', '"
-                + selectedEvent.getEventDescription() + "', '"
-                + formatter.format(selectedEvent.getEventDate()) + "', '"
-                + selectedEvent.getIsVisible() + "');");
-        return sqlCode;
-    }
-    private String editPrepStatement()
-    {
-        String sqlCode = ("UPDATE event_list " +
-                "SET event_name = '" + nameTextArea.getText() + "', "+
-                "event_description = '" + descriptionTextArea.getText() +"', "+
-                "event_date = '" + formatter.format(selectedEvent.getEventDate()) + "'," +
-                "is_active = '" + selectedEvent.getIsVisible() + "' "+
-                "WHERE event_name = '" + selectedEvent.getEventName() + "';");
-        return sqlCode;
-    }
-    private String deletePrepStatement()
-    {
-        String sqlCode ="DELETE FROM event_list WHERE event_name = '" + selectedEvent.getEventName() + "';";
-                //DELETE FROM table_name WHERE condition LIMIT 1;
-        return sqlCode;
-    }
-
     // ==============================================================================================
     //                                    DATA BASE CONNECTION
     // ==============================================================================================
-    /*
-    private void publishEvent()
+
+    public void publishEvent(ActionEvent e)
     {
-       // selectedEvent.setIsVisible(true);
-        Connection connection = JDBC.getConnection();
-        PreparedStatement statement = connection.prepareStatement(publishPrepStatement());
+        if(validateEvent()) { //if(validateEvent()) {
+            sqlCode = ("INSERT INTO event_list (event_name, event_description, " +
+                    "event_date, is_active) VALUES (?,?,?,?)");
+            PreparedStatement statement = null;
+            try {
+                quickUpdate();
+                Connection connection = JDBC.getConnection();
+                statement = connection.prepareStatement(sqlCode);
+                statement.setString(1, selectedEvent.getEventName());
+                statement.setString(2, selectedEvent.getEventDescription());
+                statement.setString(3, formatter.format(selectedEvent.getEventDate()));
+                statement.setBoolean(4, selectedEvent.getIsVisible());
+                int rowsLeft = statement.executeUpdate();
+                if (rowsLeft > 0) {
+                    System.out.println("Event published successfully!");
+                    selectedEvent.setIsVisible(true);
+                    refreshText();
+                }
+            } catch (SQLException event) {
+                throw new RuntimeException(event);
+            }
+        }
+        else {
+            System.out.println("Not valid");
+        }
     }
-    private void editEvent()
+    public void editEvent(ActionEvent e)
     {
-        Connection connection = JDBC.getConnection();
-        PreparedStatement statement = connection.prepareStatement(editPrepStatement());
+        sqlCode = ("UPDATE event_list " +
+                "SET event_name = ?, event_description = ?, " +
+                "event_date = ?, is_active = ? " +
+                "WHERE event_name = ?");
+        PreparedStatement statement = null;
+        try {
+            Connection connection = JDBC.getConnection();
+            statement = connection.prepareStatement(sqlCode);
+            statement.setString(1,nameTextArea.getText());
+            statement.setString(2,descriptionTextArea.getText());
+            statement.setString(3,formatter.format(datePicker.getValue()));
+            statement.setBoolean(4,selectedEvent.getIsVisible());
+            statement.setString(5,selectedEvent.getEventName());
+            int rowsLeft = statement.executeUpdate();
+            if (rowsLeft > 0) {
+                System.out.println("Event edited successfully!");
+                refreshText();
+            }
+            statement.close();
+            connection.close();
+        } catch (SQLException event) {
+            throw new RuntimeException(event);
+        }
     }
-    private void deleteEvent()
+    public void deleteEvent(ActionEvent e)
     {
-        Connection connection = JDBC.getConnection();
-        PreparedStatement statement = connection.prepareStatement(deletePrepStatement());
+     sqlCode ="DELETE FROM event_list WHERE event_name = ?";
+        PreparedStatement statement = null;
+        try {
+            Connection connection = JDBC.getConnection();
+            statement = connection.prepareStatement(sqlCode);
+            statement.setString(1,nameTextArea.getText());
+            int rowsLeft = statement.executeUpdate();
+            if (rowsLeft > 0) {
+                System.out.println("Event deleted successfully!");
+                selectedEvent = listOfEvents.get(eventIndex);
+                refreshText();
+            }
+            statement.close();
+            connection.close();
+        } catch (SQLException event) {
+            throw new RuntimeException(event);
+        }
     }
+<<<<<<< Updated upstream
 
 
      */
+=======
+    private boolean validateEvent()
+    {
+        boolean valid =false;
+        sqlCode ="SELECT COUNT(event_id) FROM event_list WHERE event_name = ?";
+        PreparedStatement statement = null;
+
+        try {
+            Connection connection = JDBC.getConnection();
+            statement = connection.prepareStatement(sqlCode);
+            statement.setString(1,nameTextArea.getText());
+            statement.executeQuery();
+            ResultSet rs = statement.executeQuery();
+            if(rs.next())
+            {
+                System.out.println("Event is valid!");
+                selectedEvent.setEventName(nameTextArea.getText());
+                selectedEvent.setEventDescription(descriptionTextArea.getText());
+                selectedEvent.setEventDate(datePicker.getValue());
+                valid = true;
+            }
+            rs.close();
+            statement.close();
+            connection.close();
+        } catch (SQLException event) {
+            throw new RuntimeException(event);
+        }
+        return valid;
+    }
+
+    public void pullEvents(ActionEvent e)
+    {
+        sqlCode ="SELECT event_name, event_description, event_date, is_active FROM event_list";
+        PreparedStatement statement = null;
+
+        try {
+            Connection connection = JDBC.getConnection();
+            statement = connection.prepareStatement(sqlCode);
+            ResultSet rs = statement.executeQuery();
+            while(rs.next())
+            {
+                String name = rs.getString("event_name");
+                String description = rs.getString("event_description");
+                LocalDate date = LocalDate.parse(rs.getString("event_date"));
+                Boolean visible =rs.getBoolean("is_active");
+                selectedEvent = new Event(name,description,date,visible);
+                listOfEvents.add(selectedEvent);
+                eventIndex++;
+            }
+            rs.close();
+            statement.close();
+            connection.close();
+            refreshText();
+        } catch (SQLException event) {
+            throw new RuntimeException(event);
+        }
+    }
+
+>>>>>>> Stashed changes
 }

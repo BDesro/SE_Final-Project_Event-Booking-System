@@ -91,4 +91,13 @@ CREATE TABLE etickets.bookings
 INSERT INTO users
 	(username, password_hash, email_address, user_role)
 VALUES
+<<<<<<< Updated upstream
 	('Guest User', 'N/A', 'N/A', DEFAULT);
+=======
+	('Guest User', 'N/A', 'N/A', DEFAULT);
+
+	INSERT INTO users
+    (username, password_hash, email_address, user_role)
+    VALUES
+    ('King Rhoam Bosphoramus ','N/A', 'N/A1', 'admin')
+>>>>>>> Stashed changes
