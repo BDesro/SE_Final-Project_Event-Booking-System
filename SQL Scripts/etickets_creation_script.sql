@@ -96,8 +96,11 @@ VALUES
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
 	('Guest User', 'N/A', 'N/A', DEFAULT);
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 =======
