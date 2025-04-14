@@ -47,7 +47,7 @@
                         <Font size="24.0" />
                      </font>
                   </Text>
-                  <Label fx:id="name" text="Name Label" GridPane.rowIndex="2">
+                  <Label fx:id="name" text="NULL" GridPane.rowIndex="2">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -57,12 +57,12 @@
                         <Font size="24.0" />
                      </font>
                   </Text>
-                  <Label fx:id="description" text="Description Label" GridPane.rowIndex="4">
+                  <Label fx:id="description" text="NULL" GridPane.rowIndex="4">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="date" text="Date Label" GridPane.rowIndex="6">
+                  <Label fx:id="date" text="NULL" GridPane.rowIndex="6">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -77,7 +77,7 @@
                         <Font size="24.0" />
                      </font>
                   </Text>
-                  <Label fx:id="publicity" text="Public Label" GridPane.rowIndex="8">
+                  <Label fx:id="publicity" text="NULL" GridPane.rowIndex="8">
                      <font>
                         <Font size="18.0" />
                      </font>

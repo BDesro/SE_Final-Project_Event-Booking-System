@@ -46,7 +46,7 @@ public class AdminController {
         eventIndex++;
     }
 
-    public void nextEvent(ActionEvent e)
+    public void nextEvent()
     {
         if(eventIndex + 1 == listOfEvents.size())
             eventIndex = 0;
@@ -83,7 +83,7 @@ public class AdminController {
 
     public void publishEvent(ActionEvent e)
     {
-        if(validateEvent()) { //if(validateEvent()) {
+        if(validateEvent()) {
             sqlCode = ("INSERT INTO event_list (event_name, event_description, " +
                     "event_date, is_active) VALUES (?,?,?,?)");
             PreparedStatement statement = null;
@@ -145,8 +145,9 @@ public class AdminController {
             statement.setString(1,nameTextArea.getText());
             int rowsLeft = statement.executeUpdate();
             if (rowsLeft > 0) {
+                listOfEvents.remove(eventIndex);
                 System.out.println("Event deleted successfully!");
-                selectedEvent = listOfEvents.get(eventIndex);
+                nextEvent();
                 refreshText();
             }
             statement.close();
