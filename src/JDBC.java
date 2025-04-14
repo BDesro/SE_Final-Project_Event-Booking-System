@@ -4,7 +4,7 @@ import java.sql.SQLException;
 public class JDBC {
     private static final String url = "jdbc:mysql://localhost:3306/etickets";
     private static final String user = "root";
-    private static final String password = "1234"; //Change to your password
+    private static final String password = "Lovegood!17"; //Change to your password
 
     public static Connection getConnection() {
         try {
