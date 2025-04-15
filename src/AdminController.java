@@ -95,12 +95,8 @@ public class AdminController {
                 statement.setString(2, selectedEvent.getEventDescription());
                 statement.setString(3, formatter.format(selectedEvent.getEventDate()));
                 statement.setBoolean(4, selectedEvent.getIsVisible());
-                int rowsLeft = statement.executeUpdate();
-                if (rowsLeft > 0) {
-                    System.out.println("Event published successfully!");
-                    selectedEvent.setIsVisible(true);
-                    refreshText();
-                }
+                statement.executeUpdate();
+                refreshText();
             } catch (SQLException event) {
                 throw new RuntimeException(event);
             }
@@ -142,11 +138,12 @@ public class AdminController {
         try {
             Connection connection = JDBC.getConnection();
             statement = connection.prepareStatement(sqlCode);
-            statement.setString(1,nameTextArea.getText());
+            statement.setString(1,selectedEvent.getEventName());
             int rowsLeft = statement.executeUpdate();
             if (rowsLeft > 0) {
-                listOfEvents.remove(eventIndex);
+                listOfEvents.remove(selectedEvent);
                 System.out.println("Event deleted successfully!");
+                eventIndex--;
                 nextEvent();
                 refreshText();
             }
@@ -203,8 +200,8 @@ public class AdminController {
                 Boolean visible =rs.getBoolean("is_active");
                 selectedEvent = new Event(name,description,date,visible);
                 listOfEvents.add(selectedEvent);
-                eventIndex++;
             }
+            eventIndex = listOfEvents.size()-1;
             rs.close();
             statement.close();
             connection.close();
