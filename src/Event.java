@@ -1,4 +1,12 @@
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Event {
 
@@ -6,6 +14,8 @@ public class Event {
     private String eventDescription;
     private LocalDate eventDate;
     private Boolean isVisible;
+
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public Event()
     {
@@ -59,5 +69,33 @@ public class Event {
 
     public String toString() {
         return getEventName() + " " + getEventDescription() + " " + getEventDate();
+    }
+
+    public static ObservableList<Event> getAllEvents()
+    {
+        ObservableList<Event> events = FXCollections.observableArrayList();
+
+        String query = "SELECT event_name, event_description, event_date, is_active " +
+                       "FROM event_list " +
+                       "WHERE is_active";
+
+        try (Connection connection = JDBC.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery())
+        {
+            while(rs.next())
+            {
+                events.add(new Event(
+                        rs.getString("event_name"),
+                        rs.getString("event_description"),
+                        LocalDate.parse(rs.getString("event_date")),
+                        rs.getBoolean("is_active")
+                ));
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
+        return events;
     }
 }
