@@ -76,8 +76,8 @@ public class Event {
         ObservableList<Event> events = FXCollections.observableArrayList();
 
         String query = "SELECT event_name, event_description, event_date, is_active " +
-                       "FROM event_list " +
-                       "WHERE is_active";
+                       "FROM event_list ";
+                  // + "WHERE is_active";    I'm commenting this until the active/inactive works right
 
         try (Connection connection = JDBC.getConnection();
              PreparedStatement stmt = connection.prepareStatement(query);

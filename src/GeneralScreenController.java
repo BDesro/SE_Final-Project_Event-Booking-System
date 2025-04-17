@@ -1,4 +1,5 @@
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
@@ -19,7 +20,7 @@ public class GeneralScreenController
     private TableColumn<Event, LocalDate> dateColumn;
 
     @FXML
-    public void initializeEventTable()
+    public void initialize()
     {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("eventName"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("eventDescription"));
@@ -38,10 +39,14 @@ public class GeneralScreenController
                 {
                     Event selected = row.getItem();
                     System.out.println("Selected: " + selected.getEventName());
-                    // Can use this to trigger seating screen, etc.
+                    // Can use this to trigger seating screen, etc. later
                 }
             });
             return row;
         });
+    }
+
+    public void backToLogin(ActionEvent e){
+        SceneManager.switchTo(SceneID.LOGIN_SCREEN);
     }
 }
