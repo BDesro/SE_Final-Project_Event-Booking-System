@@ -23,6 +23,7 @@ public class LoginPage {
 
         Label passwordLabel = new Label("Password: ");
         PasswordField passwordField = new PasswordField();
+        Label messageLabel = new Label("");
 
         Button login = new Button("Login");
         Button createNewAccount = new Button ("Make a new account"); //Case to add to user table with set action
@@ -40,7 +41,8 @@ public class LoginPage {
             String password = passwordField.getText();
 
             if(checkLogin(user, password)) {
-                System.out.println("Log in successful!");
+                messageLabel.setText("Log In Success!!");
+                messageLabel.setStyle("-fx-text-fill: green;");
                 username.clear();
                 passwordField.clear();
 
@@ -52,15 +54,19 @@ public class LoginPage {
                 else
                     SceneManager.switchTo(SceneID.ADMIN_SCREEN);*/ // Switches to Admin screen if user is Admin
             }
-            else
-                System.out.println("Incorrect password or username. Try again");
+            else {
+                messageLabel.setText("Incorrect Username or password. Please try again");
+                messageLabel.setStyle("-fx-text-fill: red;");
+                username.clear();
+                passwordField.clear();
+            }
 
         });
         guestLogIn.setOnAction(e->SceneManager.switchTo(SceneID.GENERAL_SCREEN));
         createNewAccount.setOnAction(e ->SceneManager.switchTo(SceneID.CREATE_SCREEN));
 
         tempAdmin.setOnAction(e -> SceneManager.switchTo(SceneID.ADMIN_SCREEN));
-        root.getChildren().addAll(tempAdmin);
+        root.getChildren().addAll(tempAdmin, messageLabel);
         return root;
     }
     public static boolean checkLogin(String username, String password){

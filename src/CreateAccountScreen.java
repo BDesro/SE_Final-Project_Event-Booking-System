@@ -1,5 +1,4 @@
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
@@ -16,6 +15,8 @@ public class CreateAccountScreen {
         dialog.setTitle("Create Account");
         dialog.setHeaderText("Enter your details (username,email,password)");
 
+        Label messageLabel = new Label("");
+
         Label newUserLabel = new Label("New Username:");
         TextField newUserField = new TextField();
         Label newEmailLabel = new Label("New Email:");
@@ -31,21 +32,26 @@ public class CreateAccountScreen {
             String newPassword = newPassField.getText();
 
             if (newUsername.isEmpty() || newEmail.isEmpty() || newPassword.isEmpty()) {
-                System.out.println("Please fill out all fields.");
+                messageLabel.setText("All fields are required.");
+                messageLabel.setStyle("-fx-text-fill: red;");
                 return;
             }
 
             if (emailHasAccount(newEmail)) {
-                System.out.println("Email is already in use.");
+                messageLabel.setText("Email already has associated account!!!!");
+                messageLabel.setStyle("-fx-text-fill: red;");
+                newEmailField.clear();
             } else {
                 User newUser = new User(newUsername, newPassword, newEmail, User.Role.USER); //Default as user account
                 if (createAccount(newUser)) {
-                    System.out.println("Account created successfully!");
+                    messageLabel.setText("Account created successfully!");
+                    messageLabel.setStyle("-fx-text-fill: green;");
                     newUserField.clear();
                     newEmailField.clear();
                     newPassField.clear();
                 } else {
-                    System.out.println("Account creation failed.");
+                    messageLabel.setText("Error in making the account");
+                    messageLabel.setStyle("-fx-text-fill: red;");
                 }
             }
         });
@@ -57,7 +63,7 @@ public class CreateAccountScreen {
         HBox emailRow = new HBox(10, newEmailLabel, newEmailField);
         HBox passRow = new HBox(10, newPassLabel, newPassField);
         HBox buttonRow = new HBox(10, submitNewAccount, returnToLogIn);
-        root.getChildren().addAll(userRow, emailRow, passRow, buttonRow);
+        root.getChildren().addAll(userRow, emailRow, passRow, buttonRow, messageLabel);
         
         return root;
     }
