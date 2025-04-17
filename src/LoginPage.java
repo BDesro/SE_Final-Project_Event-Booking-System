@@ -28,11 +28,12 @@ public class LoginPage {
         Button createNewAccount = new Button ("Make a new account"); //Case to add to user table with set action
 
         Button tempAdmin = new Button("Temp goto Admin Screen");
+        Button guestLogIn = new Button("Log In As Guest");
 
         VBox root = new VBox(10);
         root.setPadding(new Insets(20));
         root.getChildren().addAll(usernameLabel, username, passwordLabel, passwordField,
-                login, createNewAccount);
+                login, guestLogIn, createNewAccount);
 
         login.setOnAction(e ->{
             String user = username.getText();
@@ -55,6 +56,7 @@ public class LoginPage {
                 System.out.println("Incorrect password or username. Try again");
 
         });
+        guestLogIn.setOnAction(e->{SceneManager.switchTo(SceneID.GENERAL_SCREEN);});
         createNewAccount.setOnAction(e -> {
             // Temporary dialog (can be made into a new Scene if needed)
             TextInputDialog dialog = new TextInputDialog();
