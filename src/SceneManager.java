@@ -52,16 +52,23 @@ public class SceneManager
 
             // Declare the Scene based on the parameters above for FXML
             //  vs pure Java
-            switch(id)
+            switch (id)
             {
-                case LOGIN_SCREEN:
+                case LOGIN_SCREEN ->
+                {
                     scene = new Scene(LoginPage.getRootNode(), resX, resY);
                     stage.setTitle("Login Screen");
-                    break;
-                case ADMIN_SCREEN:
+                }
+                case ADMIN_SCREEN ->
+                {
                     scene = new Scene(loadFXML("admin-view.fxml"), resX, resY);
                     stage.setTitle("Admin Screen");
-                    break;
+                }
+                case GENERAL_SCREEN ->
+                {
+                    scene = new Scene(loadFXML("general-view.fxml"), resX, resY);
+                    stage.setTitle("General User Screen");
+                }
             }
 
             if(scene != null)

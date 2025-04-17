@@ -11,6 +11,8 @@ import java.sql.SQLException;
 // No longer extends Application, since it is plugged into SceneManager.switchTo()
 public class LoginPage {
 
+    public static User activeUser = null;
+
     // Creates and returns the root needed to set up the screen (in SceneManager)
     // All functionality except for stage and scene remains the same
     public static Parent getRootNode() { //A second class should be made to handle log in methods and database queries
@@ -37,9 +39,17 @@ public class LoginPage {
             String password = passwordField.getText();
 
             if(checkLogin(user, password)) {
-                System.out.println("Log in successful!"); //Don't have general user screen yet
+                System.out.println("Log in successful!");
                 username.clear();
                 passwordField.clear();
+
+                SceneManager.switchTo(SceneID.GENERAL_SCREEN);
+
+                /*activeUser = User.fetchUser(user, password);
+                if(activeUser.getRole() == User.Role.USER)
+                    SceneManager.switchTo(SceneID.GENERAL_SCREEN); // Switches to General Screen on successful login
+                else
+                    SceneManager.switchTo(SceneID.ADMIN_SCREEN);*/ // Switches to Admin screen if user is Admin
             }
             else
                 System.out.println("Incorrect password or username. Try again");
