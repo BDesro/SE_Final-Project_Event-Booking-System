@@ -69,6 +69,11 @@ public class SceneManager
                     scene = new Scene(loadFXML("general-view.fxml"), resX, resY);
                     stage.setTitle("General User Screen");
                 }
+                case CREATE_SCREEN ->
+                {
+                    scene = new Scene(CreateAccountScreen.getRootNode(), resX, resY);
+                    stage.setTitle("Create Account Screen");
+                }
             }
 
             if(scene != null)
