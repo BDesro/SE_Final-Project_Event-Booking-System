@@ -126,9 +126,12 @@ public class AdminController {
                 "WHERE event_name = ?");
         PreparedStatement statement = null;
         try {
+            quickUpdate();
             Connection connection = JDBC.getConnection();
             statement = connection.prepareStatement(sqlCode);
             statement.setBoolean(1,true);
+            statement.setString(2,selectedEvent.getEventName());
+            statement.executeUpdate();
             selectedEvent.setIsVisible(true);
             errorLabel.setText("");
             successLabel.setText("Event Successfully Published");
