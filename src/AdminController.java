@@ -109,18 +109,15 @@ public class AdminController {
                 statement.setString(2, selectedEvent.getEventDescription());
                 statement.setString(3, formatter.format(selectedEvent.getEventDate()));
                 statement.setBoolean(4, selectedEvent.getIsVisible());
-<<<<<<< Updated upstream
                 int rowsLeft = statement.executeUpdate();
                 if (rowsLeft > 0) {
                     System.out.println("Event published successfully!");
                     selectedEvent.setIsVisible(true);
                     refreshText();
                 }
-=======
                 statement.executeUpdate();
                 quickUpdate();
                 refreshText();
->>>>>>> Stashed changes
             } catch (SQLException event) {
                 throw new RuntimeException(event);
             }
@@ -151,7 +148,7 @@ public class AdminController {
             else {
                 errorLabel.setText("Event Could Not Be Found");
                 successLabel.setText("");
-            } CONTINUE TO MAKE SUCCESS="" AND ERROR = ""
+            }
 
             statement.close();
             connection.close();
@@ -169,12 +166,14 @@ public class AdminController {
             statement.setString(1,nameTextArea.getText());
             int rowsLeft = statement.executeUpdate();
             if (rowsLeft > 0) {
-                System.out.println("Event deleted successfully!");
+                successLabel.setText("Event Deleted Well");
                 selectedEvent = listOfEvents.get(eventIndex);
                 refreshText();
             }
-            else
+            else {
                 errorLabel.setText("Event Could Not Be Found");
+                successLabel.setText("");
+            }
             statement.close();
             connection.close();
         } catch (SQLException event) {
@@ -197,13 +196,16 @@ public class AdminController {
             if(rs.next())
             {
                 successLabel.setText("Event Saved Successfully");
+                errorLabel.setText("");
                 selectedEvent.setEventName(nameTextArea.getText());
                 selectedEvent.setEventDescription(descriptionTextArea.getText());
                 selectedEvent.setEventDate(datePicker.getValue());
                 valid = true;
             }
-            else
+            else {
                 errorLabel.setText("Event Name Is Not Unique");
+                successLabel.setText("");
+            }
             rs.close();
             statement.close();
             connection.close();
@@ -231,6 +233,8 @@ public class AdminController {
                 selectedEvent = new Event(name,description,date,visible);
                 listOfEvents.add(selectedEvent);
                 eventIndex++;
+                errorLabel.setText("");
+                successLabel.setText("Events Pulled From DB");
             }
             rs.close();
             statement.close();
@@ -238,6 +242,7 @@ public class AdminController {
             refreshText();
         } catch (SQLException event) {
             errorLabel.setText("Cannot Connect To DB");
+            successLabel.setText("");
             throw new RuntimeException(event);
         }
     }
