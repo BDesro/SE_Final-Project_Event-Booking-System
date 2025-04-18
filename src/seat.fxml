@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<VBox fx:id="seatPane" alignment="CENTER" onMouseClicked="#handleClick" spacing="5" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="SeatController">
+<StackPane>
+    <Rectangle fx:id="backrest" arcHeight="10" arcWidth="10" fill="#273227" height="20" stroke="#555555" width="60" />
+    <Rectangle fx:id="base" arcHeight="10" arcWidth="10" fill="#2c362c" height="32.0" stroke="#555555" translateY="25" width="61.0" />
+   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#941512" height="16.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
+    <Text fx:id="seatLabel" translateY="50" />
+</StackPane>
+</VBox>

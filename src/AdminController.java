@@ -50,7 +50,7 @@ public class AdminController {
         eventIndex++;
     }
 
-    public void nextEvent(ActionEvent e)
+    public void nextEvent()
     {
         if(eventIndex + 1 == listOfEvents.size())
             eventIndex = 0;
@@ -97,7 +97,7 @@ public class AdminController {
 
     public void saveEvent(ActionEvent e)
     {
-        if(validateEvent()) { //if(validateEvent()) {
+        if(validateEvent()) {
             sqlCode = ("INSERT INTO event_list (event_name, event_description, " +
                     "event_date, is_active) VALUES (?,?,?,?)");
             PreparedStatement statement = null;
@@ -163,11 +163,15 @@ public class AdminController {
         try {
             Connection connection = JDBC.getConnection();
             statement = connection.prepareStatement(sqlCode);
-            statement.setString(1,nameTextArea.getText());
+            statement.setString(1,selectedEvent.getEventName());
             int rowsLeft = statement.executeUpdate();
             if (rowsLeft > 0) {
-                successLabel.setText("Event Deleted Well");
+                successLabel.setText("Event Deleted successfully!");
+                errorLabel.setText("");
                 selectedEvent = listOfEvents.get(eventIndex);
+                listOfEvents.remove(selectedEvent);
+                eventIndex--;
+                nextEvent();
                 refreshText();
             }
             else {
@@ -236,6 +240,8 @@ public class AdminController {
                 errorLabel.setText("");
                 successLabel.setText("Events Pulled From DB");
             }
+            eventIndex = listOfEvents.size()-1;
+            nextEvent();
             rs.close();
             statement.close();
             connection.close();

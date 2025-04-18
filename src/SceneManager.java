@@ -6,6 +6,8 @@ import javafx.stage.Stage;
 public class SceneManager
 {
     private static Stage stage;
+    private static int resX = 1280;
+    private static int resY = 720;
 
     public static void setStage(Stage s)
     {
@@ -50,16 +52,28 @@ public class SceneManager
 
             // Declare the Scene based on the parameters above for FXML
             //  vs pure Java
-            switch(id)
+            switch (id)
             {
-                case LOGIN_SCREEN:
-                    scene = new Scene(LoginPage.getRootNode(), 500, 500);
+                case LOGIN_SCREEN ->
+                {
+                    scene = new Scene(LoginPage.getRootNode(), resX, resY);
                     stage.setTitle("Login Screen");
-                    break;
-                case ADMIN_SCREEN:
-                    scene = new Scene(loadFXML("admin-view.fxml"), 500, 500);
+                }
+                case ADMIN_SCREEN ->
+                {
+                    scene = new Scene(loadFXML("admin-view.fxml"), resX, resY);
                     stage.setTitle("Admin Screen");
-                    break;
+                }
+                case GENERAL_SCREEN ->
+                {
+                    scene = new Scene(loadFXML("general-view.fxml"), resX, resY);
+                    stage.setTitle("General User Screen");
+                }
+                case CREATE_SCREEN ->
+                {
+                    scene = new Scene(CreateAccountScreen.getRootNode(), resX, resY);
+                    stage.setTitle("Create Account Screen");
+                }
             }
 
             if(scene != null)
