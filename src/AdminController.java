@@ -202,6 +202,7 @@ public class AdminController {
                 listOfEvents.add(selectedEvent);
             }
             eventIndex = listOfEvents.size()-1;
+            nextEvent();
             rs.close();
             statement.close();
             connection.close();

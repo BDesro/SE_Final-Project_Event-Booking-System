@@ -22,7 +22,7 @@
             <TextArea fx:id="nameTextArea" layoutX="532.0" layoutY="25.0" prefHeight="45.0" prefWidth="200.0" promptText="Enter Event Name..." />
             <DatePicker fx:id="datePicker" layoutX="1031.0" layoutY="25.0" promptText="Select A Date" />
             <Button layoutX="50.0" layoutY="70.0" mnemonicParsing="false" onAction="#publishEvent" text="Publish Event" />
-            <Button layoutX="1000.0" layoutY="670.0" mnemonicParsing="false" onAction="#goToLogin" text="Temp return to Login Screen" />
+            <Button layoutX="1000.0" layoutY="670.0" mnemonicParsing="false" onAction="#goToLogin" text="Sign out" />
             <Button layoutX="50.0" layoutY="120.0" mnemonicParsing="false" onAction="#deleteEvent" text="Delete Event" />
             <Button layoutX="200.0" layoutY="70.0" mnemonicParsing="false" onAction="#editEvent" text="Edit Event" />
             <Button layoutX="200.0" layoutY="20.0" mnemonicParsing="false" onAction="#pullEvents" text="Pull Events" />
