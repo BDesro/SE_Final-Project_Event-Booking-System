@@ -72,13 +72,6 @@ public class AdminController {
         descriptionTextArea.setText(selectedEvent.getEventDescription());
         datePicker.setValue(selectedEvent.getEventDate());
     }
-    public void publishEvent(ActionEvent e)
-    {
-        selectedEvent.setIsVisible(true);
-        errorLabel.setText("");
-        successLabel.setText("Event Successfully Published");
-        refreshText();
-    }
 
     private void quickUpdate()
     {
@@ -111,18 +104,43 @@ public class AdminController {
                 statement.setBoolean(4, selectedEvent.getIsVisible());
                 int rowsLeft = statement.executeUpdate();
                 if (rowsLeft > 0) {
-                    System.out.println("Event published successfully!");
-                    selectedEvent.setIsVisible(true);
+                    successLabel.setText("Event Saved To The DataBase");
+                    errorLabel.setText("");
                     refreshText();
                 }
-                statement.executeUpdate();
                 quickUpdate();
                 refreshText();
+                statement.close();
+                connection.close();
             } catch (SQLException event) {
+                successLabel.setText("");
+                errorLabel.setText("Cannot Save This Event");
                 throw new RuntimeException(event);
             }
         }
     }
+    public void publishEvent(ActionEvent e)
+    {
+        sqlCode = ("UPDATE event_list " +
+                "SET is_active = ? " +
+                "WHERE event_name = ?");
+        PreparedStatement statement = null;
+        try {
+            Connection connection = JDBC.getConnection();
+            statement = connection.prepareStatement(sqlCode);
+            statement.setBoolean(1,true);
+            selectedEvent.setIsVisible(true);
+            errorLabel.setText("");
+            successLabel.setText("Event Successfully Published");
+            refreshText();
+            statement.close();
+            connection.close();
+        }
+        catch (SQLException event) {
+            throw new RuntimeException(event);
+        }
+    }
+
     public void editEvent(ActionEvent e)
     {
         sqlCode = ("UPDATE event_list " +
@@ -195,20 +213,13 @@ public class AdminController {
             Connection connection = JDBC.getConnection();
             statement = connection.prepareStatement(sqlCode);
             statement.setString(1,nameTextArea.getText());
-            statement.executeQuery();
             ResultSet rs = statement.executeQuery();
             if(rs.next())
             {
-                successLabel.setText("Event Saved Successfully");
-                errorLabel.setText("");
                 selectedEvent.setEventName(nameTextArea.getText());
                 selectedEvent.setEventDescription(descriptionTextArea.getText());
                 selectedEvent.setEventDate(datePicker.getValue());
                 valid = true;
-            }
-            else {
-                errorLabel.setText("Event Name Is Not Unique");
-                successLabel.setText("");
             }
             rs.close();
             statement.close();
