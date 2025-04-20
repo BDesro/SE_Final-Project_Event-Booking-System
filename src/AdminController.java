@@ -141,6 +141,8 @@ public class AdminController {
         }
         catch (SQLException event) {
             throw new RuntimeException(event);
+            //event.printStackTrace();
+            //errorLabel.setText("Database error: " + event.getMessage());
         }
     }
 
@@ -242,6 +244,7 @@ public class AdminController {
             Connection connection = JDBC.getConnection();
             statement = connection.prepareStatement(sqlCode);
             ResultSet rs = statement.executeQuery();
+            listOfEvents.clear();
             while(rs.next())
             {
                 String name = rs.getString("event_name");
