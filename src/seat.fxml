@@ -4,11 +4,14 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<VBox fx:id="seatPane" alignment="CENTER" onMouseClicked="#handleClick" spacing="5" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="SeatController">
-<StackPane>
-    <Rectangle fx:id="backrest" arcHeight="10" arcWidth="10" fill="#273227" height="20" stroke="#555555" width="60" />
-    <Rectangle fx:id="base" arcHeight="10" arcWidth="10" fill="#2c362c" height="32.0" stroke="#555555" translateY="25" width="61.0" />
-   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#941512" height="16.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
-    <Text fx:id="seatLabel" translateY="50" />
-</StackPane>
+<VBox fx:id = "seatPane" xmlns:fx = "http://javafx.com/fxml" fx:controller = "SeatController"
+      spacing="2" alignment="CENTER" prefWidth="70" prefHeight="80" style="-fx-padding: 5;" onMouseClicked="#handleClick">
+    <Rectangle fx:id="backrest" width="40" height="10" arcWidth="5" arcHeight="5" fill="LIGHTGREEN" />
+    <HBox alignment="CENTER" spacing="2">
+        <Rectangle fx:id="leftArmRest" width="5" height="25" arcWidth="2" arcHeight="2" fill="DARKGRAY" />
+        <Rectangle fx:id="base" width="40" height="25" arcWidth="5" arcHeight="5" fill="LIGHTGREEN" />
+        <Rectangle fx:id="rightArmRest" width="5" height="25" arcWidth="2" arcHeight="2" fill="DARKGRAY" />
+    </HBox>
+    <Text fx:id="seatLabel" style="-fx-font-size: 12px;" />
+
 </VBox>
