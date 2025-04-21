@@ -92,7 +92,7 @@ public class AdminController {
     {
         if(validateEvent()) {
             sqlCode = ("INSERT INTO event_list (event_name, event_description, " +
-                    "event_date, is_active) VALUES (?,?,?,?)");
+                    "event_date, is_active) VALUES (TRIM(?),?,?,?)");
             PreparedStatement statement = null;
             try {
                 quickUpdate();
@@ -104,8 +104,8 @@ public class AdminController {
                 statement.setBoolean(4, selectedEvent.getIsVisible());
                 int rowsLeft = statement.executeUpdate();
                 if (rowsLeft > 0) {
-                    successLabel.setText("Event Saved To The DataBase");
                     errorLabel.setText("");
+                    successLabel.setText("Event Saved To The DataBase");
                     refreshText();
                 }
                 quickUpdate();
@@ -114,11 +114,11 @@ public class AdminController {
                 connection.close();
             } catch (SQLException event) {
                 successLabel.setText("");
-                errorLabel.setText("Cannot Save This Event");
-                throw new RuntimeException(event);
+                errorLabel.setText("Cannot save this event: " + event.getMessage());
             }
         }
     }
+
     public void publishEvent(ActionEvent e)
     {
         sqlCode = ("UPDATE event_list " +
@@ -140,9 +140,8 @@ public class AdminController {
             connection.close();
         }
         catch (SQLException event) {
-            throw new RuntimeException(event);
-            //event.printStackTrace();
-            //errorLabel.setText("Database error: " + event.getMessage());
+            successLabel.setText("");
+            errorLabel.setText("Failed to publish event: " + event.getMessage());
         }
     }
 
@@ -163,22 +162,23 @@ public class AdminController {
             statement.setString(5,selectedEvent.getEventName());
             int rowsLeft = statement.executeUpdate();
             if (rowsLeft > 0) {
-                successLabel.setText("Event Edited Successfully");
                 errorLabel.setText("");
+                successLabel.setText("Event Edited Successfully");
                 quickUpdate();
                 refreshText();
             }
             else {
-                errorLabel.setText("Event Could Not Be Found");
                 successLabel.setText("");
+                errorLabel.setText("Event could not be found");
             }
-
             statement.close();
             connection.close();
         } catch (SQLException event) {
-            throw new RuntimeException(event);
+            successLabel.setText("");
+            errorLabel.setText("Failed to edit event: " + event.getMessage());
         }
     }
+
     public void deleteEvent(ActionEvent e)
     {
      sqlCode ="DELETE FROM event_list WHERE event_name = ?";
@@ -198,13 +198,14 @@ public class AdminController {
                 refreshText();
             }
             else {
-                errorLabel.setText("Event Could Not Be Found");
                 successLabel.setText("");
+                errorLabel.setText("Event could not be found");
             }
             statement.close();
             connection.close();
         } catch (SQLException event) {
-            throw new RuntimeException(event);
+            successLabel.setText("");
+            errorLabel.setText("Failed to delete event: " + event.getMessage());
         }
     }
 
@@ -254,19 +255,25 @@ public class AdminController {
                 selectedEvent = new Event(name,description,date,visible);
                 listOfEvents.add(selectedEvent);
                 eventIndex++;
+            }
+            if (listOfEvents.isEmpty())
+            {
+                successLabel.setText("");
+                errorLabel.setText("No events found in database");
+            }
+            else {
+                eventIndex = listOfEvents.size()-1;
+                nextEvent();
                 errorLabel.setText("");
                 successLabel.setText("Events Pulled From DB");
             }
-            eventIndex = listOfEvents.size()-1;
-            nextEvent();
             rs.close();
             statement.close();
             connection.close();
             refreshText();
         } catch (SQLException event) {
-            errorLabel.setText("Cannot Connect To DB");
             successLabel.setText("");
-            throw new RuntimeException(event);
+            errorLabel.setText("Cannot connect to database: " + event.getMessage());
         }
     }
 }
