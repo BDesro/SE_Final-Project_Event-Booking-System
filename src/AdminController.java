@@ -29,6 +29,10 @@ public class AdminController {
     private TextArea descriptionTextArea;
     @FXML
     private DatePicker datePicker;
+    @FXML
+    private Label errorLabel;
+    @FXML
+    private Label successLabel;
 
     private Event selectedEvent;
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -64,6 +68,9 @@ public class AdminController {
         if (selectedEvent.getIsVisible())
             publicity.setText("It's public");
         else publicity.setText("It's not public");
+        nameTextArea.setText(selectedEvent.getEventName());
+        descriptionTextArea.setText(selectedEvent.getEventDescription());
+        datePicker.setValue(selectedEvent.getEventDate());
     }
 
     private void quickUpdate()
@@ -81,11 +88,11 @@ public class AdminController {
     //                                    DATA BASE CONNECTION
     // ==============================================================================================
 
-    public void publishEvent(ActionEvent e)
+    public void saveEvent(ActionEvent e)
     {
         if(validateEvent()) {
             sqlCode = ("INSERT INTO event_list (event_name, event_description, " +
-                    "event_date, is_active) VALUES (?,?,?,?)");
+                    "event_date, is_active) VALUES (TRIM(?),?,?,?)");
             PreparedStatement statement = null;
             try {
                 quickUpdate();
@@ -95,16 +102,49 @@ public class AdminController {
                 statement.setString(2, selectedEvent.getEventDescription());
                 statement.setString(3, formatter.format(selectedEvent.getEventDate()));
                 statement.setBoolean(4, selectedEvent.getIsVisible());
-                statement.executeUpdate();
+                int rowsLeft = statement.executeUpdate();
+                if (rowsLeft > 0) {
+                    errorLabel.setText("");
+                    successLabel.setText("Event Saved To The DataBase");
+                    refreshText();
+                }
+                quickUpdate();
                 refreshText();
+                statement.close();
+                connection.close();
             } catch (SQLException event) {
-                throw new RuntimeException(event);
+                successLabel.setText("");
+                errorLabel.setText("Cannot save this event: " + event.getMessage());
             }
         }
-        else {
-            System.out.println("Not valid");
+    }
+
+    public void publishEvent(ActionEvent e)
+    {
+        sqlCode = ("UPDATE event_list " +
+                "SET is_active = ? " +
+                "WHERE event_name = ?");
+        PreparedStatement statement = null;
+        try {
+            quickUpdate();
+            Connection connection = JDBC.getConnection();
+            statement = connection.prepareStatement(sqlCode);
+            statement.setBoolean(1,true);
+            statement.setString(2,selectedEvent.getEventName());
+            statement.executeUpdate();
+            selectedEvent.setIsVisible(true);
+            errorLabel.setText("");
+            successLabel.setText("Event Successfully Published");
+            refreshText();
+            statement.close();
+            connection.close();
+        }
+        catch (SQLException event) {
+            successLabel.setText("");
+            errorLabel.setText("Failed to publish event: " + event.getMessage());
         }
     }
+
     public void editEvent(ActionEvent e)
     {
         sqlCode = ("UPDATE event_list " +
@@ -122,15 +162,23 @@ public class AdminController {
             statement.setString(5,selectedEvent.getEventName());
             int rowsLeft = statement.executeUpdate();
             if (rowsLeft > 0) {
-                System.out.println("Event edited successfully!");
+                errorLabel.setText("");
+                successLabel.setText("Event Edited Successfully");
+                quickUpdate();
                 refreshText();
+            }
+            else {
+                successLabel.setText("");
+                errorLabel.setText("Event could not be found");
             }
             statement.close();
             connection.close();
         } catch (SQLException event) {
-            throw new RuntimeException(event);
+            successLabel.setText("");
+            errorLabel.setText("Failed to edit event: " + event.getMessage());
         }
     }
+
     public void deleteEvent(ActionEvent e)
     {
      sqlCode ="DELETE FROM event_list WHERE event_name = ?";
@@ -141,16 +189,23 @@ public class AdminController {
             statement.setString(1,selectedEvent.getEventName());
             int rowsLeft = statement.executeUpdate();
             if (rowsLeft > 0) {
+                successLabel.setText("Event Deleted successfully!");
+                errorLabel.setText("");
+                selectedEvent = listOfEvents.get(eventIndex);
                 listOfEvents.remove(selectedEvent);
-                System.out.println("Event deleted successfully!");
                 eventIndex--;
                 nextEvent();
                 refreshText();
             }
+            else {
+                successLabel.setText("");
+                errorLabel.setText("Event could not be found");
+            }
             statement.close();
             connection.close();
         } catch (SQLException event) {
-            throw new RuntimeException(event);
+            successLabel.setText("");
+            errorLabel.setText("Failed to delete event: " + event.getMessage());
         }
     }
 
@@ -164,11 +219,9 @@ public class AdminController {
             Connection connection = JDBC.getConnection();
             statement = connection.prepareStatement(sqlCode);
             statement.setString(1,nameTextArea.getText());
-            statement.executeQuery();
             ResultSet rs = statement.executeQuery();
             if(rs.next())
             {
-                System.out.println("Event is valid!");
                 selectedEvent.setEventName(nameTextArea.getText());
                 selectedEvent.setEventDescription(descriptionTextArea.getText());
                 selectedEvent.setEventDate(datePicker.getValue());
@@ -192,6 +245,7 @@ public class AdminController {
             Connection connection = JDBC.getConnection();
             statement = connection.prepareStatement(sqlCode);
             ResultSet rs = statement.executeQuery();
+            listOfEvents.clear();
             while(rs.next())
             {
                 String name = rs.getString("event_name");
@@ -200,14 +254,26 @@ public class AdminController {
                 Boolean visible =rs.getBoolean("is_active");
                 selectedEvent = new Event(name,description,date,visible);
                 listOfEvents.add(selectedEvent);
+                eventIndex++;
             }
-            eventIndex = listOfEvents.size()-1;
+            if (listOfEvents.isEmpty())
+            {
+                successLabel.setText("");
+                errorLabel.setText("No events found in database");
+            }
+            else {
+                eventIndex = listOfEvents.size()-1;
+                nextEvent();
+                errorLabel.setText("");
+                successLabel.setText("Events Pulled From DB");
+            }
             rs.close();
             statement.close();
             connection.close();
             refreshText();
         } catch (SQLException event) {
-            throw new RuntimeException(event);
+            successLabel.setText("");
+            errorLabel.setText("Cannot connect to database: " + event.getMessage());
         }
     }
 }
