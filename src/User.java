@@ -54,28 +54,6 @@ public class User {
         return hashedPassword;
     }
 
-    // Gets a user (or null) from the database using username + password    (TO BE CONTINUED)
-    /*public static User fetchUser(String username, String password)
-    {
-        String query = "SELECT email_address, user_role " +
-                       "FROM users " +
-                       "WHERE username = ?";
-
-        try (Connection connection = JDBC.getConnection();
-             PreparedStatement stmt = connection.prepareStatement(query))
-        {
-            stmt.setString(1, username);
-            ResultSet rs = stmt.executeQuery();
-
-            if(rs.next())
-            {
-
-            }
-        } catch(SQLException e) {
-            e.printStackTrace();
-        }
-    }*/
-
     @Override
     public String toString() {
         return "User{" +

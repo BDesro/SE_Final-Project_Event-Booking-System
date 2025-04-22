@@ -7,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-// No longer extends Application, since it is plugged into SceneManager.switchTo()
 public class LoginPage {
 
     public static User activeUser = null;
@@ -46,12 +45,6 @@ public class LoginPage {
                 passwordField.clear();
 
                 SceneManager.switchTo(SceneID.GENERAL_SCREEN);
-
-                /*activeUser = User.fetchUser(user, password);
-                if(activeUser.getRole() == User.Role.USER)
-                    SceneManager.switchTo(SceneID.GENERAL_SCREEN); // Switches to General Screen on successful login
-                else
-                    SceneManager.switchTo(SceneID.ADMIN_SCREEN);*/ // Switches to Admin screen if user is Admin
             }
             else {
                 messageLabel.setText("Incorrect Username or password. Please try again");
@@ -69,14 +62,6 @@ public class LoginPage {
         return root;
     }
     public static boolean checkLogin(String username, String password){
-        /* This will only work properly once passwords are properly
-            hashed during account creation using
-                PasswordUtils.hashPassword("the password goes here");
-
-           For now, use "Guest User" for username and "N/A" for password
-           to test login functionality (remember to update locally to
-                                        current db creation script)
-         */
         String query = "SELECT password_hash FROM users WHERE username = ?";
 
         try (Connection connection = JDBC.getConnection();

@@ -27,17 +27,6 @@ public class SceneManager
 
           Pure Java:  new Scene(*yourFileName*.getRootNode(), 500, 500);
 
-                Rather than creating your scenes to extend Application,
-                have your class declared normally and create a method
-                getRootNode() that does the same thing as if the scene
-                were independent, but returns its root so the scene
-                manager can handle the scene switching/assignment
-
-                Ex:
-                    public class LoginPage {
-                        public static Parent getRootNode()...
-
-
           FXML:       new Scene(loadFXML("Your FXML File Name"), 500, 500);
          ******************************************************************
     */

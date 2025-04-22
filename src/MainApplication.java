@@ -7,9 +7,8 @@ import javafx.stage.Stage;
 import java.util.Objects;
 
 /*
-    This class serves as the central entry point to the application.
-
-    Using the SceneBuilder class's methods,
+    This class serves as the central entry point to the application
+    using the SceneBuilder class's methods.
 */
 public class MainApplication extends Application
 {
