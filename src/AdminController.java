@@ -11,8 +11,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
-
+//======================================================================================
+//                 THIS CLASS CONTROLS THE GUI FOR THE ADMIN SCENE
+//======================================================================================
 public class AdminController {
 
     @FXML
@@ -41,6 +42,8 @@ public class AdminController {
     private String sqlCode;
 
 
+    //Does what the name says
+    //Create Event Button
     public void createEvent(ActionEvent e)
     {
         selectedEvent = new Event();
@@ -49,6 +52,8 @@ public class AdminController {
         eventIndex++;
     }
 
+    //Goes to the next event within the observable list
+    //Next Event Button
     public void nextEvent()
     {
         if(eventIndex + 1 == listOfEvents.size())
@@ -59,7 +64,7 @@ public class AdminController {
         refreshText();
     }
 
-
+    //Updates the text shown on the admin screen to reflect the currently selected event
     private void refreshText(){
         date.setText(formatter.format(selectedEvent.getEventDate()));
         name.setText(selectedEvent.getEventName());
@@ -71,25 +76,29 @@ public class AdminController {
         descriptionTextArea.setText(selectedEvent.getEventDescription());
         datePicker.setValue(selectedEvent.getEventDate());
     }
-
+    //Changes the selected event data locally to reflect changes made within in the DB
+    //without needing to pull info from the database
     private void quickUpdate()
     {
         selectedEvent.setEventName(nameTextArea.getText());
         selectedEvent.setEventDescription(descriptionTextArea.getText());
         selectedEvent.setEventDate(datePicker.getValue());
     }
-
-    // Temp function to go back to login screen for easy viewing/testing
+    //Brings the user back to the login screen
+    //Sign Out Button
     public void goToLogin(ActionEvent e){
         SceneManager.switchTo(SceneID.LOGIN_SCREEN);
     }
+
     // ==============================================================================================
     //                                    DATA BASE FUNCTIONS
     // ==============================================================================================
 
+    //Saves the event to the database calls validateEventName() in case the event table is changed
+    //Save Event To DB Button
     public void saveEvent(ActionEvent e)
     {
-        if(validateEvent()) {
+        if(validateEventName()) {
             sqlCode = ("INSERT INTO event_list (event_name, event_description, " +
                     "event_date, is_active) VALUES (TRIM(?),?,?,?)");
             PreparedStatement statement = null;
@@ -116,34 +125,42 @@ public class AdminController {
                 errorLabel.setText("Cannot save this event: " + event.getMessage());
             }
         }
+        else {
+            successLabel.setText("");
+            errorLabel.setText("Cannot save this event, name in use");
+        }
     }
 
+    //Changes the publicity of the event non-visible events are only seen by the admins not the public
+    // is_active == false means it is not visible
+    //Publish Event Button
     public void publishEvent(ActionEvent e)
     {
-        sqlCode = ("UPDATE event_list " +
-                "SET is_active = ? " +
-                "WHERE event_name = ?");
-        PreparedStatement statement = null;
-        try {
-            quickUpdate();
-            Connection connection = JDBC.getConnection();
-            statement = connection.prepareStatement(sqlCode);
-            statement.setBoolean(1,true);
-            statement.setString(2,selectedEvent.getEventName());
-            statement.executeUpdate();
-            selectedEvent.setIsVisible(true);
-            errorLabel.setText("");
-            successLabel.setText("Event Successfully Published");
-            refreshText();
-            statement.close();
-            connection.close();
-        }
-        catch (SQLException event) {
-            successLabel.setText("");
-            errorLabel.setText("Failed to publish event: " + event.getMessage());
-        }
+            sqlCode = ("UPDATE event_list " +
+                    "SET is_active = ? " +
+                    "WHERE event_name = ?");
+            PreparedStatement statement = null;
+            try {
+                quickUpdate();
+                Connection connection = JDBC.getConnection();
+                statement = connection.prepareStatement(sqlCode);
+                statement.setBoolean(1, true);
+                statement.setString(2, selectedEvent.getEventName());
+                statement.executeUpdate();
+                selectedEvent.setIsVisible(true);
+                errorLabel.setText("");
+                successLabel.setText("Event Successfully Published");
+                refreshText();
+                statement.close();
+                connection.close();
+            } catch (SQLException event) {
+                successLabel.setText("");
+                errorLabel.setText("Failed to publish event: " + event.getMessage());
+            }
     }
 
+    //Edits the currently selected event
+    //Edit Event Button
     public void editEvent(ActionEvent e)
     {
         sqlCode = ("UPDATE event_list " +
@@ -178,6 +195,8 @@ public class AdminController {
         }
     }
 
+    //Deletes the event from the database and removes it from the list of events
+    //Delete Event Button
     public void deleteEvent(ActionEvent e)
     {
      sqlCode ="DELETE FROM event_list WHERE event_name = ?";
@@ -208,7 +227,10 @@ public class AdminController {
         }
     }
 
-    private boolean validateEvent()
+    //This will return a boolean to dictate weather the event is already in the DB or not
+    //false meaning it's not a valid event name
+    //true meaning it's a valid event name
+    private boolean validateEventName()
     {
         boolean valid =false;
         sqlCode ="SELECT COUNT(event_id) FROM event_list WHERE event_name = ?";
@@ -219,7 +241,8 @@ public class AdminController {
             statement = connection.prepareStatement(sqlCode);
             statement.setString(1,nameTextArea.getText());
             ResultSet rs = statement.executeQuery();
-            if(rs.next())
+            rs.next();
+            if(rs.getInt("COUNT(event_id)") == 0)
             {
                 selectedEvent.setEventName(nameTextArea.getText());
                 selectedEvent.setEventDescription(descriptionTextArea.getText());
@@ -235,6 +258,8 @@ public class AdminController {
         return valid;
     }
 
+    //Pulls all the saved event from the DB and reformats the observable list
+    //Pull Events Button
     public void pullEvents(ActionEvent e)
     {
         sqlCode ="SELECT event_name, event_description, event_date, is_active FROM event_list";
