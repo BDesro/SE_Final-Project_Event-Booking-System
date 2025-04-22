@@ -38,7 +38,6 @@ public class AdminController {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     public int eventIndex = -1;
     private ObservableList<Event> listOfEvents = FXCollections.observableArrayList();
-    private JDBC jdbc = new JDBC();
     private String sqlCode;
 
 
@@ -85,7 +84,7 @@ public class AdminController {
         SceneManager.switchTo(SceneID.LOGIN_SCREEN);
     }
     // ==============================================================================================
-    //                                    DATA BASE CONNECTION
+    //                                    DATA BASE FUNCTIONS
     // ==============================================================================================
 
     public void saveEvent(ActionEvent e)
