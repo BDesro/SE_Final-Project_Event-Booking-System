@@ -1,6 +1,4 @@
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -19,16 +17,12 @@ public class SeatController { //This class is setting up the shape each individu
     @FXML private Rectangle leftArmRest;
     @FXML private Rectangle rightArmRest;
     @FXML private Text seatLabel;
-    @FXML
-    private GridPane seatGrid;
 
     private Seat seat;
     private boolean isReserved = false; //Similar to isActive
     private Tooltip tooltip;
 
-
-    @FXML
-    public void initialize() {
+    public void makeTool() {
         tooltip = new Tooltip(); //Tooltip (check on Oracle) is a tool that shows additional info
         //When you hover over the object you install it to
         //Can be modified to show pricing for later

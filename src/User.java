@@ -34,10 +34,6 @@ public class User {
         return role;
     }
 
-    public boolean userPassCheck(String inputPassword) { //Calling checkPassword from PasswordUtils in User class
-        return PasswordUtils.checkPassword(inputPassword, this.hashedPassword);
-    }
-
     public void setEmail(String email) {
         this.email = email;
     }

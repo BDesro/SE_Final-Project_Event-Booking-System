@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 public class LoginPage {
 
-    public static User activeUser = null;
+    public static User activeUser = null; //In progress
 
     // Creates and returns the root needed to set up the screen (in SceneManager)
     // All functionality except for stage and scene remains the same
@@ -20,8 +20,8 @@ public class LoginPage {
         TextField username = new TextField();
 
         Label passwordLabel = new Label("Password: ");
-        PasswordField passwordField = new PasswordField();
-        Label messageLabel = new Label("");
+        PasswordField password = new PasswordField();
+        Label message = new Label("");
 
         Button login = new Button("Login");
         Button createNewAccount = new Button ("Make a new account"); //Case to add to user table with set action
@@ -31,26 +31,26 @@ public class LoginPage {
 
         VBox root = new VBox(10);
         root.setPadding(new Insets(20));
-        root.getChildren().addAll(usernameLabel, username, passwordLabel, passwordField,
+        root.getChildren().addAll(usernameLabel, username, passwordLabel, password,
                 login, guestLogIn, createNewAccount);
 
         login.setOnAction(e ->{
             String user = username.getText();
-            String password = passwordField.getText();
+            String pass = password.getText();
 
-            if(checkLogin(user, password)) {
-                messageLabel.setText("Log In Success!!");
-                messageLabel.setStyle("-fx-text-fill: green;");
+            if(checkLogin(user, pass)) {
+                message.setText("Log In Success!!");
+                message.setStyle("-fx-text-fill: green;");
                 username.clear();
-                passwordField.clear();
+                password.clear();
 
                 SceneManager.switchTo(SceneID.GENERAL_SCREEN);
             }
             else {
-                messageLabel.setText("Incorrect Username or password. Please try again");
-                messageLabel.setStyle("-fx-text-fill: red;");
+                message.setText("Incorrect Username or password. Please try again");
+                message.setStyle("-fx-text-fill: red;");
                 username.clear();
-                passwordField.clear();
+                password.clear();
             }
 
         });
@@ -58,17 +58,17 @@ public class LoginPage {
         createNewAccount.setOnAction(e ->SceneManager.switchTo(SceneID.CREATE_SCREEN));
 
         tempAdmin.setOnAction(e -> SceneManager.switchTo(SceneID.ADMIN_SCREEN));
-        root.getChildren().addAll(tempAdmin, messageLabel);
+        root.getChildren().addAll(tempAdmin, message);
         return root;
     }
     public static boolean checkLogin(String username, String password){
-        String query = "SELECT password_hash FROM users WHERE username = ?";
+        String code = "SELECT password_hash FROM users WHERE username = ?";
 
-        try (Connection connection = JDBC.getConnection();
-             PreparedStatement stmt = connection.prepareStatement(query))
+        try (Connection connect = JDBC.getConnection();
+             PreparedStatement ps = connect.prepareStatement(code))
         {
-            stmt.setString(1, username);
-            ResultSet rs = stmt.executeQuery();
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
 
             if(rs.next())
             {
@@ -78,7 +78,7 @@ public class LoginPage {
                 return false;
             }
         } catch(SQLException e){
-            e.printStackTrace();
+            System.out.println("Error with retrieving database!");
             return false;
         }
 

@@ -11,47 +11,47 @@ import java.sql.SQLException;
 public class CreateAccountScreen {
 
     public static Parent getRootNode() {
-        TextInputDialog dialog = new TextInputDialog();
+        TextInputDialog dialog = new TextInputDialog(); //Might need to remove since title already sets title
         dialog.setTitle("Create Account");
         dialog.setHeaderText("Enter your details (username,email,password)");
 
-        Label messageLabel = new Label("");
+        Label message = new Label("");
 
         Label newUserLabel = new Label("New Username:");
-        TextField newUserField = new TextField();
+        TextField newUser = new TextField();
         Label newEmailLabel = new Label("New Email:");
-        TextField newEmailField = new TextField();
+        TextField newEmail = new TextField();
         Label newPassLabel = new Label("New Password:");
-        PasswordField newPassField = new PasswordField();
+        PasswordField newPass = new PasswordField();
         Button returnToLogIn = new Button ("Back to Log In");
         Button submitNewAccount = new Button("Submit New Account");
 
         submitNewAccount.setOnAction(submitEvent -> {
-            String newUsername = newUserField.getText().trim();
-            String newEmail = newEmailField.getText().trim();
-            String newPassword = newPassField.getText();
+            String newUsername = newUser.getText().trim();
+            String newEmails = newEmail.getText().trim();
+            String newPassword = newPass.getText();
 
-            if (newUsername.isEmpty() || newEmail.isEmpty() || newPassword.isEmpty()) {
-                messageLabel.setText("All fields are required.");
-                messageLabel.setStyle("-fx-text-fill: red;");
+            if (newUsername.isEmpty() || newEmails.isEmpty() || newPassword.isEmpty()) {
+                message.setText("All fields are required.");
+                message.setStyle("-fx-text-fill: red;");
                 return;
             }
 
-            if (emailHasAccount(newEmail)) {
-                messageLabel.setText("Email already has associated account!!!!");
-                messageLabel.setStyle("-fx-text-fill: red;");
-                newEmailField.clear();
+            if (emailHasAccount(newEmails)) {
+                message.setText("Email already has associated account!!!!");
+                message.setStyle("-fx-text-fill: red;");
+                newEmail.clear();
             } else {
-                User newUser = new User(newUsername, newPassword, newEmail, User.Role.USER); //Default as user account
-                if (createAccount(newUser)) {
-                    messageLabel.setText("Account created successfully!");
-                    messageLabel.setStyle("-fx-text-fill: green;");
-                    newUserField.clear();
-                    newEmailField.clear();
-                    newPassField.clear();
+                User user = new User(newUsername, newPassword, newEmails, User.Role.USER); //Default as user account
+                if (createAccount(user)) {
+                    message.setText("Account created successfully!");
+                    message.setStyle("-fx-text-fill: green;");
+                    newUser.clear();
+                    newEmail.clear();
+                    newPass.clear();
                 } else {
-                    messageLabel.setText("Error in making the account");
-                    messageLabel.setStyle("-fx-text-fill: red;");
+                    message.setText("Error in making the account");
+                    message.setStyle("-fx-text-fill: red;");
                 }
             }
         });
@@ -59,47 +59,47 @@ public class CreateAccountScreen {
             SceneManager.switchTo(SceneID.LOGIN_SCREEN));
         VBox root = new VBox(15);
         root.setPadding(new Insets(20));
-        HBox userRow = new HBox(10, newUserLabel, newUserField);
-        HBox emailRow = new HBox(10, newEmailLabel, newEmailField);
-        HBox passRow = new HBox(10, newPassLabel, newPassField);
+        HBox userRow = new HBox(10, newUserLabel, newUser);
+        HBox emailRow = new HBox(10, newEmailLabel, newEmail);
+        HBox passRow = new HBox(10, newPassLabel, newPass);
         HBox buttonRow = new HBox(10, submitNewAccount, returnToLogIn);
-        root.getChildren().addAll(userRow, emailRow, passRow, buttonRow, messageLabel);
+        root.getChildren().addAll(userRow, emailRow, passRow, buttonRow, message);
         
         return root;
     }
     public static boolean emailHasAccount(String email){ //Method to make sure each email only has one account
-        String query = "SELECT COUNT(*) FROM users WHERE email_address = ?";
-        try (Connection connection = JDBC.getConnection();
-             PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setString(1, email);
-            ResultSet rs = stmt.executeQuery();
+        String codeLine = "SELECT COUNT(*) FROM users WHERE email_address = ?";
+        try (Connection conn = JDBC.getConnection();
+             PreparedStatement ps = conn.prepareStatement(codeLine)) {
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
                 return rs.getInt(1) > 0;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Error in executing the query!");
         }
 
         return false;
     }
 
     public static boolean createAccount(User user){ //Creating account method
-        String query = "INSERT INTO users (username, password_hash, email_address, user_role) VALUES (?, ?, ?, ?)";
+        String line = "INSERT INTO users (username, password_hash, email_address, user_role) VALUES (?, ?, ?, ?)";
 
         try (Connection connection = JDBC.getConnection();
-             PreparedStatement stmt = connection.prepareStatement(query)) {
+             PreparedStatement ps = connection.prepareStatement(line)) {
 
-            stmt.setString(1, user.getUsername());
-            stmt.setString(2, user.getHashedPassword());
-            stmt.setString(3, user.getEmail());
-            stmt.setString(4, user.getRole().toString().toLowerCase());
+            ps.setString(1, user.getUsername());
+            ps.setString(2, user.getHashedPassword());
+            ps.setString(3, user.getEmail());
+            ps.setString(4, user.getRole().toString().toLowerCase());
 
-            stmt.executeUpdate();
+            ps.executeUpdate();
             return true;
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Error in execution");
             return false;
         }
     }
