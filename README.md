@@ -34,6 +34,7 @@
 - [ ] Add Table User Pics
 
 <ins>**Other**</ins>  
-- [ ] **HELP BUTTON FOR EVERY SCREEN** (video later)  
-- [ ] **Green-Black Colors**  
-- [ ] **Left Buttons Right Everything Else**  
+- [ ] HELP BUTTON FOR EVERY SCREEN (video later)  
+- [ ] Green-Black Colors
+- [ ] Left Buttons Right Everything Else
+- [ ] Main Screen (Company Logo, Buttons to login, guest login, etc.)  
