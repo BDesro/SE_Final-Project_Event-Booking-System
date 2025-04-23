@@ -2,18 +2,18 @@
 
 Product Backlog Sprint 2
 
-Event page 
+edu.westfieldstate.eticketmanager.model.Event page 
     Seating - All the stuff that goes with this
     Take me to checkout button
     Google Calendar API
-    User Profile button
+    edu.westfieldstate.eticketmanager.model.User Profile button
 Checkout Screen 
     List of seats in cart
     Conformation screen (simple text box saying it was purchased)
-User Profile
+edu.westfieldstate.eticketmanager.model.User Profile
     Add Name
     Add Location
-    User Profile Pic
+    edu.westfieldstate.eticketmanager.model.User Profile Pic
     CC Info
     My Events
 Admin Screen 
@@ -23,10 +23,10 @@ Login Screen
     Password Requirements (1 Cap, 1 lower, 1 num, 1 special)
 Database
     Add Venue
-    Add Join Venue-Event
+    Add Join Venue-edu.westfieldstate.eticketmanager.model.Event
     Update Bookings 
     Add Table for Images
-    Add Table User Pics
+    Add Table edu.westfieldstate.eticketmanager.model.User Pics
 HELP BUTTON FOR EVERY SCREEN (video later)
 Green-Black Colors
 Left Buttons Right Everything Else

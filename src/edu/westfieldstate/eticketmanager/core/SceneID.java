@@ -1,3 +1,5 @@
+package edu.westfieldstate.eticketmanager.core;
+
 public enum SceneID
 {
     LOGIN_SCREEN,

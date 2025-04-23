@@ -4,7 +4,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<VBox fx:id = "seatPane" xmlns:fx = "http://javafx.com/fxml" fx:controller = "SeatController"
+<VBox fx:id = "seatPane" xmlns:fx = "http://javafx.com/fxml" fx:controller = "edu.westfieldstate.eticketmanager.controller.SeatController"
       spacing="2" alignment="CENTER" prefWidth="70" prefHeight="80" style="-fx-padding: 5;" onMouseClicked="#handleClick">
     <Rectangle fx:id="backrest" width="40" height="10" arcWidth="5" arcHeight="5" fill="LIGHTGREEN" />
     <HBox alignment="CENTER" spacing="2">

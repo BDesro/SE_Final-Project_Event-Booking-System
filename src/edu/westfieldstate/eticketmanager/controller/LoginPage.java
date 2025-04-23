@@ -1,3 +1,10 @@
+package edu.westfieldstate.eticketmanager.controller;
+
+import edu.westfieldstate.eticketmanager.core.SceneID;
+import edu.westfieldstate.eticketmanager.core.SceneManager;
+import edu.westfieldstate.eticketmanager.model.User;
+import edu.westfieldstate.eticketmanager.util.JDBC;
+import edu.westfieldstate.eticketmanager.util.PasswordUtils;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.layout.VBox;
@@ -11,7 +18,7 @@ public class LoginPage {
 
     public static User activeUser = null; //In progress
 
-    // Creates and returns the root needed to set up the screen (in SceneManager)
+    // Creates and returns the root needed to set up the screen (in edu.westfieldstate.eticketmanager.core.SceneManager)
     // All functionality except for stage and scene remains the same
     public static Parent getRootNode() { //A second class should be made to handle log in methods and database queries
         //Want this class to focus on the login screen layout, will do with next branch
@@ -54,8 +61,8 @@ public class LoginPage {
             }
 
         });
-        guestLogIn.setOnAction(e->SceneManager.switchTo(SceneID.GENERAL_SCREEN));
-        createNewAccount.setOnAction(e ->SceneManager.switchTo(SceneID.CREATE_SCREEN));
+        guestLogIn.setOnAction(e-> SceneManager.switchTo(SceneID.GENERAL_SCREEN));
+        createNewAccount.setOnAction(e -> SceneManager.switchTo(SceneID.CREATE_SCREEN));
 
         tempAdmin.setOnAction(e -> SceneManager.switchTo(SceneID.ADMIN_SCREEN));
         root.getChildren().addAll(tempAdmin, message);

@@ -1,3 +1,5 @@
+package edu.westfieldstate.eticketmanager.model;
+
 public interface Seat { //Possible example of strategy pattern
     //Columns from the database table
     int getSeatId();
