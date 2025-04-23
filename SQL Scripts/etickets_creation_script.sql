@@ -7,12 +7,21 @@ CREATE DATABASE etickets;
 USE etickets;
 
 
--- -----------------------------------------------------
--- Table etickets.users
--- -----------------------------------------------------
-DROP TABLE IF EXISTS etickets.users;
+-- =====================================================
+-- Table user_avatar
+-- =====================================================
+DROP TABLE IF EXISTS user_avatar;
 
-CREATE TABLE etickets.users
+CREATE TABLE user_avatar
+(
+  -- To be continued
+) AUTO_INCREMENT = 1;
+-- -----------------------------------------------------
+-- Table users
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE users
 (
   user_id         INT                     PRIMARY KEY   AUTO_INCREMENT,
   username        VARCHAR(45)             NOT NULL      UNIQUE,
@@ -23,11 +32,11 @@ CREATE TABLE etickets.users
 
 
 -- -----------------------------------------------------
--- Table etickets.seats
+-- Table seats
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS etickets.seats;
+DROP TABLE IF EXISTS seats;
 
-CREATE TABLE etickets.seats
+CREATE TABLE seats
 (
   seat_id        INT                                  PRIMARY KEY   AUTO_INCREMENT,
   seat_section   CHAR(1)                              NULL,
@@ -38,49 +47,66 @@ CREATE TABLE etickets.seats
   price          DECIMAL(5,2)                         NOT NULL      DEFAULT 20.00
 ) AUTO_INCREMENT = 1;
 
+-- =====================================================
+-- Table venues
+-- =====================================================
+DROP TABLE IF EXISTS venues;
+
+CREATE TABLE venues
+(
+	venue_id INT PRIMARY KEY AUTO_INCREMENT,
+    venue_name VARCHAR(50) NOT NULL UNIQUE,
+    address VARCHAR(50) NOT NULL,
+    city VARCHAR(25) NOT NULL,
+    state CHAR(2) NOT NULL
+) AUTO_INCREMENT = 1;
 
 -- -----------------------------------------------------
--- Table etickets.event_list
+-- Table event_list
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS etickets.event_list;
+DROP TABLE IF EXISTS event_list;
 
-CREATE TABLE etickets.event_list
+CREATE TABLE event_list
 (
   event_id            INT            PRIMARY KEY   AUTO_INCREMENT,
+  venue_id            INT            NOT NULL,
   event_name          VARCHAR(45)    NOT NULL      UNIQUE,
   event_description   VARCHAR(500)   NOT NULL      DEFAULT 'No Description',
   is_active           TINYINT        NOT NULL      DEFAULT 0,
   event_date          DATE           NOT NULL      UNIQUE,
   start_time          TIME           NOT NULL      DEFAULT '17:00:00',
-  end_time            TIME           NOT NULL      DEFAULT '20:00:00'
+  end_time            TIME           NOT NULL      DEFAULT '20:00:00',
+  
+  CONSTRAINT venue_id_events_fk FOREIGN KEY (venue_id) REFERENCES venues (venue_id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
 ) AUTO_INCREMENT = 1;
 
 
 -- -----------------------------------------------------
--- Table etickets.bookings
+-- Table bookings
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS etickets.bookings;
+DROP TABLE IF EXISTS bookings;
 
-CREATE TABLE etickets.bookings
+CREATE TABLE bookings
 (
   booking_id     INT        PRIMARY KEY   AUTO_INCREMENT,
   user_id        INT        NOT NULL,
   seat_id        INT        NOT NULL,
   event_id       INT        NOT NULL,
+  venue_id       INT        NOT NULL,
   booking_time   DATETIME   NOT NULL      DEFAULT NOW(),
   
-  UNIQUE (event_id, seat_id),
-  INDEX user_id_idx (user_id ASC) VISIBLE,
-  INDEX seat_id_idx (seat_id ASC) VISIBLE,
-  INDEX event_id_idx (event_id ASC) VISIBLE,
-  
-  CONSTRAINT user_id FOREIGN KEY (user_id) REFERENCES etickets.users (user_id)
+  CONSTRAINT user_id_fk FOREIGN KEY (user_id) REFERENCES users (user_id)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
-  CONSTRAINT seat_id FOREIGN KEY (seat_id) REFERENCES etickets.seats (seat_id)
+  CONSTRAINT seat_id_fk FOREIGN KEY (seat_id) REFERENCES seats (seat_id)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
-  CONSTRAINT event_id FOREIGN KEY (event_id) REFERENCES etickets.event_list (event_id)
+  CONSTRAINT event_id_fk FOREIGN KEY (event_id) REFERENCES event_list (event_id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT venue_id_fk FOREIGN KEY (venue_id) REFERENCES venues (venue_id)
     ON DELETE CASCADE
     ON UPDATE CASCADE
 ) AUTO_INCREMENT = 1;
