@@ -1,3 +1,5 @@
+package edu.westfieldstate.eticketmanager.util;
+
 import org.mindrot.jbcrypt.BCrypt;
 
 public class PasswordUtils

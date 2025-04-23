@@ -1,7 +1,6 @@
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+package edu.westfieldstate.eticketmanager.model;
+
+import edu.westfieldstate.eticketmanager.util.PasswordUtils;
 
 public class User {
     public enum Role{
@@ -52,7 +51,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "edu.westfieldstate.eticketmanager.model.User{" +
                 "username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", role=" + role +

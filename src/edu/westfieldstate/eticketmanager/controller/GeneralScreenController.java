@@ -1,3 +1,8 @@
+package edu.westfieldstate.eticketmanager.controller;
+
+import edu.westfieldstate.eticketmanager.core.SceneID;
+import edu.westfieldstate.eticketmanager.core.SceneManager;
+import edu.westfieldstate.eticketmanager.model.Event;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

@@ -1,3 +1,7 @@
+package edu.westfieldstate.eticketmanager.core;
+
+import edu.westfieldstate.eticketmanager.controller.CreateAccountScreen;
+import edu.westfieldstate.eticketmanager.controller.LoginPage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -21,13 +25,13 @@ public class SceneManager
         your scene.
 
          ******************************************************************
-            Make sure to add an id for each scene in the SceneID enum file,
+            Make sure to add an id for each scene in the edu.westfieldstate.eticketmanager.core.SceneID enum file,
             then update the switch statement in this method so that it can
             be accessed.
 
           Pure Java:  new Scene(*yourFileName*.getRootNode(), 500, 500);
 
-          FXML:       new Scene(loadFXML("Your FXML File Name"), 500, 500);
+          FXML:       new Scene(loadFXML("Your FXML File Path"), 500, 500);
          ******************************************************************
     */
     public static void switchTo(SceneID id)
@@ -50,12 +54,12 @@ public class SceneManager
                 }
                 case ADMIN_SCREEN ->
                 {
-                    scene = new Scene(loadFXML("admin-view.fxml"), resX, resY);
+                    scene = new Scene(loadFXML("/edu/westfieldstate/eticketmanager/view/admin-view.fxml"), resX, resY);
                     stage.setTitle("Admin Screen");
                 }
                 case GENERAL_SCREEN ->
                 {
-                    scene = new Scene(loadFXML("general-view.fxml"), resX, resY);
+                    scene = new Scene(loadFXML("/edu/westfieldstate/eticketmanager/view/general-view.fxml"), resX, resY);
                     stage.setTitle("General User Screen");
                 }
                 case CREATE_SCREEN ->
