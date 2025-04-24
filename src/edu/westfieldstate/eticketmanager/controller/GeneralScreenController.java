@@ -31,8 +31,8 @@ public class GeneralScreenController
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("eventDescription"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("eventDate"));
 
-        ObservableList<Event> events = Event.getAllEvents();
-        table.setItems(events);
+       // ObservableList<Event> events = Event.getAllEvents();
+       // table.setItems(events);
 
         // Makes table rows (events) clickable. Clicking currently just prints event name
         table.setRowFactory(tv ->

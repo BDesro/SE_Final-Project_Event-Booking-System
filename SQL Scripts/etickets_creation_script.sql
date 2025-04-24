@@ -29,8 +29,8 @@ CREATE TABLE users
   password_hash   VARCHAR(255)            NOT NULL,
   email_address   VARCHAR(50)             NOT NULL      UNIQUE,
   user_role       ENUM('user', 'admin')   NOT NULL      DEFAULT 'user',
-  avatar_id		  INT					  NOT NULL,
-  
+  avatar_id		  INT					  ,
+
   CONSTRAINT avatar_id_fk FOREIGN KEY (avatar_id) REFERENCES user_avatars (avatar_id)
 	ON UPDATE CASCADE
 ) AUTO_INCREMENT = 1;
@@ -61,9 +61,7 @@ CREATE TABLE venues
 (
 	venue_id INT PRIMARY KEY AUTO_INCREMENT,
     venue_name VARCHAR(50) NOT NULL UNIQUE,
-    address VARCHAR(50) NOT NULL,
-    city VARCHAR(25) NOT NULL,
-    state CHAR(2) NOT NULL
+    address VARCHAR(50) NOT NULL 	UNIQUE
 ) AUTO_INCREMENT = 1;
 
 -- -----------------------------------------------------
@@ -81,8 +79,8 @@ CREATE TABLE event_list
   event_date          DATE           NOT NULL      UNIQUE,
   start_time          TIME           NOT NULL      DEFAULT '17:00:00',
   end_time            TIME           NOT NULL      DEFAULT '20:00:00',
-  
-  CONSTRAINT venue_id_events_fk FOREIGN KEY (venue_id) REFERENCES venues (venue_id)
+
+	CONSTRAINT venue_id_events_fk FOREIGN KEY (venue_id) REFERENCES venues (venue_id)
     ON DELETE CASCADE
     ON UPDATE CASCADE
 ) AUTO_INCREMENT = 1;
@@ -101,7 +99,7 @@ CREATE TABLE bookings
   event_id       INT        NOT NULL,
   venue_id       INT        NOT NULL,
   booking_time   DATETIME   NOT NULL      DEFAULT NOW(),
-  
+
   CONSTRAINT user_id_fk FOREIGN KEY (user_id) REFERENCES users (user_id)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
@@ -123,8 +121,19 @@ INSERT INTO users
 	(username, password_hash, email_address, user_role)
 VALUES
 	('Guest User', '$2a$10$O39LWmBVdc9qzYt5FI62quQSPbvPfwzZdGTLWcWnh//Zqm0mldBie', 'N/A', DEFAULT);
-	
+
 INSERT INTO users
     (username, password_hash, email_address, user_role)
 VALUES
-    ('King Rhoam Bosphoramus ','N/A', 'N/A1', 'admin')
+    ('King Rhoam Bosphoramus ','N/A', 'N/A1', 'admin');
+
+-- -----------------------------------------------------
+-- Adding View Table to Connect venue and event
+-- -----------------------------------------------------
+DROP VIEW IF EXISTS event_venue;
+
+CREATE VIEW event_venue AS
+(
+	SELECT event_name, event_description, event_date, is_active, venue_name, address
+    FROM event_list JOIN venues ON event_list.venue_id = venues.venue_id
+) ;
