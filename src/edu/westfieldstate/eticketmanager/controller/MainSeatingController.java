@@ -13,7 +13,7 @@ public class MainSeatingController { //This class is going to handle the mutlipl
     @FXML
     private GridPane seatGrid;
 
-    public void make() {
+    public void initialize() {
         try {
             SeatController seatController = new SeatController();
             for (Seat seat : seatController.getAllSeats()) {

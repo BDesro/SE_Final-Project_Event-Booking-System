@@ -26,7 +26,7 @@ public class SeatController { //This class is setting up the shape each individu
     private boolean isReserved = false; //Similar to isActive
     private Tooltip tooltip;
 
-    public void makeTool() {
+    public void initialize() {
         tooltip = new Tooltip(); //Tooltip (check on Oracle) is a tool that shows additional info
         //When you hover over the object you install it to
         //Can be modified to show pricing for later
