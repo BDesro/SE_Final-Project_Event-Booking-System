@@ -14,14 +14,4 @@ public class JDBC {
             return null;
         }
     }
-
-    //Test in main class to make sure it connects properly
-    public static void main(String[] args) {
-        Connection conn = getConnection();
-        if (conn != null) {
-            System.out.println("Connected to MySQL!");
-        } else {
-            System.out.println("Failed to connect.");
-        }
-    }
 }

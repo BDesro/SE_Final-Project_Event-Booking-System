@@ -14,7 +14,6 @@ public class Event {
     private String eventDescription;
     private LocalDate eventDate;
     private Boolean isVisible;
-
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public Event()
