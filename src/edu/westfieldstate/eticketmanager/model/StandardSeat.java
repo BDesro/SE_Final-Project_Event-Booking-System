@@ -1,5 +1,9 @@
-public class PremiumSeat implements Seat{
-    //Didn't discuss this type of seat much, assuming it will be more expensive and different color
+package edu.westfieldstate.eticketmanager.model;
+
+import edu.westfieldstate.eticketmanager.model.Seat;
+
+public class StandardSeat implements Seat
+{ //For now we are assuming price and color is what differentiates each seat
     private int seatId;
     private String seatSection;
     private String seatRow;
@@ -7,21 +11,23 @@ public class PremiumSeat implements Seat{
     private boolean active;
     private double price;
 
-    public PremiumSeat(int seatId, String seatSection, String seatRow, int seatNum, boolean active, double price){
+    public StandardSeat(int seatId, String seatSection, String seatRow, int seatNum, boolean active, double price){
         this.seatId = seatId;
         this.seatSection = seatSection;
         this.seatRow = seatRow;
         this.seatNum = seatNum;
-        this.active = active;
+        this.active = active; //Assume all seats are active or available first
         this.price = price;
     }
+
+
     @Override
     public int getSeatId() {
         return seatId;
     }
 
     @Override public String getSeatType() {
-        return "premium";
+        return "standard";
     }
 
     @Override
@@ -46,11 +52,11 @@ public class PremiumSeat implements Seat{
 
     @Override
     public double getPrice() {
-        return price; 
+        return price;
     }
 
     @Override public String getColor() {
-        return "gold"; //Making it gold, coulv'e put it for VIP color but VIP seems more fancy than gold, thiking iridium
+        return "lightblue"; //Standard seats are goin to be light blue
     }
 
     @Override

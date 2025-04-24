@@ -1,3 +1,10 @@
+package edu.westfieldstate.eticketmanager.controller;
+
+import edu.westfieldstate.eticketmanager.core.SceneID;
+import edu.westfieldstate.eticketmanager.core.SceneManager;
+import edu.westfieldstate.eticketmanager.model.Event;
+
+import edu.westfieldstate.eticketmanager.util.JDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -43,7 +50,7 @@ public class AdminController {
 
 
     //Does what the name says
-    //Create Event Button
+    //Create edu.westfieldstate.eticketmanager.model.Event Button
     public void createEvent(ActionEvent e)
     {
         selectedEvent = new Event();
@@ -53,7 +60,7 @@ public class AdminController {
     }
 
     //Goes to the next event within the observable list
-    //Next Event Button
+    //Next edu.westfieldstate.eticketmanager.model.Event Button
     public void nextEvent()
     {
         if(eventIndex + 1 == listOfEvents.size())
@@ -95,7 +102,7 @@ public class AdminController {
     // ==============================================================================================
 
     //Saves the event to the database calls validateEventName() in case the event table is changed
-    //Save Event To DB Button
+    //Save edu.westfieldstate.eticketmanager.model.Event To DB Button
     public void saveEvent(ActionEvent e)
     {
         if(validateEventName()) {
@@ -113,7 +120,7 @@ public class AdminController {
                 int rowsLeft = statement.executeUpdate();
                 if (rowsLeft > 0) {
                     errorLabel.setText("");
-                    successLabel.setText("Event Saved To The DataBase");
+                    successLabel.setText("edu.westfieldstate.eticketmanager.model.Event Saved To The DataBase");
                     refreshText();
                 }
                 quickUpdate();
@@ -133,7 +140,7 @@ public class AdminController {
 
     //Changes the publicity of the event non-visible events are only seen by the admins not the public
     // is_active == false means it is not visible
-    //Publish Event Button
+    //Publish edu.westfieldstate.eticketmanager.model.Event Button
     public void publishEvent(ActionEvent e)
     {
             sqlCode = ("UPDATE event_list " +
@@ -149,7 +156,7 @@ public class AdminController {
                 statement.executeUpdate();
                 selectedEvent.setIsVisible(true);
                 errorLabel.setText("");
-                successLabel.setText("Event Successfully Published");
+                successLabel.setText("edu.westfieldstate.eticketmanager.model.Event Successfully Published");
                 refreshText();
                 statement.close();
                 connection.close();
@@ -160,7 +167,7 @@ public class AdminController {
     }
 
     //Edits the currently selected event
-    //Edit Event Button
+    //Edit edu.westfieldstate.eticketmanager.model.Event Button
     public void editEvent(ActionEvent e)
     {
         sqlCode = ("UPDATE event_list " +
@@ -179,13 +186,13 @@ public class AdminController {
             int rowsLeft = statement.executeUpdate();
             if (rowsLeft > 0) {
                 errorLabel.setText("");
-                successLabel.setText("Event Edited Successfully");
+                successLabel.setText("edu.westfieldstate.eticketmanager.model.Event Edited Successfully");
                 quickUpdate();
                 refreshText();
             }
             else {
                 successLabel.setText("");
-                errorLabel.setText("Event could not be found");
+                errorLabel.setText("edu.westfieldstate.eticketmanager.model.Event could not be found");
             }
             statement.close();
             connection.close();
@@ -196,7 +203,7 @@ public class AdminController {
     }
 
     //Deletes the event from the database and removes it from the list of events
-    //Delete Event Button
+    //Delete edu.westfieldstate.eticketmanager.model.Event Button
     public void deleteEvent(ActionEvent e)
     {
      sqlCode ="DELETE FROM event_list WHERE event_name = ?";
@@ -207,7 +214,7 @@ public class AdminController {
             statement.setString(1,selectedEvent.getEventName());
             int rowsLeft = statement.executeUpdate();
             if (rowsLeft > 0) {
-                successLabel.setText("Event Deleted successfully!");
+                successLabel.setText("edu.westfieldstate.eticketmanager.model.Event Deleted successfully!");
                 errorLabel.setText("");
                 selectedEvent = listOfEvents.get(eventIndex);
                 listOfEvents.remove(selectedEvent);
@@ -217,7 +224,7 @@ public class AdminController {
             }
             else {
                 successLabel.setText("");
-                errorLabel.setText("Event could not be found");
+                errorLabel.setText("edu.westfieldstate.eticketmanager.model.Event could not be found");
             }
             statement.close();
             connection.close();

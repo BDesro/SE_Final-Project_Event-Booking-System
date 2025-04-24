@@ -1,3 +1,5 @@
+package edu.westfieldstate.eticketmanager.core;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -7,9 +9,8 @@ import javafx.stage.Stage;
 import java.util.Objects;
 
 /*
-    This class serves as the central entry point to the application.
-
-    Using the SceneBuilder class's methods,
+    This class serves as the central entry point to the application
+    using the SceneBuilder class's methods.
 */
 public class MainApplication extends Application
 {

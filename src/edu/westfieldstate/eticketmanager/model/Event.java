@@ -1,3 +1,6 @@
+package edu.westfieldstate.eticketmanager.model;
+
+import edu.westfieldstate.eticketmanager.util.JDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

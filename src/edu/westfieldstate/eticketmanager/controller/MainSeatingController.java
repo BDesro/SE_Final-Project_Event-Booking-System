@@ -1,3 +1,6 @@
+package edu.westfieldstate.eticketmanager.controller;
+
+import edu.westfieldstate.eticketmanager.model.Seat;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -10,13 +13,12 @@ public class MainSeatingController { //This class is going to handle the mutlipl
     @FXML
     private GridPane seatGrid;
 
-    @FXML
     public void initialize() {
         try {
             SeatController seatController = new SeatController();
             for (Seat seat : seatController.getAllSeats()) {
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("seat.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("edu/westfieldstate/eticketmanager/view/seat.fxml"));
                 VBox seatNode = loader.load();
 
                 SeatController controller = loader.getController();

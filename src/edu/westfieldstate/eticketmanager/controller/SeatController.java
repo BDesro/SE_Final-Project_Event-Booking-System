@@ -1,8 +1,10 @@
+package edu.westfieldstate.eticketmanager.controller;
+
+import edu.westfieldstate.eticketmanager.model.Seat;
+import edu.westfieldstate.eticketmanager.model.SeatFactory;
+import edu.westfieldstate.eticketmanager.util.JDBC;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Tooltip;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -19,15 +21,11 @@ public class SeatController { //This class is setting up the shape each individu
     @FXML private Rectangle leftArmRest;
     @FXML private Rectangle rightArmRest;
     @FXML private Text seatLabel;
-    @FXML
-    private GridPane seatGrid;
 
     private Seat seat;
     private boolean isReserved = false; //Similar to isActive
     private Tooltip tooltip;
 
-
-    @FXML
     public void initialize() {
         tooltip = new Tooltip(); //Tooltip (check on Oracle) is a tool that shows additional info
         //When you hover over the object you install it to
@@ -48,7 +46,7 @@ public class SeatController { //This class is setting up the shape each individu
     }
 
     @FXML
-    private void handleClick(MouseEvent event) { //Event for future refactoring where if the user clicks on a seat
+    private void handleClick(MouseEvent event) { //edu.westfieldstate.eticketmanager.model.Event for future refactoring where if the user clicks on a seat
         //it will change color to represent reserved or available
         //Will also change what it shows when you hover over it from seat id (available or reserved)
         isReserved = !isReserved;
@@ -82,7 +80,7 @@ public class SeatController { //This class is setting up the shape each individu
         int number = seat.getSeatNum();
         double price = seat.getPrice();
 
-        String text = "Seat " + section + row + number + "\n";
+        String text = "edu.westfieldstate.eticketmanager.model.Seat " + section + row + number + "\n";
         text += "Type: " + type + "\n";
         text += "Price: $" + price + "\n";
         text += "Status: " + status;

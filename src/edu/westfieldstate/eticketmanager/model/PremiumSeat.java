@@ -1,5 +1,8 @@
-public class VIPSeat implements Seat{ //Should make like 50-60% more expensive (realistic)
+package edu.westfieldstate.eticketmanager.model;
 
+public class PremiumSeat implements Seat
+{
+    //Didn't discuss this type of seat much, assuming it will be more expensive and different color
     private int seatId;
     private String seatSection;
     private String seatRow;
@@ -7,7 +10,7 @@ public class VIPSeat implements Seat{ //Should make like 50-60% more expensive (
     private boolean active;
     private double price;
 
-    public VIPSeat(int seatId, String seatSection, String seatRow, int seatNum, boolean active, double price){
+    public PremiumSeat(int seatId, String seatSection, String seatRow, int seatNum, boolean active, double price){
         this.seatId = seatId;
         this.seatSection = seatSection;
         this.seatRow = seatRow;
@@ -21,7 +24,7 @@ public class VIPSeat implements Seat{ //Should make like 50-60% more expensive (
     }
 
     @Override public String getSeatType() {
-        return "vip"; //Case doesn't matter
+        return "premium";
     }
 
     @Override
@@ -46,11 +49,11 @@ public class VIPSeat implements Seat{ //Should make like 50-60% more expensive (
 
     @Override
     public double getPrice() {
-        return price;
+        return price; 
     }
 
     @Override public String getColor() {
-        return "purple";
+        return "gold"; //Making it gold, coulv'e put it for VIP color but VIP seems more fancy than gold, thiking iridium
     }
 
     @Override

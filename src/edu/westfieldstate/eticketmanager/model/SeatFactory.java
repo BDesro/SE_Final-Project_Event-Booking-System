@@ -1,3 +1,8 @@
+package edu.westfieldstate.eticketmanager.model;
+
+import edu.westfieldstate.eticketmanager.model.PremiumSeat;
+import edu.westfieldstate.eticketmanager.model.Seat;
+
 public class SeatFactory { //Simple factory
     public static Seat createSeat(int seatId, String section, String row, int number, String type, boolean active, double price) {
         switch (type) {

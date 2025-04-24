@@ -1,7 +1,6 @@
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+package edu.westfieldstate.eticketmanager.model;
+
+import edu.westfieldstate.eticketmanager.util.PasswordUtils;
 
 public class User {
     public enum Role{
@@ -34,10 +33,6 @@ public class User {
         return role;
     }
 
-    public boolean userPassCheck(String inputPassword) { //Calling checkPassword from PasswordUtils in User class
-        return PasswordUtils.checkPassword(inputPassword, this.hashedPassword);
-    }
-
     public void setEmail(String email) {
         this.email = email;
     }
@@ -54,31 +49,9 @@ public class User {
         return hashedPassword;
     }
 
-    // Gets a user (or null) from the database using username + password    (TO BE CONTINUED)
-    /*public static User fetchUser(String username, String password)
-    {
-        String query = "SELECT email_address, user_role " +
-                       "FROM users " +
-                       "WHERE username = ?";
-
-        try (Connection connection = JDBC.getConnection();
-             PreparedStatement stmt = connection.prepareStatement(query))
-        {
-            stmt.setString(1, username);
-            ResultSet rs = stmt.executeQuery();
-
-            if(rs.next())
-            {
-
-            }
-        } catch(SQLException e) {
-            e.printStackTrace();
-        }
-    }*/
-
     @Override
     public String toString() {
-        return "User{" +
+        return "edu.westfieldstate.eticketmanager.model.User{" +
                 "username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", role=" + role +
