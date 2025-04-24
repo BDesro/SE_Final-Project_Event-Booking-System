@@ -8,13 +8,14 @@ USE etickets;
 
 
 -- =====================================================
--- Table user_avatar
+-- Table user_avatars
 -- =====================================================
-DROP TABLE IF EXISTS user_avatar;
+DROP TABLE IF EXISTS user_avatars;
 
-CREATE TABLE user_avatar
+CREATE TABLE user_avatars
 (
-  -- To be continued
+  avatar_id INT PRIMARY KEY AUTO_INCREMENT,
+  image_data LONGBLOB
 ) AUTO_INCREMENT = 1;
 -- -----------------------------------------------------
 -- Table users
@@ -27,7 +28,11 @@ CREATE TABLE users
   username        VARCHAR(45)             NOT NULL      UNIQUE,
   password_hash   VARCHAR(255)            NOT NULL,
   email_address   VARCHAR(50)             NOT NULL      UNIQUE,
-  user_role       ENUM('user', 'admin')   NOT NULL      DEFAULT 'user'
+  user_role       ENUM('user', 'admin')   NOT NULL      DEFAULT 'user',
+  avatar_id		  INT					  NOT NULL,
+  
+  CONSTRAINT avatar_id_fk FOREIGN KEY (avatar_id) REFERENCES user_avatars (avatar_id)
+	ON UPDATE CASCADE
 ) AUTO_INCREMENT = 1;
 
 
