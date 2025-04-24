@@ -27,11 +27,10 @@
 - [ ] Password Requirements (1 Cap, 1 lower, 1 num, 1 special)  
       
 <ins>**Database**</ins>  
-- [ ] Add Venue  
-- [ ] Add Join Venue-Event  
-- [ ] Update Bookings   
-- [ ] Add Table for Images  
-- [ ] Add Table User Pics
+- [x] Add Venue  
+- [x] Add Join Venue-Event (Just a venue FK in Event_List)  
+- [x] Update Bookings   
+- [x] Add Table for Images  
 
 <ins>**Other**</ins>  
 - [ ] HELP BUTTON FOR EVERY SCREEN (video later)  
