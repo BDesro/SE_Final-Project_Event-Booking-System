@@ -17,7 +17,7 @@ public class Event {
     private String eventDescription;
     private LocalDate eventDate;
     private Boolean isVisible;
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private Venue eventVenue;
 
     public Event()
     {
@@ -25,13 +25,15 @@ public class Event {
         eventDescription = "Default Description";
         eventDate = LocalDate.now();
         isVisible = false;
+        eventVenue = new Venue();
     }
-    public Event(String name, String description, LocalDate date, Boolean visible)
+    public Event(String name, String description, LocalDate date, Boolean visible, Venue venue)
     {
         eventName = name;
         eventDescription = description;
         eventDate = date;
         isVisible = visible;
+        eventVenue = venue;
     }
 
 
@@ -73,31 +75,13 @@ public class Event {
         return getEventName() + " " + getEventDescription() + " " + getEventDate();
     }
 
-    public static ObservableList<Event> getAllEvents()
-    {
-        ObservableList<Event> events = FXCollections.observableArrayList();
 
-        String query = "SELECT event_name, event_description, event_date, is_active " +
-                       "FROM event_list ";
-                  // + "WHERE is_active";    I'm commenting this until the active/inactive works right
+    public Venue getEventVenue() {
+        return eventVenue;
+    }
 
-        try (Connection connection = JDBC.getConnection();
-             PreparedStatement stmt = connection.prepareStatement(query);
-             ResultSet rs = stmt.executeQuery())
-        {
-            while(rs.next())
-            {
-                events.add(new Event(
-                        rs.getString("event_name"),
-                        rs.getString("event_description"),
-                        LocalDate.parse(rs.getString("event_date")),
-                        rs.getBoolean("is_active")
-                ));
-            }
-        }catch(SQLException e){
-            e.printStackTrace();
-        }
-
-        return events;
+    public void setEventVenue(Venue eventVenue) {
+        if(eventVenue!=null)
+            this.eventVenue = eventVenue;
     }
 }
