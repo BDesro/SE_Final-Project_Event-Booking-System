@@ -24,7 +24,7 @@
 - [x] Venue Class  
       
 <ins>**Login Screen**</ins>  
-- [ ] Password Requirements (1 Cap, 1 lower, 1 num, 1 special)  
+- [x] Password Requirements (1 Cap, 1 lower, 1 num, 1 special)  
       
 <ins>**Database**</ins>  
 - [x] Add Venue  
