@@ -17,10 +17,6 @@ import java.sql.SQLException;
 public class CreateAccountScreen {
 
     public static Parent getRootNode() {
-        TextInputDialog dialog = new TextInputDialog(); //Might need to remove since title already sets title
-        dialog.setTitle("Create Account");
-        dialog.setHeaderText("Enter your details (username,email,password)");
-
         Label message = new Label("");
 
         Label newUserLabel = new Label("New Username:");
@@ -29,8 +25,57 @@ public class CreateAccountScreen {
         TextField newEmail = new TextField();
         Label newPassLabel = new Label("New Password:");
         PasswordField newPass = new PasswordField();
+        Label passMessage = new Label("Password must be 8 or more characters long with at least 1 uppercase, 1 special character, and 1 number.");
+        passMessage.setStyle("-fx-text-fill: red;");
+
+        ProgressBar strengthBar = new ProgressBar(0);
+        strengthBar.setPrefWidth(200);
+        strengthBar.setStyle("-fx-accent: red;");
+        Label strengthLabel = new Label("Strength: ");
+        strengthLabel.setStyle("-fx-text-fill: red;");
+
+        strengthBar.setVisible(false);
+        strengthBar.setManaged(false);
+        strengthLabel.setVisible(false);
+        strengthLabel.setManaged(false);
+        passMessage.setVisible(false);
+        passMessage.setManaged(false);
+
         Button returnToLogIn = new Button ("Back to Log In");
         Button submitNewAccount = new Button("Submit New Account");
+
+        newPass.textProperty().addListener((observed, old, newValue) -> {
+            double strength = calculateStrength(newValue);
+            strengthBar.setProgress(strength);
+            if (strength < 0.4) {
+                strengthBar.setStyle("-fx-accent: red;");
+                strengthLabel.setText("Strength: Weak");
+                strengthLabel.setStyle("-fx-text-fill: red;");
+            } else if (strength < 0.7) {
+                strengthBar.setStyle("-fx-accent: orange;");
+                strengthLabel.setText("Strength: Medium");
+                strengthLabel.setStyle("-fx-text-fill: orange;");
+            }
+            if (!passwordCheck(newValue)) {
+                passMessage.setText("Password must be 8 or more characters long with at least 1 uppercase, 1 special character, and 1 number.");
+                passMessage.setStyle("-fx-text-fill: red;");
+            } else {
+                strengthBar.setStyle("-fx-accent: green;");
+                strengthLabel.setText("Strength: Strong password");
+                strengthLabel.setStyle("-fx-text-fill: green;");
+                passMessage.setText("Password requirements met!");
+                passMessage.setStyle("-fx-text-fill: green;");
+            }
+        });
+
+        newPass.focusedProperty().addListener((obs, wasFocused, isFocused) -> {
+            strengthBar.setVisible(isFocused);
+            strengthBar.setManaged(isFocused);
+            strengthLabel.setVisible(isFocused);
+            strengthLabel.setManaged(isFocused);
+            passMessage.setVisible(isFocused);
+            passMessage.setManaged(isFocused);
+        });
 
         submitNewAccount.setOnAction(submitEvent -> {
             String newUsername = newUser.getText().trim();
@@ -39,6 +84,12 @@ public class CreateAccountScreen {
 
             if (newUsername.isEmpty() || newEmails.isEmpty() || newPassword.isEmpty()) {
                 message.setText("All fields are required.");
+                message.setStyle("-fx-text-fill: red;");
+                return;
+            }
+
+            if (!passwordCheck(newPassword)) {
+                message.setText("Password does not meet requirements");
                 message.setStyle("-fx-text-fill: red;");
                 return;
             }
@@ -67,7 +118,7 @@ public class CreateAccountScreen {
         root.setPadding(new Insets(20));
         HBox userRow = new HBox(10, newUserLabel, newUser);
         HBox emailRow = new HBox(10, newEmailLabel, newEmail);
-        HBox passRow = new HBox(10, newPassLabel, newPass);
+        VBox passRow = new VBox(5, new HBox(10, newPassLabel, newPass), passMessage, strengthBar, strengthLabel);
         HBox buttonRow = new HBox(10, submitNewAccount, returnToLogIn);
         root.getChildren().addAll(userRow, emailRow, passRow, buttonRow, message);
         
@@ -88,6 +139,56 @@ public class CreateAccountScreen {
         }
 
         return false;
+    }
+
+    public static boolean passwordCheck(String password) {
+        if (password.length() < 8) {
+            return false;
+        }
+
+        boolean hasUpper = false;
+        boolean hasNumber = false;
+
+        for (int i = 0; i < password.length(); i++) {
+            char c = password.charAt(i);
+            if (Character.isUpperCase(c)) {
+                hasUpper = true;
+            } else if (Character.isDigit(c)) {
+                hasNumber = true;
+            }
+        }
+
+        return hasUpper && hasNumber;
+    }
+
+    private static double calculateStrength(String password) {
+        int score = 0;
+
+        if (password.length() >= 8) score++; //Score increases a point if string is 8 characters or more
+        for (int i = 0; i < password.length(); i++) {
+            char c = password.charAt(i);
+            if (Character.isUpperCase(c)) { //Increases if ther is upper case too
+                score++;
+                break;
+            }
+        }
+        for (int i = 0; i < password.length(); i++) { //Increases when we find a digit
+            char c = password.charAt(i);
+            if (Character.isDigit(c)) {
+                score++;
+                break;
+            }
+
+        }
+        for (int i = 0; i < password.length(); i++) {//Increase for special characters
+            char c = password.charAt(i);
+            if (!Character.isLetterOrDigit(c)) {
+                score++;
+                break;
+            }
+        }
+
+        return Math.min(score / 4.0, 1.0); //If score gets all 4 points it is strong, anything less is weak or medium
     }
 
     public static boolean createAccount(User user){ //Creating account method
