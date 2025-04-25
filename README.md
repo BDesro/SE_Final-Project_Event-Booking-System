@@ -20,8 +20,8 @@
 - [ ] My Events  
       
 <ins>**Admin Screen**</ins>  
-- [ ] Venue Manager  
-- [ ] Venue Class  
+- [x] Venue Manager  
+- [x] Venue Class  
       
 <ins>**Login Screen**</ins>  
 - [ ] Password Requirements (1 Cap, 1 lower, 1 num, 1 special)  
