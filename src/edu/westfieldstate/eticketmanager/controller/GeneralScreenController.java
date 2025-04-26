@@ -25,8 +25,6 @@ public class GeneralScreenController
     private TableColumn<Event, String> descriptionColumn;
     @FXML
     private TableColumn<Event, LocalDate> dateColumn;
-    @FXML
-    private Label noEventsLabel;
 
     @FXML
     private ComboBox<Venue> venueSelector;
@@ -36,17 +34,13 @@ public class GeneralScreenController
     @FXML
     public void initialize()
     {
+        initializeVenueSelector();
         tableEvents = FXCollections.observableArrayList();
+        table.setPlaceholder(new Label("No Venue Selected"));
 
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("eventName"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("eventDescription"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("eventDate"));
-
-        noEventsLabel = new Label("No Venue Selected");
-        table.setPlaceholder(noEventsLabel);
-
-       // tableEvents = Event.getAllEvents();
-       // table.setItems(tableEvents);
 
         // Makes table rows (events) clickable. Clicking currently just prints event name
         table.setRowFactory(tv ->
@@ -69,31 +63,73 @@ public class GeneralScreenController
         SceneManager.switchTo(SceneID.LOGIN_SCREEN);
     }
 
-    public ObservableList<Event> getPublicVenueEvents(Venue venue)
+    public void initializeVenueSelector()
     {
-        String query = "SELECT event_name, event_description, event_date " +
-                       "FROM event_venue " +
-                       "WHERE is_active = 1 && venue_name = ? " +
-                       "ORDER BY eventDate";
+        String query ="SELECT venue_name, address " +
+                      "FROM venues";
 
-        try (Connection connection = JDBC.getConnection())
+        if(!venueSelector.getItems().isEmpty())
+            venueSelector.getItems().clear();
+
+        try(Connection connection = JDBC.getConnection();
+            PreparedStatement ps = connection.prepareStatement(query))
         {
-            if(connection != null)
-            {
-                PreparedStatement ps = connection.prepareStatement(query);
-                ps.setString(1, venue.getVenueName());
-                ResultSet rs = ps.executeQuery();
-                tableEvents.clear();
+            ResultSet rs = ps.executeQuery();
 
-                while(rs.next())
-                {
-                    String eventName = rs.getString("event_name");
-                    String eventDescription = rs.getString("event_description");
-                    LocalDate date = LocalDate.parse(rs.getString("event_date"));
-                }
+            while(rs.next())
+            {
+                venueSelector.getItems().add(new Venue(rs.getString("venue_name"), rs.getString("address")));
             }
+            rs.close();
         } catch(SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void pullPublicVenueEvents(Venue venue)
+    {
+        tableEvents.clear();
+
+        if (venue == null)
+        {
+            table.setPlaceholder(new Label("No Venue Selected"));
+            return;
+        }
+
+        String query = "SELECT * FROM event_venue " +
+                       "WHERE is_active = 1 && venue_name = ? " +
+                       "ORDER BY event_date";
+
+        try (Connection connection = JDBC.getConnection();
+             PreparedStatement ps = connection.prepareStatement(query))
+        {
+            ps.setString(1, venue.getVenueName());
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next())
+            {
+                String eventName = rs.getString("event_name");
+                String eventDescription = rs.getString("event_description");
+                LocalDate date = LocalDate.parse(rs.getString("event_date"));
+                Boolean active = rs.getBoolean("is_active");
+                String venueName = rs.getString("venue_name");
+                String address = rs.getString("address");
+                tableEvents.add(new Event(eventName, eventDescription, date, active, new Venue(venueName, address)));
+            }
+            rs.close();
+
+            if(tableEvents.isEmpty())
+                table.setPlaceholder(new Label("No Events Available for this Venue"));
+
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void updateTable(ActionEvent e)
+    {
+        pullPublicVenueEvents(venueSelector.getSelectionModel().getSelectedItem());
+        table.setItems(tableEvents);
     }
 }
