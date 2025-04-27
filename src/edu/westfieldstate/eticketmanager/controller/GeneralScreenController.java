@@ -3,6 +3,7 @@ package edu.westfieldstate.eticketmanager.controller;
 import edu.westfieldstate.eticketmanager.core.SceneID;
 import edu.westfieldstate.eticketmanager.core.SceneManager;
 import edu.westfieldstate.eticketmanager.model.Event;
+import edu.westfieldstate.eticketmanager.model.User;
 import edu.westfieldstate.eticketmanager.model.Venue;
 import edu.westfieldstate.eticketmanager.util.JDBC;
 import javafx.collections.FXCollections;
@@ -11,12 +12,20 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 
 import java.sql.*;
 import java.time.LocalDate;
 
 public class GeneralScreenController
 {
+    @FXML
+    public ImageView userAvatar;
+
+    private User activeUser;
+    @FXML
+    private Label usernameLabel;
+
     @FXML
     private TableView<Event> table;
     @FXML
@@ -34,10 +43,12 @@ public class GeneralScreenController
     @FXML
     public void initialize()
     {
+        getActiveUser();
+        usernameLabel.setText(activeUser.getUsername());
         initializeVenueSelector();
         tableEvents = FXCollections.observableArrayList();
-        table.setPlaceholder(new Label("No Venue Selected"));
 
+        table.setPlaceholder(new Label("No Venue Selected"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("eventName"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("eventDescription"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("eventDate"));
@@ -59,7 +70,38 @@ public class GeneralScreenController
         });
     }
 
+    public void getActiveUser()
+    {
+        String query = "SELECT * FROM users WHERE is_active = 1";
+
+        try(Connection connection = JDBC.getConnection();
+            PreparedStatement ps = connection.prepareStatement(query))
+        {
+            ResultSet rs = ps.executeQuery();
+            if(rs.next())
+            {
+                String username = rs.getString("username");
+                String email = rs.getString("email_address");
+                activeUser = new User(username, email); //Will add feature to get avatar, harder than I thought
+            }
+        } catch(SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     public void backToLogin(ActionEvent e){
+        String query = "UPDATE users " +
+                "SET is_active = 0 " +
+                "WHERE is_active = 1";
+
+        try(Connection connection = JDBC.getConnection();
+            PreparedStatement ps = connection.prepareStatement(query))
+        {
+            ps.executeUpdate();
+        } catch(SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
         SceneManager.switchTo(SceneID.LOGIN_SCREEN);
     }
 
