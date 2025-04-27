@@ -16,8 +16,6 @@ import java.sql.SQLException;
 
 public class LoginPage {
 
-    public static User activeUser = null; //In progress
-
     // Creates and returns the root needed to set up the screen (in edu.westfieldstate.eticketmanager.core.SceneManager)
     // All functionality except for stage and scene remains the same
     public static Parent getRootNode() { //A second class should be made to handle log in methods and database queries
@@ -51,6 +49,7 @@ public class LoginPage {
                 username.clear();
                 password.clear();
 
+                setActiveUser(user);
                 SceneManager.switchTo(SceneID.GENERAL_SCREEN);
             }
             else {
@@ -61,7 +60,10 @@ public class LoginPage {
             }
 
         });
-        guestLogIn.setOnAction(e-> SceneManager.switchTo(SceneID.GENERAL_SCREEN));
+        guestLogIn.setOnAction(e-> {
+            setActiveUser("Guest User");
+            SceneManager.switchTo(SceneID.GENERAL_SCREEN);
+        });
         createNewAccount.setOnAction(e -> SceneManager.switchTo(SceneID.CREATE_SCREEN));
 
         tempAdmin.setOnAction(e -> SceneManager.switchTo(SceneID.ADMIN_SCREEN));
@@ -92,6 +94,22 @@ public class LoginPage {
         //return username.equals(validUsername) && password.equals(validPassword);
     }
 
+    public static boolean setActiveUser(String username)
+    {
+        String query = "UPDATE users " +
+                       "SET is_active = 1 " +
+                       "WHERE username = ?";
 
+        try(Connection connection = JDBC.getConnection();
+            PreparedStatement ps = connection.prepareStatement(query))
+        {
+            ps.setString(1, username);
 
+            ps.executeUpdate();
+            return true;
+        } catch(SQLException e) {
+            System.out.println("Error with updating database!");
+            return false;
+        }
+    }
 }

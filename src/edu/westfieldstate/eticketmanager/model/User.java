@@ -12,12 +12,19 @@ public class User {
     private String hashedPassword;
     private String email;
     private Role role; //Role is important to know which scene the user will go to once they log in
+    private byte[] avatar;
 
     public User(String username, String plainPassword, String email, Role role) {
         this.username = username;
         this.hashedPassword = PasswordUtils.hashPassword(plainPassword);
         this.email = email;
         this.role = role;
+    }
+
+    public User(String username, String email) {
+        this.username = username;
+        this.email = email;
+        this.role = Role.USER;
     }
 
     //Getter methods for user account creation

@@ -15,7 +15,7 @@ DROP TABLE IF EXISTS user_avatars;
 CREATE TABLE user_avatars
 (
   avatar_id INT PRIMARY KEY AUTO_INCREMENT,
-  image_data LONGBLOB
+  image_data LONGBLOB NOT NULL
 ) AUTO_INCREMENT = 1;
 -- -----------------------------------------------------
 -- Table users
@@ -29,6 +29,7 @@ CREATE TABLE users
   password_hash   VARCHAR(255)            NOT NULL,
   email_address   VARCHAR(50)             NOT NULL      UNIQUE,
   user_role       ENUM('user', 'admin')   NOT NULL      DEFAULT 'user',
+  is_active	      TINYINT                 NOT NULL      DEFAULT 0,
   avatar_id		  INT					  ,
 
   CONSTRAINT avatar_id_fk FOREIGN KEY (avatar_id) REFERENCES user_avatars (avatar_id)
