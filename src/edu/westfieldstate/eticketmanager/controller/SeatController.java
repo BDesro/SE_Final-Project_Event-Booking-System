@@ -80,7 +80,7 @@ public class SeatController { //This class is setting up the shape each individu
         int number = seat.getSeatNum();
         double price = seat.getPrice();
 
-        String text = "edu.westfieldstate.eticketmanager.model.Seat " + section + row + number + "\n";
+        String text = "Seat: " + section + row + number + "\n";
         text += "Type: " + type + "\n";
         text += "Price: $" + price + "\n";
         text += "Status: " + status;

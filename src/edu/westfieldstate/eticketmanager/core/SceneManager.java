@@ -49,7 +49,7 @@ public class SceneManager
             {
                 case LOGIN_SCREEN ->
                 {
-                    scene = new Scene(LoginPage.getRootNode(), resX, resY);
+                    scene = new Scene(LoginPage.getRootNode(), 500, 400);
                     stage.setTitle("Login Screen");
                 }
                 case ADMIN_SCREEN ->
@@ -64,7 +64,7 @@ public class SceneManager
                 }
                 case CREATE_SCREEN ->
                 {
-                    scene = new Scene(CreateAccountScreen.getRootNode(), resX, resY);
+                    scene = new Scene(CreateAccountScreen.getRootNode(), 550, 300);
                     stage.setTitle("Create Account Screen");
                 }
             }
@@ -72,6 +72,7 @@ public class SceneManager
             if(scene != null)
             {
                 stage.setScene(scene);
+                stage.centerOnScreen();
                 stage.show();
             }
         } catch (Exception e) {

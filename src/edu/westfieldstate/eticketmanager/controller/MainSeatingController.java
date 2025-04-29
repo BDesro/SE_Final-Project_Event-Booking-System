@@ -4,6 +4,7 @@ import edu.westfieldstate.eticketmanager.model.Seat;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
@@ -18,17 +19,17 @@ public class MainSeatingController { //This class is going to handle the mutlipl
             SeatController seatController = new SeatController();
             for (Seat seat : seatController.getAllSeats()) {
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("edu/westfieldstate/eticketmanager/view/seat.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/westfieldstate/eticketmanager/view/seat.fxml"));
                 VBox seatNode = loader.load();
 
                 SeatController controller = loader.getController();
                 controller.setSeat(seat);
 
                 //Should make seatRow and section return a char
-                int rowIndex = Character.toUpperCase(seat.getSeatSection().charAt(0)) - 'A';
-                int colIndex = seat.getSeatNum() - 1;
+                int sectIndex = Character.toUpperCase(seat.getSeatSection().charAt(0)) - 'A';
+                int rowIndex = Character.toUpperCase(seat.getSeatRow().charAt(0)) - 'A';
 
-                seatGrid.add(seatNode, colIndex, rowIndex);
+                seatGrid.add(seatNode, rowIndex, sectIndex);
                 GridPane.setMargin(seatNode, new Insets(10));
             }
         } catch (Exception e) {
