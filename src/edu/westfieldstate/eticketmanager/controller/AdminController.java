@@ -9,8 +9,14 @@ import edu.westfieldstate.eticketmanager.util.JDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -512,4 +518,22 @@ public class AdminController implements Initializable {
         pullEvents();
         comboBoxInitialize();
     }
+    // ==============================================================================================
+    //                                    HELP BUTTON
+    // ==============================================================================================
+
+    public void helpBox(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/westfieldstate/eticketmanager/view/help-view.fxml"));
+            Parent root = loader.load();
+            Stage helpStage = new Stage();
+            helpStage.setTitle("Help Screen");
+            helpStage.setScene(new Scene(root));
+            helpStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }

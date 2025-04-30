@@ -21,7 +21,7 @@
             <TextArea fx:id="nameTextArea" layoutX="250.0" layoutY="40.0" prefHeight="45.0" prefWidth="200.0" promptText="Enter Event Name..." />
             <TextArea fx:id="descriptionTextArea" layoutX="250.0" layoutY="140.0" prefHeight="45.0" prefWidth="200.0" promptText="Enter Event Description..." />
             <DatePicker fx:id="datePicker" layoutX="250.0" layoutY="220.0" prefWidth="200.0" promptText="Select A Date" />
-            <Button layoutX="50.0" layoutY="680.0" mnemonicParsing="false" onAction="#goToLogin" text="Sign out" />
+            <Button layoutX="150.0" layoutY="680.0" mnemonicParsing="false" onAction="#goToLogin" text="Sign out" />
             <Button fx:id="deleteButton" layoutX="50.0" layoutY="240.0" mnemonicParsing="false" onAction="#deleteEvent" text="Delete Event" />
             <Button fx:id="editButton" layoutX="50.0" layoutY="160.0" mnemonicParsing="false" onAction="#editEvent" text="Edit Event" />
             <Button fx:id="nextButton" layoutX="50.0" layoutY="120.0" mnemonicParsing="false" onAction="#nextEvent" text="Next Event" />
@@ -127,6 +127,7 @@
             <Label fx:id="enterVenueAddress" layoutX="300.0" layoutY="120.0" text="Enter Venue Address" visible="false" />
             <Label fx:id="enterEventVenue" layoutX="300.0" layoutY="250.0" text="Select Event Venue" visible="false" />
             <Label fx:id="enterEventDate" layoutX="300.0" layoutY="200.0" text="Enter Event Date" visible="false" />
+            <Button layoutX="50.0" layoutY="680.0" mnemonicParsing="false" onAction="#helpBox" text="Need Help?" />
          </children>
       </AnchorPane>
    </children>

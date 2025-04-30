@@ -12,6 +12,7 @@ public class User {
     private String hashedPassword;
     private String email;
     private Role role; //Role is important to know which scene the user will go to once they log in
+    private String nickName;
     private byte[] avatar;
 
     public User(String username, String plainPassword, String email, Role role) {
