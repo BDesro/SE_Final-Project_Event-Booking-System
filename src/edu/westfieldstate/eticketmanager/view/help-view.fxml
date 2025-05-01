@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westfieldstate.eticketmanager.controller.HelpViewController">
+   <children>
+      <HBox layoutY="10.0" prefHeight="11.0" prefWidth="600.0" spacing="10.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#helpLogIn" text="Log-In Screen">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#helpGeneral" text="General Screen" />
+            <Button mnemonicParsing="false" onAction="#helpUser" text="User Profile" />
+            <Button mnemonicParsing="false" onAction="#helpCheckOut" text="Check Out" />
+            <Button mnemonicParsing="false" onAction="#helpAdmin" text="Admin Screen" />
+         </children>
+         <padding>
+            <Insets left="50.0" />
+         </padding>
+      </HBox>
+      <Label fx:id="helpLabel" layoutX="14.0" layoutY="49.0" prefHeight="348.0" prefWidth="570.0" textAlignment="JUSTIFY" wrapText="true" />
+   </children>
+</AnchorPane>
