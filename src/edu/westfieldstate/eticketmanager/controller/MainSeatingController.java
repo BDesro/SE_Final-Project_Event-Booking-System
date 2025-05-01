@@ -1,12 +1,12 @@
 package edu.westfieldstate.eticketmanager.controller;
-
 import edu.westfieldstate.eticketmanager.model.Seat;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainSeatingController { //This class is going to handle the mutliple seats, rows, and labels for the
     //seating screen
@@ -15,8 +15,11 @@ public class MainSeatingController { //This class is going to handle the mutlipl
     private GridPane seatGrid;
 
     public void initialize() {
+        seatGrid.getChildren().clear();
+        Map<Character, Integer> sectionColumnTracker = new HashMap<>();
         try {
             SeatController seatController = new SeatController();
+            seatController.generateSeats(5, 10);
             for (Seat seat : seatController.getAllSeats()) {
 
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/westfieldstate/eticketmanager/view/seat.fxml"));
@@ -25,16 +28,19 @@ public class MainSeatingController { //This class is going to handle the mutlipl
                 SeatController controller = loader.getController();
                 controller.setSeat(seat);
 
-                //Should make seatRow and section return a char
-                int sectIndex = Character.toUpperCase(seat.getSeatSection().charAt(0)) - 'A';
-                int rowIndex = Character.toUpperCase(seat.getSeatRow().charAt(0)) - 'A';
+                int row, col;
+                char sectionChar = Character.toUpperCase(seat.getSeatSection().charAt(0));
+                row = sectionChar - 'A';
+                col = sectionColumnTracker.getOrDefault(sectionChar, 0);
+                sectionColumnTracker.put(sectionChar, col + 1);
 
-                seatGrid.add(seatNode, rowIndex, sectIndex);
+                seatGrid.add(seatNode, col, row);
                 GridPane.setMargin(seatNode, new Insets(10));
             }
         } catch (Exception e) {
             System.out.println("Error loading seats from database");
         }
+
     }
 
 }

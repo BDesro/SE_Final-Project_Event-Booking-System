@@ -21,7 +21,8 @@ public class MainApplication extends Application
         //is made with SCENE ID (gotta remember)
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/edu/westfieldstate/eticketmanager/view/main-seating.fxml")));
         stage.setTitle("Seating Chart");
-        stage.setScene(new Scene(root, 500, 300));
+        stage.setScene(new Scene(root, 1050, 1000));
+        stage.centerOnScreen();
         stage.show();
         /*
         SceneManager.setStage(stage);

@@ -22,6 +22,8 @@ public class SeatController { //This class is setting up the shape each individu
     @FXML private Rectangle rightArmRest;
     @FXML private Text seatLabel;
 
+    private int seatCount = 1;
+
     private Seat seat;
     private boolean isReserved = false; //Similar to isActive
     private Tooltip tooltip;
@@ -113,5 +115,62 @@ public class SeatController { //This class is setting up the shape each individu
         }
 
         return seats;
+    }
+
+    private boolean seatsExist() {
+        String checkSQL = "SELECT COUNT(*) FROM seats";
+        try (Connection conn = JDBC.getConnection();
+             PreparedStatement ps = conn.prepareStatement(checkSQL);
+             ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public void generateSeats(int sections, int rows) {
+        if(seatsExist()){
+            return;
+        }
+        seatCount = 1;
+        String insertSQL = "INSERT INTO seats (seat_section, seat_row, seat_number, seat_type, is_active, price) " +
+                "VALUES (?, ?, ?, ?, ?, ?)";
+
+        try (Connection conn = JDBC.getConnection();
+             PreparedStatement ps = conn.prepareStatement(insertSQL)) {
+
+            for (int sec = 0; sec < sections; sec++) {
+                char section = (char) ('A' + sec);
+                for (int r = 0; r < rows; r++) {
+                    char row = (char) ('A' + r);
+                        String type;
+                        double price = 20;
+                        if (section == 'E') {
+                            type = "vip";
+                        } else if (row >= 'E' && row <= 'F') {
+                            type = "premium";
+                        } else {
+                            type = "standard";
+                        }
+
+                        ps.setString(1, String.valueOf(section));
+                        ps.setString(2, String.valueOf(row));
+                        ps.setInt(3, seatCount++);
+                        ps.setString(4, type);
+                        ps.setBoolean(5, false);
+                        ps.setDouble(6, price);
+                        //Our seat numbers are unique
+                        ps.addBatch();
+                }
+            }
+
+            ps.executeBatch();
+            System.out.println("Checking that set s generated good, seat count: " + seatCount);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
