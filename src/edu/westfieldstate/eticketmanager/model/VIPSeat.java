@@ -18,7 +18,7 @@ public class VIPSeat implements Seat
         this.seatRow = seatRow;
         this.seatNum = seatNum;
         this.active = active;
-        this.price = price;
+        this.price = price * 1.6;
     }
     @Override
     public int getSeatId() {

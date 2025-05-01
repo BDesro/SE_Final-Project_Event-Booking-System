@@ -25,7 +25,7 @@ public class CreateAccountScreen {
         TextField newEmail = new TextField();
         Label newPassLabel = new Label("New Password:");
         PasswordField newPass = new PasswordField();
-        Label passMessage = new Label("Password must be 8 or more characters long with at least 1 uppercase, 1 special character, and 1 number.");
+        Label passMessage = new Label("Must be 8+ characters long with 1 uppercase, special character, and number");
         passMessage.setStyle("-fx-text-fill: red;");
 
         ProgressBar strengthBar = new ProgressBar(0);
@@ -57,7 +57,7 @@ public class CreateAccountScreen {
                 strengthLabel.setStyle("-fx-text-fill: orange;");
             }
             if (!passwordCheck(newValue)) {
-                passMessage.setText("Password must be 8 or more characters long with at least 1 uppercase, 1 special character, and 1 number.");
+                passMessage.setText("Must be 8+ characters long with 1 uppercase, special character, and number");
                 passMessage.setStyle("-fx-text-fill: red;");
             } else {
                 strengthBar.setStyle("-fx-accent: green;");
