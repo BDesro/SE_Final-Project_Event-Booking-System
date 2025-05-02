@@ -3,6 +3,7 @@ package edu.westfieldstate.eticketmanager.controller;
 import edu.westfieldstate.eticketmanager.core.SceneID;
 import edu.westfieldstate.eticketmanager.core.SceneManager;
 import edu.westfieldstate.eticketmanager.model.User;
+import edu.westfieldstate.eticketmanager.resources.Avatar;
 import edu.westfieldstate.eticketmanager.util.JDBC;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
@@ -99,7 +100,8 @@ public class CreateAccountScreen {
                 message.setStyle("-fx-text-fill: red;");
                 newEmail.clear();
             } else {
-                User user = new User(newUsername, newPassword, newEmails, User.Role.USER); //Default as user account
+                Avatar avatar = Avatar.Default;
+                User user = new User(newUsername, newPassword, newEmails, User.Role.USER, avatar); //Default as user account
                 if (createAccount(user)) {
                     message.setText("Account created successfully!");
                     message.setStyle("-fx-text-fill: green;");

@@ -1,22 +1,12 @@
 -- -----------------------------------------------------
 -- Database etickets
 -- -----------------------------------------------------
-DROP DATABASE IF EXISTS etickets;
+DROP DATABASE IF EXISTS omni_vent;
 
-CREATE DATABASE etickets;
-USE etickets;
+CREATE DATABASE omni_vent;
+USE omni_vent;
 
 
--- =====================================================
--- Table user_avatars
--- =====================================================
-DROP TABLE IF EXISTS user_avatars;
-
-CREATE TABLE user_avatars
-(
-  avatar_id INT PRIMARY KEY AUTO_INCREMENT,
-  image_data LONGBLOB NOT NULL
-) AUTO_INCREMENT = 1;
 -- -----------------------------------------------------
 -- Table users
 -- -----------------------------------------------------
@@ -26,17 +16,49 @@ CREATE TABLE users
 (
   user_id         INT                     PRIMARY KEY   AUTO_INCREMENT,
   username        VARCHAR(45)             NOT NULL      UNIQUE,
+  nickname		  VARCHAR(45),
   password_hash   VARCHAR(255)            NOT NULL,
   email_address   VARCHAR(50)             NOT NULL      UNIQUE,
   user_role       ENUM('user', 'admin')   NOT NULL      DEFAULT 'user',
   is_active	      TINYINT                 NOT NULL      DEFAULT 0,
-  avatar_id		  INT					  ,
-
-  CONSTRAINT avatar_id_fk FOREIGN KEY (avatar_id) REFERENCES user_avatars (avatar_id)
-	ON UPDATE CASCADE
+  avatar		  ENUM('FourArms','CannonBolt','DiamondHead','GreyMatter','HeatBlast','RipJaw','StinkFly','UpChuck','Upgrade','WildMutt','XLR8','Default')  NOT NULL DEFAULT 'Default'
 ) AUTO_INCREMENT = 1;
 
+-- -----------------------------------------------------
+-- Trigger To Initialize Nickname
+-- -----------------------------------------------------
+DROP TRIGGER IF EXISTS set_nickname_before_insert;
+DELIMITER //
 
+CREATE TRIGGER set_nickname_before_insert
+BEFORE INSERT ON users
+FOR EACH ROW
+BEGIN
+  IF NEW.nickname IS NULL THEN
+    SET NEW.nickname = NEW.username;
+  END IF;
+END//
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- Trigger To Prevent Guests from Changing Their Values
+-- -----------------------------------------------------
+DROP TRIGGER IF EXISTS stop_guest_user_update;
+
+DELIMITER //
+CREATE TRIGGER stop_guest_user_update
+BEFORE UPDATE ON users
+FOR EACH ROW
+BEGIN
+IF OLD.username = 'Guest User' THEN
+	IF NOT(OLD.nickname = NEW.nickname AND OLD.avatar = NEW.avatar) THEN
+		SIGNAL SQLSTATE '45000'
+		SET MESSAGE_TEXT = 'Guest Users Cannot Update Their Info';
+	END IF;
+END IF;
+END //
+DELIMITER ;
 -- -----------------------------------------------------
 -- Table seats
 -- -----------------------------------------------------
@@ -126,7 +148,7 @@ VALUES
 INSERT INTO users
     (username, password_hash, email_address, user_role)
 VALUES
-    ('King Rhoam Bosphoramus ','N/A', 'N/A1', 'admin');
+    ('King Rhoam Bosphoramus Hyrule','$2a$10$sGToUTOEKwn7dYg79YobTO9dR3tksHqtke3M701Lu4fUH2/PGb59i', 'N/A1', 'admin');
 
 -- -----------------------------------------------------
 -- Adding View Table to Connect venue and event

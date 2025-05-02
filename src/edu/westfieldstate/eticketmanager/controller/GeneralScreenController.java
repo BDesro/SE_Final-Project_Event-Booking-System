@@ -5,6 +5,8 @@ import edu.westfieldstate.eticketmanager.core.SceneManager;
 import edu.westfieldstate.eticketmanager.model.Event;
 import edu.westfieldstate.eticketmanager.model.User;
 import edu.westfieldstate.eticketmanager.model.Venue;
+import edu.westfieldstate.eticketmanager.resources.Avatar;
+import edu.westfieldstate.eticketmanager.resources.AvatarManager;
 import edu.westfieldstate.eticketmanager.util.JDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.sql.*;
@@ -24,8 +27,7 @@ public class GeneralScreenController
 
     private User activeUser;
     @FXML
-    private Label usernameLabel;
-
+    private Hyperlink nickNameLabel;
     @FXML
     private TableView<Event> table;
     @FXML
@@ -37,6 +39,8 @@ public class GeneralScreenController
 
     @FXML
     private ComboBox<Venue> venueSelector;
+    @FXML
+    private ImageView avatarIMG;
 
     private ObservableList<Event> tableEvents;
 
@@ -44,10 +48,10 @@ public class GeneralScreenController
     public void initialize()
     {
         getActiveUser();
-        usernameLabel.setText(activeUser.getUsername());
+        nickNameLabel.setText(activeUser.getNickName());
         initializeVenueSelector();
         tableEvents = FXCollections.observableArrayList();
-
+        avatarIMG.setImage(new Image(AvatarManager.getAvatarLocation(activeUser.getAvatar()),true));
         table.setPlaceholder(new Label("No Venue Selected"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("eventName"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("eventDescription"));
@@ -82,7 +86,9 @@ public class GeneralScreenController
             {
                 String username = rs.getString("username");
                 String email = rs.getString("email_address");
-                activeUser = new User(username, email); //Will add feature to get avatar, harder than I thought
+                String nickname = rs.getString("nickname");
+                Avatar avatar = Avatar.valueOf(rs.getString("avatar"));
+                activeUser = new User(username, email,nickname,avatar); //Will add feature to get avatar, harder than I thought
             }
         } catch(SQLException e) {
             System.out.println(e.getMessage());
@@ -174,4 +180,10 @@ public class GeneralScreenController
         pullPublicVenueEvents(venueSelector.getSelectionModel().getSelectedItem());
         table.setItems(tableEvents);
     }
+
+    public void openProfile()
+    {
+        SceneManager.switchTo(SceneID.USER_PROFILE);
+    }
+
 }

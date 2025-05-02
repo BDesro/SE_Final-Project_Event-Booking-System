@@ -67,6 +67,16 @@ public class SceneManager
                     scene = new Scene(CreateAccountScreen.getRootNode(), resX, resY);
                     stage.setTitle("Create Account Screen");
                 }
+                case USER_PROFILE ->
+                {
+                    scene = new Scene(loadFXML("/edu/westfieldstate/eticketmanager/view/profile-view.fxml"), resX, resY);
+                    stage.setTitle("User Profile");
+                }
+                case SQL_PASSWORD ->
+                {
+                    scene = new Scene(loadFXML("/edu/westfieldstate/eticketmanager/view/sql-view.fxml"), resX, resY);
+                    stage.setTitle("Enter Your SQL Password");
+                }
             }
 
             if(scene != null)

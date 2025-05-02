@@ -1,9 +1,7 @@
 package edu.westfieldstate.eticketmanager.controller;
-
 import edu.westfieldstate.eticketmanager.core.SceneID;
 import edu.westfieldstate.eticketmanager.core.SceneManager;
 import edu.westfieldstate.eticketmanager.model.Event;
-
 import edu.westfieldstate.eticketmanager.model.Venue;
 import edu.westfieldstate.eticketmanager.util.JDBC;
 import javafx.collections.FXCollections;

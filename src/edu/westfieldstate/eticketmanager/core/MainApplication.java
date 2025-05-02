@@ -27,7 +27,7 @@ public class MainApplication extends Application
 
  */
         SceneManager.setStage(stage);
-        SceneManager.switchTo(SceneID.LOGIN_SCREEN); // Starts out at login, scenes change
+        SceneManager.switchTo(SceneID.SQL_PASSWORD); // Starts out at login, scenes change
                                                      // through action event triggers from there
     }
 

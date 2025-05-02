@@ -3,16 +3,18 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westfieldstate.eticketmanager.controller.GeneralScreenController">
    <children>
-      <Button layoutX="14.0" layoutY="100.0" mnemonicParsing="false" onAction="#backToLogin" text="Back to Login">
+      <Button layoutX="14.0" layoutY="140.0" mnemonicParsing="false" onAction="#backToLogin" text="Back to Login">
          <font>
             <Font size="20.0" />
          </font>
@@ -29,6 +31,7 @@
       </TableView>
       <HBox prefHeight="100.0" prefWidth="1280.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
+            <ImageView fx:id="avatarIMG" fitHeight="102.0" fitWidth="136.0" pickOnBounds="true" preserveRatio="true" />
             <Label prefHeight="54.0" prefWidth="162.0" text="Welcome,">
                <font>
                   <Font size="36.0" />
@@ -37,11 +40,12 @@
                   <Insets right="5.0" />
                </HBox.margin>
             </Label>
-            <Label fx:id="usernameLabel" prefHeight="55.0" prefWidth="256.0" text="Username">
+            <Hyperlink fx:id="nickNameLabel" onAction="#openProfile" prefHeight="68.0" text="Hyperlink" translateX="-5.0" translateY="-5.0">
                <font>
                   <Font size="36.0" />
                </font>
-            </Label>
+            </Hyperlink>
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
          </children>
          <padding>
             <Insets left="14.0" top="14.0" />
