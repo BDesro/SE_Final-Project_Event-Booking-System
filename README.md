@@ -6,7 +6,7 @@
 - [ ] Seating - All the stuff that goes with this  
 - [ ] Take me to checkout button  
 - [ ] Google Calendar API  
-- [ ] User Profile button  
+- [X] User Profile button  
       
 <ins>**Checkout Screen**</ins>  
 - [ ] List of seats in cart  
@@ -33,7 +33,7 @@
 - [x] Add Table for Images  
 
 <ins>**Other**</ins>  
-- [ ] HELP BUTTON FOR EVERY SCREEN (video later)  
+- [X] HELP BUTTON FOR EVERY SCREEN (video later)  
 - [ ] Green-Black Colors
 - [ ] Left Buttons Right Everything Else
 - [ ] Main Screen (Company Logo, Buttons to login, guest login, etc.)  

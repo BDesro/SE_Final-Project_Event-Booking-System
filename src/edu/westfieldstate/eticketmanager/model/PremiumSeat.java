@@ -16,7 +16,7 @@ public class PremiumSeat implements Seat
         this.seatRow = seatRow;
         this.seatNum = seatNum;
         this.active = active;
-        this.price = price;
+        this.price = price * 1.2;
     }
     @Override
     public int getSeatId() {
