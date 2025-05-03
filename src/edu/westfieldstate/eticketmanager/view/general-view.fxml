@@ -14,11 +14,6 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westfieldstate.eticketmanager.controller.GeneralScreenController">
    <children>
-      <Button layoutX="14.0" layoutY="140.0" mnemonicParsing="false" onAction="#backToLogin" text="Back to Login">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Button>
       <TableView fx:id="table" layoutX="14.0" layoutY="259.0" prefHeight="447.0" prefWidth="675.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0">
         <columns>
             <TableColumn fx:id="nameColumn" prefWidth="178.0" text="Event" />
@@ -52,5 +47,10 @@
          </padding>
       </HBox>
       <ComboBox fx:id="venueSelector" layoutX="14.0" layoutY="209.0" onAction="#updateTable" prefHeight="44.0" prefWidth="335.0" promptText="Select a Venue" AnchorPane.bottomAnchor="467.0" AnchorPane.leftAnchor="14.0" />
+      <Button layoutX="14.0" layoutY="140.0" mnemonicParsing="false" onAction="#backToLogin" text="Back to Login">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
