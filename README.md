@@ -13,11 +13,11 @@
 - [ ] Conformation screen (simple text box saying it was purchased)  
       
 <ins>**User Profile**</ins>  
-- [ ] Add Name  
-- [ ] Add Location  
-- [ ] User Profile Pic  
-- [ ] CC Info  
-- [ ] My Events  
+- [x] Add Name    
+- [x] User Profile Pic  
+- [x] CC Info  
+- [ ] My Events
+- [ ] Clean Up Functionality (clear text boxes, etc.)
       
 <ins>**Admin Screen**</ins>  
 - [x] Venue Manager  
