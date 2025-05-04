@@ -17,6 +17,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 
 
 import java.sql.*;
@@ -24,59 +26,40 @@ import java.time.LocalDate;
 
 public class GeneralScreenController
 {
-    @FXML
-    public ImageView userAvatar;
-
     private User activeUser;
-    @FXML
-    private Hyperlink nickNameLabel;
-    @FXML
-    private TableView<Event> table;
-    @FXML
-    private TableColumn<Event, String> nameColumn;
-    @FXML
-    private TableColumn<Event, String> descriptionColumn;
-    @FXML
-    private TableColumn<Event, LocalDate> dateColumn;
+    @FXML private ImageView avatarIMG;
+    @FXML private Hyperlink nickNameLabel;
 
-    @FXML
-    private ComboBox<Venue> venueSelector;
-    @FXML
-    private ImageView avatarIMG;
+    @FXML private TableView<Event> table;
+    @FXML private TableColumn<Event, String> nameColumn;
+    @FXML private TableColumn<Event, String> descriptionColumn;
+    @FXML private TableColumn<Event, LocalDate> dateColumn;
+    @FXML private ComboBox<Venue> venueSelector;
 
-    @FXML
-    private ImageView gifView;
+    @FXML private ImageView gifView;
 
     private ObservableList<Event> tableEvents;
+
+    @FXML private Rectangle eventDetailsBackground;
+    @FXML private VBox eventDetailsVBox;
+    @FXML private Label eventNameLabel;
+    @FXML private Label eventDescriptionLabel;
+    @FXML private Label eventDateLabel;
+    @FXML private Label venueNameLabel;
+    @FXML private Label venueAddressLabel;
 
     @FXML
     public void initialize()
     {
         getActiveUser();
         nickNameLabel.setText(activeUser.getNickName());
+        avatarIMG.setImage(new Image(AvatarManager.getAvatarLocation(activeUser.getAvatar()),true));
+
         initializeVenueSelector();
         tableEvents = FXCollections.observableArrayList();
-        avatarIMG.setImage(new Image(AvatarManager.getAvatarLocation(activeUser.getAvatar()),true));
-        table.setPlaceholder(new Label("No Venue Selected"));
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("eventName"));
-        descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("eventDescription"));
-        dateColumn.setCellValueFactory(new PropertyValueFactory<>("eventDate"));
+        initializeTableView();
 
-        // Makes table rows (events) clickable. Clicking currently just prints event name
-        table.setRowFactory(tv ->
-        {
-            TableRow<Event> row = new TableRow<>();
-            row.setOnMouseClicked(event ->
-            {
-                if(!row.isEmpty() && event.getClickCount() == 1)
-                {
-                    Event selected = row.getItem();
-                    System.out.println("Selected: " + selected.getEventName());
-                    // Can use this to trigger seating screen, etc. later
-                }
-            });
-            return row;
-        });
+        setEventDetailsVisibility(false);
 
         //This is here temporarily to show that the API works, it will go in the checkout screen
         //for when a purchase is complete.
@@ -120,7 +103,7 @@ public class GeneralScreenController
         SceneManager.switchTo(SceneID.LOGIN_SCREEN);
     }
 
-    public void initializeVenueSelector()
+    private void initializeVenueSelector()
     {
         String query ="SELECT venue_name, address " +
                       "FROM venues";
@@ -141,6 +124,39 @@ public class GeneralScreenController
         } catch(SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    private void initializeTableView()
+    {
+        table.setPlaceholder(new Label("No Venue Selected"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("eventName"));
+        descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("eventDescription"));
+        dateColumn.setCellValueFactory(new PropertyValueFactory<>("eventDate"));
+
+        // Makes table rows (events) clickable. Clicking currently just prints event name
+        table.setRowFactory(tv ->
+        {
+            TableRow<Event> row = new TableRow<>();
+            row.setOnMouseClicked(event ->
+            {
+                if(!row.isEmpty() && event.getClickCount() == 1)
+                {
+                    Event selected = row.getItem();
+                    System.out.println("Selected: " + selected.getEventName());
+
+                    eventNameLabel.setText(selected.getEventName());
+                    eventDescriptionLabel.setText(selected.getEventDescription());
+                    eventDateLabel.setText(String.valueOf(selected.getEventDate()));
+                    venueNameLabel.setText(selected.getEventVenue().getVenueName());
+                    venueAddressLabel.setText(selected.getEventVenue().getVenueLocation());
+
+                    if(!eventDetailsVBox.isVisible())
+                        setEventDetailsVisibility(true);
+                    // Can use this to trigger seating screen, etc. later
+                }
+            });
+            return row;
+        });
     }
 
     public void pullPublicVenueEvents(Venue venue)
@@ -183,11 +199,19 @@ public class GeneralScreenController
         }
     }
 
+    private void setEventDetailsVisibility(boolean visibility)
+    {
+        eventDetailsBackground.setVisible(visibility);
+        eventDetailsVBox.setVisible(visibility);
+    }
+
     @FXML
     public void updateTable(ActionEvent e)
     {
         pullPublicVenueEvents(venueSelector.getSelectionModel().getSelectedItem());
         table.setItems(tableEvents);
+
+        setEventDetailsVisibility(false);
     }
 
     public void openProfile()

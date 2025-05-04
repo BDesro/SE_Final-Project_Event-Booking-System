@@ -10,6 +10,8 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westfieldstate.eticketmanager.controller.GeneralScreenController">
@@ -35,12 +37,11 @@
                   <Insets right="5.0" />
                </HBox.margin>
             </Label>
-            <Hyperlink fx:id="nickNameLabel" onAction="#openProfile" prefHeight="68.0" text="Hyperlink" translateX="-5.0" translateY="-5.0">
+            <Hyperlink fx:id="nickNameLabel" onAction="#openProfile" prefHeight="48.0" text="Hyperlink" translateX="-5.0" translateY="-5.0">
                <font>
                   <Font size="36.0" />
                </font>
             </Hyperlink>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
          </children>
          <padding>
             <Insets left="14.0" top="14.0" />
@@ -52,7 +53,99 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <ImageView fx:id="gifView" fitHeight="300.0" fitWidth="300.0" layoutX="812.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="406.0" AnchorPane.rightAnchor="168.0" AnchorPane.topAnchor="14.0" />
-      <Label layoutX="1165.0" layoutY="184.0" text="Test GIF" />
+      <ImageView fx:id="gifView" fitHeight="163.0" fitWidth="187.0" layoutX="453.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="453.0" AnchorPane.topAnchor="81.0" />
+      <Label layoutX="646.0" layoutY="154.0" text="Test GIF" AnchorPane.leftAnchor="646.0" AnchorPane.topAnchor="154.0" />
+      <Rectangle fx:id="eventDetailsBackground" arcHeight="5.0" arcWidth="5.0" fill="#e1e1e1" height="589.0" layoutX="698.0" layoutY="117.0" stroke="BLACK" strokeType="INSIDE" width="568.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+      <VBox fx:id="eventDetailsVBox" layoutX="698.0" layoutY="114.0" prefHeight="589.0" prefWidth="568.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
+         <children>
+            <HBox alignment="TOP_CENTER" prefHeight="68.0" prefWidth="568.0">
+               <children>
+                  <Label fx:id="eventNameLabel" alignment="TOP_CENTER" prefHeight="78.0" prefWidth="562.0" text="Event Name" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefWidth="568.0" spacing="5.0">
+               <children>
+                  <Label alignment="TOP_LEFT" prefHeight="38.0" prefWidth="135.0" text="Description:" underline="true">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <VBox prefWidth="435.0">
+                     <children>
+                        <Label fx:id="eventDescriptionLabel" alignment="TOP_LEFT" prefWidth="435.0" text="Event Description" textOverrun="CLIP" wrapText="true" VBox.vgrow="ALWAYS">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="14.0" left="10.0" right="10.0" />
+               </padding>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="78.0" prefHeight="38.0" prefWidth="568.0" spacing="76.0">
+               <children>
+                  <Label alignment="TOP_LEFT" text="Date:" underline="true">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="eventDateLabel" alignment="TOP_LEFT" prefHeight="29.0" prefWidth="254.0" text="Event Date" wrapText="true">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="148.0" prefHeight="38.0" prefWidth="568.0" spacing="62.0">
+               <children>
+                  <Label alignment="TOP_LEFT" text="Venue:" underline="true">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="venueNameLabel" alignment="TOP_LEFT" prefHeight="30.0" prefWidth="414.0" text="Venue Name" wrapText="true">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="186.0" prefHeight="67.0" prefWidth="568.0" spacing="46.0">
+               <children>
+                  <Label alignment="TOP_LEFT" text="Address:" underline="true">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="venueAddressLabel" alignment="TOP_LEFT" prefHeight="71.0" prefWidth="419.0" text="Venue Address" wrapText="true">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>
