@@ -11,5 +11,15 @@
     <orderEntry type="library" exported="" name="javafx-swt" level="application" />
     <orderEntry type="library" exported="" name="MySQL Connector" level="project" />
     <orderEntry type="library" exported="" name="jbcrypt-0.4" level="project" />
+    <orderEntry type="library" exported="" name="json" level="project" />
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/json.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

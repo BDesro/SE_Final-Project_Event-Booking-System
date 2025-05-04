@@ -52,5 +52,7 @@
             <Font size="20.0" />
          </font>
       </Button>
+      <ImageView fx:id="gifView" fitHeight="300.0" fitWidth="300.0" layoutX="812.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="406.0" AnchorPane.rightAnchor="168.0" AnchorPane.topAnchor="14.0" />
+      <Label layoutX="1165.0" layoutY="184.0" text="Test GIF" />
    </children>
 </AnchorPane>

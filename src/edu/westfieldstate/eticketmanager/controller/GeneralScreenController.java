@@ -7,6 +7,7 @@ import edu.westfieldstate.eticketmanager.model.User;
 import edu.westfieldstate.eticketmanager.model.Venue;
 import edu.westfieldstate.eticketmanager.resources.Avatar;
 import edu.westfieldstate.eticketmanager.resources.AvatarManager;
+import edu.westfieldstate.eticketmanager.util.GifUtil;
 import edu.westfieldstate.eticketmanager.util.JDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,6 +17,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -41,6 +43,9 @@ public class GeneralScreenController
     private ComboBox<Venue> venueSelector;
     @FXML
     private ImageView avatarIMG;
+
+    @FXML
+    private ImageView gifView;
 
     private ObservableList<Event> tableEvents;
 
@@ -72,6 +77,10 @@ public class GeneralScreenController
             });
             return row;
         });
+
+        //This is here temporarily to show that the API works, it will go in the checkout screen
+        //for when a purchase is complete.
+        GifUtil.loadRandomGifIntoImageView(gifView, "celebration");
     }
 
     public void getActiveUser()
