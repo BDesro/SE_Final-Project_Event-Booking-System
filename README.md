@@ -5,12 +5,12 @@
 <ins>**Event page**</ins>  
 - [ ] Seating - All the stuff that goes with this  
 - [ ] Take me to checkout button  
-- [ ] Google Calendar API  
+- [x] GIPHY API 
 - [X] User Profile button  
       
 <ins>**Checkout Screen**</ins>  
 - [ ] List of seats in cart  
-- [ ] Conformation screen (simple text box saying it was purchased)  
+- [ ] Confirmation screen (simple text box saying it was purchased)  
       
 <ins>**User Profile**</ins>  
 - [x] Add Name    
