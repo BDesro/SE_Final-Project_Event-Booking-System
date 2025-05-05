@@ -17,7 +17,6 @@ public class AvatarManager {
             case UpChuck -> avatarLocation = "/edu/westfieldstate/eticketmanager/resources/upchuck.png";
             case Upgrade -> avatarLocation = "/edu/westfieldstate/eticketmanager/resources/Upgrade.png";
             case RipJaw -> avatarLocation = "/edu/westfieldstate/eticketmanager/resources/Ripjaws.png";
-            case XLR8 -> avatarLocation = "/edu/westfieldstate/eticketmanager/resources/XLR8.png";
             default -> avatarLocation = "/edu/westfieldstate/eticketmanager/resources/Omni-Vent-Logo.jpg";
         }
         return avatarLocation;

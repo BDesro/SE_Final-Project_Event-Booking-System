@@ -30,7 +30,6 @@ public enum Avatar {
         list.add(UpChuck);
         list.add(Upgrade);
         list.add(WildMutt);
-        list.add(XLR8);
 
         return list;
     }
