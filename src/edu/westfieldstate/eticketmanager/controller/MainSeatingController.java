@@ -3,19 +3,52 @@ import edu.westfieldstate.eticketmanager.model.Seat;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import java.util.HashMap;
-import java.util.Map;
+
+import java.util.*;
 
 public class MainSeatingController { //This class is going to handle the mutliple seats, rows, and labels for the
     //seating screen
 
+    private double total = 0.00;
     @FXML
-    private GridPane seatGrid;
+    private GridPane seatLayout;
+    @FXML private Label totalPrint;
+    @FXML
+    ListView seatList;
+    public void updateTotal() {
+        totalPrint.setText("Total: $" + total);
+    }
 
+    public void increase(double seatPrice) {
+        total += seatPrice;
+        updateTotal();
+    }
+
+    public void decrease(double seatPrice) {
+        total -= seatPrice;
+        updateTotal();
+    }
+
+    public void displaySeats() {
+        List<Seat> selected = SeatController.getSelectSeat();
+        List<String> seatDescriptions = new ArrayList<>();
+        for (Seat seat : selected) {
+            String description = "Section " + seat.getSeatSection()
+                    + " Row " + seat.getSeatRow()
+                    + " Seat " + seat.getSeatNum();
+            seatDescriptions.add(description);
+        }
+
+        seatList.getItems().setAll(seatDescriptions);
+    }
+
+    @FXML
     public void initialize() {
-        seatGrid.getChildren().clear();
+        seatLayout.getChildren().clear();
         Map<Character, Integer> sectionColumnTracker = new HashMap<>();
         try {
             SeatController seatController = new SeatController();
@@ -26,15 +59,16 @@ public class MainSeatingController { //This class is going to handle the mutlipl
                 VBox seatNode = loader.load();
 
                 SeatController controller = loader.getController();
-                controller.setSeat(seat);
+                controller.setSeat(seat, this);
 
+                //Seats will print in a set square for every venue
                 int row, col;
                 char sectionChar = Character.toUpperCase(seat.getSeatSection().charAt(0));
                 row = sectionChar - 'A';
                 col = sectionColumnTracker.getOrDefault(sectionChar, 0);
                 sectionColumnTracker.put(sectionChar, col + 1);
 
-                seatGrid.add(seatNode, col, row);
+                seatLayout.add(seatNode, col, row);
                 GridPane.setMargin(seatNode, new Insets(10));
             }
         } catch (Exception e) {
