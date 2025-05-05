@@ -17,7 +17,7 @@
    <children>
       <AnchorPane prefHeight="720.0" prefWidth="1280.0">
          <children>
-            <Button fx:id="createEventButton" layoutX="50.0" layoutY="40.0" mnemonicParsing="false" onAction="#createEvent" text="Create Event" />
+            <Button fx:id="createEventButton" layoutX="50.0" layoutY="40.0" mnemonicParsing="false" onAction="#createEvent" style="-fx-background-color: #21eb14;" text="Create Event" textFill="WHITE" />
             <TextArea fx:id="nameTextArea" layoutX="250.0" layoutY="40.0" prefHeight="45.0" prefWidth="200.0" promptText="Enter Event Name..." />
             <TextArea fx:id="descriptionTextArea" layoutX="250.0" layoutY="140.0" prefHeight="45.0" prefWidth="200.0" promptText="Enter Event Description..." />
             <DatePicker fx:id="datePicker" layoutX="250.0" layoutY="220.0" prefWidth="200.0" promptText="Select A Date" />
