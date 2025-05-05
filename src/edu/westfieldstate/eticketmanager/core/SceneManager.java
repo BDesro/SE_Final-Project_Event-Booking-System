@@ -87,6 +87,10 @@ public class SceneManager
                     scene = new Scene(loadFXML("/edu/westfieldstate/eticketmanager/view/checkout_screen.fxml"), 600, 290);
                     stage.setTitle("Check Out");
                 }
+                case SEAT_CHART ->{
+                    scene = new Scene(loadFXML("/edu/westfieldstate/eticketmanager/view/main-seatingfxml"), 1050, 1000);
+                    stage.setTitle("Seating Chart");
+                }
             }
 
             if(scene != null)

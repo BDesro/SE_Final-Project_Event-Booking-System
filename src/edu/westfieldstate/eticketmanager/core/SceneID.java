@@ -9,5 +9,6 @@ public enum SceneID
     USER_PROFILE,
     SQL_PASSWORD,
     PURCHASE_DONE,
-    CHECKOUT
+    CHECKOUT,
+    SEAT_CHART
 }

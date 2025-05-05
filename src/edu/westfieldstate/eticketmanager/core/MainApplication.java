@@ -25,12 +25,10 @@ public class MainApplication extends Application
         stage.centerOnScreen();
         stage.show();
 
-         /*
-        SceneManager.setStage(stage);
-        SceneManager.switchTo(SceneID.SQL_PASSWORD); // Starts out at login, scenes change
-                                                     // through action event triggers from there
 
-          */
+        SceneManager.setStage(stage);
+        //SceneManager.switchTo(SceneID.SQL_PASSWORD); // Starts out at login, scenes change
+                                                     // through action event triggers from there
         
     }
 
