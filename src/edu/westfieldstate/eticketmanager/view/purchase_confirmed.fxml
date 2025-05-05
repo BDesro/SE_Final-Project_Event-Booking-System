@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="464.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westfieldstate.eticketmanager.controller.purchaseImage">
+   <children>
+      <Text fill="#50d040" layoutX="98.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Purchase Confirmed!!!!" underline="true" wrappingWidth="268.21630859375">
+         <font>
+            <Font name="Didot" size="40.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="checkMark" fitHeight="150.0" fitWidth="200.0" layoutX="132.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="backToGeneral" layoutX="141.0" layoutY="332.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="182.0" text="Return to Events" />
+   </children>
+</AnchorPane>

@@ -7,5 +7,7 @@ public enum SceneID
     GENERAL_SCREEN,
     CREATE_SCREEN,
     USER_PROFILE,
-    SQL_PASSWORD
+    SQL_PASSWORD,
+    PURCHASE_DONE,
+    CHECKOUT
 }

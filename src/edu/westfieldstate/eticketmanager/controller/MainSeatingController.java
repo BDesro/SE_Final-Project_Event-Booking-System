@@ -1,9 +1,12 @@
 package edu.westfieldstate.eticketmanager.controller;
+import edu.westfieldstate.eticketmanager.core.SceneID;
+import edu.westfieldstate.eticketmanager.core.SceneManager;
 import edu.westfieldstate.eticketmanager.model.Seat;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -14,6 +17,7 @@ public class MainSeatingController { //This class is going to handle the mutlipl
     //seating screen
 
     private double total = 0.00;
+    @FXML Button goToCheck;
     @FXML
     private GridPane seatLayout;
     @FXML private Label totalPrint;
@@ -21,6 +25,10 @@ public class MainSeatingController { //This class is going to handle the mutlipl
     ListView seatList;
     public void updateTotal() {
         totalPrint.setText("Total: $" + total);
+    }
+
+    public double getTotal(){
+        return total;
     }
 
     public void increase(double seatPrice) {
@@ -44,6 +52,10 @@ public class MainSeatingController { //This class is going to handle the mutlipl
         }
 
         seatList.getItems().setAll(seatDescriptions);
+    }
+
+    public ListView allSeats (){
+        return seatList;
     }
 
     @FXML
@@ -74,6 +86,7 @@ public class MainSeatingController { //This class is going to handle the mutlipl
         } catch (Exception e) {
             System.out.println("Error loading seats from database");
         }
+        goToCheck.setOnAction(e-> SceneManager.switchTo(SceneID.CHECKOUT));
 
     }
 

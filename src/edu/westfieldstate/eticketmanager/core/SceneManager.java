@@ -77,6 +77,16 @@ public class SceneManager
                     scene = new Scene(loadFXML("/edu/westfieldstate/eticketmanager/view/sql-view.fxml"), resX, resY);
                     stage.setTitle("Enter Your SQL Password");
                 }
+                case PURCHASE_DONE ->
+                {
+                    scene = new Scene(loadFXML("/edu/westfield/eticketmanager/view/purchase_confirmed.fxml"), 464, 400);
+                    stage.setTitle("Complete Purchase!");
+                }
+                case CHECKOUT ->
+                {
+                    scene = new Scene(loadFXML("/edu/westfield/eticketmanager/view/checkout_screen.fxml"), 600, 290);
+                    stage.setTitle("Check Out");
+                }
             }
 
             if(scene != null)
