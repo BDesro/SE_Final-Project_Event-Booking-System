@@ -21,7 +21,7 @@ public class CheckoutController {
     @FXML
     Button confirmPurchase;
 
-    MainSeatingController mainStuff;
+    MainSeatingController mainStuff = new MainSeatingController();
 
     @FXML
     public void initialize(){
