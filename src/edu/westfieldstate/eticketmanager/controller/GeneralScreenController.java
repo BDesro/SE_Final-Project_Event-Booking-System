@@ -9,6 +9,7 @@ import edu.westfieldstate.eticketmanager.resources.Avatar;
 import edu.westfieldstate.eticketmanager.resources.AvatarManager;
 import edu.westfieldstate.eticketmanager.util.GifUtil;
 import edu.westfieldstate.eticketmanager.util.JDBC;
+import edu.westfieldstate.eticketmanager.util.SharedSeatingInfo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -136,6 +137,7 @@ public class GeneralScreenController
                 if(!row.isEmpty() && event.getClickCount() == 1)
                 {
                     Event selected = row.getItem();
+                    SharedSeatingInfo.setEvent(selected);
                     System.out.println("Selected: " + selected.getEventName());
 
                     eventNameLabel.setText(selected.getEventName());
@@ -201,6 +203,7 @@ public class GeneralScreenController
 
     public void onGetTicketsClick(ActionEvent e)
     {
+        SharedSeatingInfo.setVenue(venueSelector.getValue());
         SceneManager.switchTo(SceneID.SEAT_CHART);
     }
 

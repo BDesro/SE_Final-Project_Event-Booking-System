@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -43,6 +44,8 @@ public class UserProfileController implements Initializable {
     private Label errorLabel;
     @FXML
     private Label successLabel;
+    @FXML
+    private ListView<String> eventList;
 
     private User activeUser;
 
@@ -69,9 +72,10 @@ public class UserProfileController implements Initializable {
         userNickName.setText(activeUser.getNickName());
         userEmail.setText(activeUser.getEmail());
         avatarIMG.setImage(new Image(AvatarManager.getAvatarLocation(activeUser.getAvatar())));
-        userCC.setText("Please Enter Your Credit Card Info; We Will Be Selling It On The Black Market");
+        userCC.setText("We Will Be Selling This Info On The Black Market");
         avatarBox.getItems().addAll(Avatar.getAll());
         nickNameBox.setText(activeUser.getNickName());
+        setEvents();
     }
     //==================================================================================================================
     //                                             DATABASE FUNCTIONS
@@ -99,6 +103,13 @@ public class UserProfileController implements Initializable {
 
     public void updateActiveUser()
     {
+        if(activeUser.getUsername().equals("Guest User")) {
+            errorLabel.setText("Guest Users Cannot Update Their Info");
+            successLabel.setText("");
+            if (!ccInfoBox.getText().isEmpty())
+                userCC.setVisible(true);
+        }
+        else {
         if (nickNameBox.getText().isEmpty())
         {
             errorLabel.setText("You Cannot Have An Empty Nick Name");
@@ -111,6 +122,7 @@ public class UserProfileController implements Initializable {
                 statement.setString(1, nickNameBox.getText());
                 statement.setString(2, String.valueOf(activeUser.getAvatar()));
                 statement.executeUpdate();
+                userCC.setVisible(true);
                 successLabel.setText("Profile Saved");
                 errorLabel.setText("");
                 statement.close();
@@ -120,7 +132,30 @@ public class UserProfileController implements Initializable {
                 errorLabel.setText("Cannot Save Profile: " + e.getMessage());
             }
         }
+        }
 
+    }
+
+    public void setEvents()
+    {
+        String query = "SELECT DISTINCT event_name from user_event WHERE username = ?";
+        try(Connection connection = JDBC.getConnection())
+        {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1,activeUser.getUsername());
+            ResultSet rs = statement.executeQuery();
+            if (!rs.next())
+                eventList.getItems().add("You Have Not Bought Any Tickets");
+            do eventList.getItems().add(rs.getString(1));
+            while (rs.next());
+
+            statement.close();
+        }
+        catch (Exception e)
+        {
+
+        }
+        //eventList
     }
 
 }
