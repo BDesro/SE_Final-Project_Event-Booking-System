@@ -1,19 +1,21 @@
 package edu.westfieldstate.eticketmanager.util;
 
-import javax.swing.text.html.ListView;
+
+import edu.westfieldstate.eticketmanager.model.Seat;
+import javafx.scene.control.ListView;
 
 public class SharedSeatingInfo {
-    private static ListView seatList;
+    private static ListView<Seat> seatList;
     private static Double totalPrice;
 
     private SharedSeatingInfo(){}
 
 
-    public static ListView getSeatList() {
+    public static ListView<Seat> getSeatList() {
         return seatList;
     }
 
-    public static void setSeatList(ListView seatList) {
+    public static void setSeatList(ListView<Seat> seatList) {
         SharedSeatingInfo.seatList = seatList;
     }
 
