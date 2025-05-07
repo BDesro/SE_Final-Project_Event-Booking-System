@@ -33,29 +33,26 @@ public class CheckoutController {
         checkoutPrice.setText("Total Checkout Price: $" + checkPrice);
         getActiveUser();
 
-        if(yes.isSelected()) //Makes sure bot the chck boxes are not selected
-            no.setSelected(false);
-        else
-            yes.setSelected(false);
-
         confirmPurchase.setOnAction(e -> {
-            ObservableList<Seat> seats = checkoutSeats.getItems();
-            for (Seat seat : seats) {
-                String query = "INSERT INTO bookings (user_id, seat_id, event_id, venue_id) VALUES (?,?,?,?)";
-                try (Connection connection = JDBC.getConnection()) {
+            if (yes.isSelected()) {
+                ObservableList<Seat> seats = checkoutSeats.getItems();
+                for (Seat seat : seats) {
+                    String query = "INSERT INTO bookings (user_id, seat_id, event_id, venue_id) VALUES (?,?,?,?)";
+                    try (Connection connection = JDBC.getConnection()) {
 
-                    PreparedStatement statement = connection.prepareStatement(query);
-                    statement.setInt(1, getUserID());
-                    statement.setInt(2, seat.getSeatId());
-                    statement.setInt(3, SharedSeatingInfo.getEventID());
-                    statement.setInt(4, SharedSeatingInfo.getVenueID());
-                    statement.executeUpdate();
+                        PreparedStatement statement = connection.prepareStatement(query);
+                        statement.setInt(1, getUserID());
+                        statement.setInt(2, seat.getSeatId());
+                        statement.setInt(3, SharedSeatingInfo.getEventID());
+                        statement.setInt(4, SharedSeatingInfo.getVenueID());
+                        statement.executeUpdate();
+                    } catch (Exception ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
-             catch(Exception ex){
-                    throw new RuntimeException(ex);
-                }
+
+                SceneManager.switchTo(SceneID.PURCHASE_DONE);
             }
-                    SceneManager.switchTo(SceneID.PURCHASE_DONE);
         }
         );
 

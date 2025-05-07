@@ -79,7 +79,7 @@ public class SceneManager
                 }
                 case PURCHASE_DONE ->
                 {
-                    scene = new Scene(loadFXML("/edu/westfieldstate/eticketmanager/view/purchase_confirmed.fxml"), 464, 400);
+                    scene = new Scene(loadFXML("/edu/westfieldstate/eticketmanager/view/purchase_confirmed.fxml"), resX, resY);
                     stage.setTitle("Complete Purchase!");
                 }
                 case CHECKOUT ->

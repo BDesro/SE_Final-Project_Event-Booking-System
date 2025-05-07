@@ -89,9 +89,11 @@ public class MainSeatingController { //This class is going to handle the mutlipl
         }
         goToCheck.setOnAction(e->
         {
-            SharedSeatingInfo.setSeatList(seatList);
-            SharedSeatingInfo.setTotalPrice(total);
-            SceneManager.switchTo(SceneID.CHECKOUT);
+            if (!seatList.getItems().isEmpty()) {
+                SharedSeatingInfo.setSeatList(seatList);
+                SharedSeatingInfo.setTotalPrice(total);
+                SceneManager.switchTo(SceneID.CHECKOUT);
+            }
         });
     }
     public Boolean isSeatTaken(int seatNum)
