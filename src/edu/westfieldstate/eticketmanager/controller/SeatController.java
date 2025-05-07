@@ -2,7 +2,9 @@ package edu.westfieldstate.eticketmanager.controller;
 
 import edu.westfieldstate.eticketmanager.model.Seat;
 import edu.westfieldstate.eticketmanager.model.SeatFactory;
+import edu.westfieldstate.eticketmanager.model.StandardSeat;
 import edu.westfieldstate.eticketmanager.util.JDBC;
+import edu.westfieldstate.eticketmanager.util.SharedSeatingInfo;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.VBox;
@@ -64,13 +66,11 @@ public class SeatController { //This class is setting up the shape each individu
         Color newColor;
         if (isReserved) {
             newColor = Color.DARKGREY; //It was this or SALMON because those colors stuck out to me
-            seat.setActive(false);
             main.increase(seat.getPrice());
             selectSeat.add(seat);
             main.displaySeats();
         } else {
             newColor = Color.valueOf(seat.getColor());
-            seat.setActive(true);
             main.decrease(seat.getPrice());
             selectSeat.remove(seat);
             main.displaySeats();
@@ -117,7 +117,6 @@ public class SeatController { //This class is setting up the shape each individu
                         rs.getString("seat_row"),
                         rs.getInt("seat_number"),
                         rs.getString("seat_type"),
-                        rs.getBoolean("is_active"),
                         rs.getDouble("price")
                 );
                 seats.add(seat);
@@ -125,7 +124,6 @@ public class SeatController { //This class is setting up the shape each individu
         } catch (SQLException e) {
            System.out.println("Problem with connection");
         }
-
         return seats;
     }
 
@@ -148,8 +146,8 @@ public class SeatController { //This class is setting up the shape each individu
             return;
         }
         seatCount = 1;
-        String insertSQL = "INSERT INTO seats (seat_section, seat_row, seat_number, seat_type, is_active, price) " +
-                "VALUES (?, ?, ?, ?, ?, ?)";
+        String insertSQL = "INSERT INTO seats (seat_section, seat_row, seat_number, seat_type, price) " +
+                "VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = JDBC.getConnection();
              PreparedStatement ps = conn.prepareStatement(insertSQL)) {
             for (int sec = 0; sec < sections; sec++) {
@@ -170,8 +168,7 @@ public class SeatController { //This class is setting up the shape each individu
                         ps.setString(2, String.valueOf(row));
                         ps.setInt(3, seatCount++);
                         ps.setString(4, type);
-                        ps.setBoolean(5, false);
-                        ps.setDouble(6, price);
+                        ps.setDouble(5, price);
                         //Our seat numbers are unique
                         ps.addBatch(); //Batch of commands SQL stuff
                 }

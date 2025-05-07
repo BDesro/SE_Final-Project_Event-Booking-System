@@ -2,6 +2,7 @@ package edu.westfieldstate.eticketmanager.controller;
 import edu.westfieldstate.eticketmanager.core.SceneID;
 import edu.westfieldstate.eticketmanager.core.SceneManager;
 import edu.westfieldstate.eticketmanager.model.Seat;
+import edu.westfieldstate.eticketmanager.util.JDBC;
 import edu.westfieldstate.eticketmanager.util.SharedSeatingInfo;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +13,9 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.*;
 
 public class MainSeatingController { //This class is going to handle the mutliple seats, rows, and labels for the
@@ -76,6 +80,8 @@ public class MainSeatingController { //This class is going to handle the mutlipl
                 sectionColumnTracker.put(sectionChar, col + 1);
 
                 seatLayout.add(seatNode, col, row);
+                if(isSeatTaken(seat.getSeatNum()))
+                    seatNode.setVisible(false);
                 GridPane.setMargin(seatNode, new Insets(10));
             }
         } catch (Exception e) {
@@ -87,7 +93,19 @@ public class MainSeatingController { //This class is going to handle the mutlipl
             SharedSeatingInfo.setTotalPrice(total);
             SceneManager.switchTo(SceneID.CHECKOUT);
         });
-
+    }
+    public Boolean isSeatTaken(int seatNum)
+    {
+        String query = "Select seat_id from bookings where event_id =? AND seat_id = ?";
+        try(Connection connection = JDBC.getConnection()){
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, SharedSeatingInfo.getEventID());
+            statement.setInt(2,seatNum);
+            ResultSet rs = statement.executeQuery();
+            return rs.next();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

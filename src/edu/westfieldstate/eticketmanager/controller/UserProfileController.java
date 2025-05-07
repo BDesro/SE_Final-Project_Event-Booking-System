@@ -146,9 +146,10 @@ public class UserProfileController implements Initializable {
             ResultSet rs = statement.executeQuery();
             if (!rs.next())
                 eventList.getItems().add("You Have Not Bought Any Tickets");
-            do eventList.getItems().add(rs.getString(1));
-            while (rs.next());
-
+            else {
+                do eventList.getItems().add(rs.getString(1));
+                while (rs.next());
+            }
             statement.close();
         }
         catch (Exception e)

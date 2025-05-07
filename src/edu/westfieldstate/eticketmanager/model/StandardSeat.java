@@ -8,15 +8,13 @@ public class StandardSeat implements Seat
     private String seatSection;
     private String seatRow;
     private int seatNum;
-    private boolean active;
     private double price;
 
-    public StandardSeat(int seatId, String seatSection, String seatRow, int seatNum, boolean active, double price){
+    public StandardSeat(int seatId, String seatSection, String seatRow, int seatNum, double price){
         this.seatId = seatId;
         this.seatSection = seatSection;
         this.seatRow = seatRow;
         this.seatNum = seatNum;
-        this.active = active; //Assume all seats are active or available first
         this.price = price;
     }
 
@@ -45,10 +43,6 @@ public class StandardSeat implements Seat
         return seatNum;
     }
 
-    @Override
-    public boolean isActive() {
-        return active;
-    }
 
     @Override
     public double getPrice() {
@@ -72,11 +66,6 @@ public class StandardSeat implements Seat
     @Override
     public int setSeatNum(int num) {
         return seatNum = num;
-    }
-
-    @Override
-    public boolean setActive(boolean active) {
-        return this.active = active;
     }
 
     public String toString()

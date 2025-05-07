@@ -71,7 +71,6 @@ CREATE TABLE seats
   seat_row       CHAR(1)                              NULL,
   seat_number    INT                                  NOT NULL      UNIQUE,
   seat_type      ENUM('standard', 'premium', 'vip')   NOT NULL      DEFAULT 'standard',
-  is_active      TINYINT                              NOT NULL      DEFAULT 1,
   price          DECIMAL(5,2)                         NOT NULL      DEFAULT 20.00
 ) AUTO_INCREMENT = 1;
 

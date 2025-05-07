@@ -7,15 +7,13 @@ public class PremiumSeat implements Seat
     private String seatSection;
     private String seatRow;
     private int seatNum;
-    private boolean active;
     private double price;
 
-    public PremiumSeat(int seatId, String seatSection, String seatRow, int seatNum, boolean active, double price){
+    public PremiumSeat(int seatId, String seatSection, String seatRow, int seatNum, double price){
         this.seatId = seatId;
         this.seatSection = seatSection;
         this.seatRow = seatRow;
         this.seatNum = seatNum;
-        this.active = active;
         this.price = price * 1.2;
     }
     @Override
@@ -43,11 +41,6 @@ public class PremiumSeat implements Seat
     }
 
     @Override
-    public boolean isActive() {
-        return active;
-    }
-
-    @Override
     public double getPrice() {
         return price; 
     }
@@ -71,10 +64,6 @@ public class PremiumSeat implements Seat
         return seatNum = num;
     }
 
-    @Override
-    public boolean setActive(boolean active) {
-        return this.active = active;
-    }
 
     public String toString()
     {

@@ -9,15 +9,13 @@ public class VIPSeat implements Seat
     private String seatSection;
     private String seatRow;
     private int seatNum;
-    private boolean active;
     private double price;
 
-    public VIPSeat(int seatId, String seatSection, String seatRow, int seatNum, boolean active, double price){
+    public VIPSeat(int seatId, String seatSection, String seatRow, int seatNum, double price){
         this.seatId = seatId;
         this.seatSection = seatSection;
         this.seatRow = seatRow;
         this.seatNum = seatNum;
-        this.active = active;
         this.price = price * 1.6;
     }
     @Override
@@ -44,10 +42,6 @@ public class VIPSeat implements Seat
         return seatNum;
     }
 
-    @Override
-    public boolean isActive() {
-        return active;
-    }
 
     @Override
     public double getPrice() {
@@ -73,10 +67,6 @@ public class VIPSeat implements Seat
         return seatNum = num;
     }
 
-    @Override
-    public boolean setActive(boolean active) {
-        return this.active = active;
-    }
 
     public String toString()
     {

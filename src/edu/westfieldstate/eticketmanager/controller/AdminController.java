@@ -112,12 +112,19 @@ public class AdminController implements Initializable {
     //Next Event Button
     public void nextEvent()
     {
-        if(eventIndex + 1 == listOfEvents.size())
-            eventIndex = 0;
-        else
-            eventIndex++;
-        selectedEvent = listOfEvents.get(eventIndex);
-        refreshText();
+        if (selectedEvent==null)
+        {
+            makeSaveEventVisible();
+            createEvent();
+        }
+        else {
+            if (eventIndex + 1 == listOfEvents.size())
+                eventIndex = 0;
+            else
+                eventIndex++;
+            selectedEvent = listOfEvents.get(eventIndex);
+            refreshText();
+        }
     }
 
     //Updates the text shown on the admin screen to reflect the currently selected event
@@ -286,11 +293,17 @@ public class AdminController implements Initializable {
     //Publish Event Button
     public void publishEvent()
     {
+        if (selectedEvent==null)
+        {
+            makeSaveEventVisible();
+            createEvent();
+        }
+        else {
             sqlCode = ("UPDATE event_list " +
                     "SET is_active = ? " +
                     "WHERE event_name = ?");
             PreparedStatement statement;
-            try (Connection connection = JDBC.getConnection()){
+            try (Connection connection = JDBC.getConnection()) {
                 quickUpdate();
                 statement = connection.prepareStatement(sqlCode);
                 statement.setBoolean(1, true);
@@ -305,39 +318,46 @@ public class AdminController implements Initializable {
                 successLabel.setText("");
                 errorLabel.setText("Failed To Publish Event: " + event.getMessage());
             }
+        }
     }
 
     //Edits the currently selected event
     //Edit Event Button
     public void editEvent()
     {
-        sqlCode = ("UPDATE event_list " +
-                "SET event_name = ?, event_description = ?, " +
-                "event_date = ?, is_active = ? " +
-                "WHERE event_name = ?");
-        PreparedStatement statement;
-        try (Connection connection = JDBC.getConnection()){
-            statement = connection.prepareStatement(sqlCode);
-            statement.setString(1,nameTextArea.getText());
-            statement.setString(2,descriptionTextArea.getText());
-            statement.setString(3,formatter.format(datePicker.getValue()));
-            statement.setBoolean(4,selectedEvent.getIsVisible());
-            statement.setString(5,selectedEvent.getEventName());
-            int rowsLeft = statement.executeUpdate();
-            if (rowsLeft > 0) {
-                errorLabel.setText("");
-                successLabel.setText("Event Edited Successfully");
-                quickUpdate();
-                refreshText();
-            }
-            else {
+        if (selectedEvent==null)
+        {
+            makeSaveEventVisible();
+            createEvent();
+        }
+        else {
+            sqlCode = ("UPDATE event_list " +
+                    "SET event_name = ?, event_description = ?, " +
+                    "event_date = ?, is_active = ? " +
+                    "WHERE event_name = ?");
+            PreparedStatement statement;
+            try (Connection connection = JDBC.getConnection()) {
+                statement = connection.prepareStatement(sqlCode);
+                statement.setString(1, nameTextArea.getText());
+                statement.setString(2, descriptionTextArea.getText());
+                statement.setString(3, formatter.format(datePicker.getValue()));
+                statement.setBoolean(4, selectedEvent.getIsVisible());
+                statement.setString(5, selectedEvent.getEventName());
+                int rowsLeft = statement.executeUpdate();
+                if (rowsLeft > 0) {
+                    errorLabel.setText("");
+                    successLabel.setText("Event Edited Successfully");
+                    quickUpdate();
+                    refreshText();
+                } else {
+                    successLabel.setText("");
+                    errorLabel.setText("Event Could Not Be Found");
+                }
+                statement.close();
+            } catch (SQLException event) {
                 successLabel.setText("");
-                errorLabel.setText("Event Could Not Be Found");
+                errorLabel.setText("Failed To Edit Event: " + event.getMessage());
             }
-            statement.close();
-        } catch (SQLException event) {
-            successLabel.setText("");
-            errorLabel.setText("Failed To Edit Event: " + event.getMessage());
         }
     }
 
@@ -345,29 +365,35 @@ public class AdminController implements Initializable {
     //Delete Event Button
     public void deleteEvent()
     {
-     sqlCode ="DELETE FROM event_list WHERE event_name = ?";
-        PreparedStatement statement;
-        try (Connection connection = JDBC.getConnection()){
-            statement = connection.prepareStatement(sqlCode);
-            statement.setString(1,selectedEvent.getEventName());
-            int rowsLeft = statement.executeUpdate();
-            if (rowsLeft > 0) {
-                successLabel.setText("Event Deleted Successfully!");
-                errorLabel.setText("");
-                selectedEvent = listOfEvents.get(eventIndex);
-                listOfEvents.remove(selectedEvent);
-                eventIndex--;
-                nextEvent();
-                refreshText();
-            }
-            else {
+        if (selectedEvent==null)
+        {
+            makeSaveEventVisible();
+            createEvent();
+        }
+        else {
+            sqlCode = "DELETE FROM event_list WHERE event_name = ?";
+            PreparedStatement statement;
+            try (Connection connection = JDBC.getConnection()) {
+                statement = connection.prepareStatement(sqlCode);
+                statement.setString(1, selectedEvent.getEventName());
+                int rowsLeft = statement.executeUpdate();
+                if (rowsLeft > 0) {
+                    successLabel.setText("Event Deleted Successfully!");
+                    errorLabel.setText("");
+                    selectedEvent = listOfEvents.get(eventIndex);
+                    listOfEvents.remove(selectedEvent);
+                    eventIndex--;
+                    nextEvent();
+                    refreshText();
+                } else {
+                    successLabel.setText("");
+                    errorLabel.setText("Event Could Not Be Found");
+                }
+                statement.close();
+            } catch (SQLException event) {
                 successLabel.setText("");
-                errorLabel.setText("Event Could Not Be Found");
+                errorLabel.setText("Failed To Delete Event: " + event.getMessage());
             }
-            statement.close();
-        } catch (SQLException event) {
-            successLabel.setText("");
-            errorLabel.setText("Failed To Delete Event: " + event.getMessage());
         }
     }
 
