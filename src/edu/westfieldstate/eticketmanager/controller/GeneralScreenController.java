@@ -36,8 +36,6 @@ public class GeneralScreenController
     @FXML private TableColumn<Event, LocalDate> dateColumn;
     @FXML private ComboBox<Venue> venueSelector;
 
-    @FXML private ImageView gifView;
-
     private ObservableList<Event> tableEvents;
 
     @FXML private Rectangle eventDetailsBackground;
@@ -60,10 +58,6 @@ public class GeneralScreenController
         initializeTableView();
 
         setEventDetailsVisibility(false);
-
-        //This is here temporarily to show that the API works, it will go in the checkout screen
-        //for when a purchase is complete.
-        GifUtil.loadRandomGifIntoImageView(gifView, "celebration");
     }
 
     public void getActiveUser()
