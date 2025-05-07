@@ -3,20 +3,20 @@
 ## Product Backlog Sprint 2
 
 <ins>**Event page**</ins>  
-- [ ] Seating - All the stuff that goes with this  
-- [ ] Take me to checkout button  
+- [x] Seating - All the stuff that goes with this  
+- [x] Take me to checkout button  
 - [x] GIPHY API 
 - [X] User Profile button  
       
 <ins>**Checkout Screen**</ins>  
-- [ ] List of seats in cart  
-- [ ] Confirmation screen (simple text box saying it was purchased)  
+- [x] List of seats in cart  
+- [x] Confirmation screen (simple text box saying it was purchased)  
       
 <ins>**User Profile**</ins>  
 - [x] Add Name    
 - [x] User Profile Pic  
 - [x] CC Info  
-- [ ] My Events
+- [x] My Events
 - [ ] Clean Up Functionality (clear text boxes, etc.)
       
 <ins>**Admin Screen**</ins>  
@@ -35,5 +35,5 @@
 <ins>**Other**</ins>  
 - [X] HELP BUTTON FOR EVERY SCREEN (video later)  
 - [ ] Green-Black Colors
-- [ ] Left Buttons Right Everything Else
+- [x] Left Buttons Right Everything Else
 - [ ] Main Screen (Company Logo, Buttons to login, guest login, etc.)  
