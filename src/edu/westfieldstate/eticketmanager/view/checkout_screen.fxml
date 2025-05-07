@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="290.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westfieldstate.eticketmanager.controller.CheckoutController">
+   <children>
+      <ListView fx:id="checkoutSeats" layoutX="371.0" layoutY="54.0" prefHeight="200.0" prefWidth="200.0" />
+      <Label layoutX="371.0" layoutY="25.0" prefHeight="17.0" prefWidth="73.0" text="Your Seats:" />
+      <Label fx:id="checkoutPrice" layoutX="26.0" layoutY="34.0" prefHeight="17.0" text="Your Total:" textOverrun="CLIP" />
+      <Label layoutX="26.0" layoutY="70.0" prefHeight="17.0" prefWidth="165.0" text="Use associating credit card?" />
+      <CheckBox fx:id="yes" layoutX="27.0" layoutY="94.0" mnemonicParsing="false" selected="true" text="Yes" />
+      <CheckBox fx:id="no" layoutX="86.0" layoutY="94.0" mnemonicParsing="false" text="No" />
+      <Button fx:id="confirmPurchase" layoutX="15.0" layoutY="185.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="143.0" text="Confirm Purchase" />
+   </children>
+</AnchorPane>

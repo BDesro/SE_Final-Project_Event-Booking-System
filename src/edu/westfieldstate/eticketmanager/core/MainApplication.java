@@ -19,18 +19,15 @@ public class MainApplication extends Application
     {
         //KML testing seating layout and screen, don't worry about this right now will be changed when seating screen
         //is made with SCENE ID (gotta remember)
-        /*
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/edu/westfieldstate/eticketmanager/view/main-seating.fxml")));
+        /*Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/edu/westfieldstate/eticketmanager/view/main-seating.fxml")));
         stage.setTitle("Seating Chart");
         stage.setScene(new Scene(root, 1050, 1000));
         stage.centerOnScreen();
-        stage.show();
+        stage.show();*/
 
-         */
         SceneManager.setStage(stage);
         SceneManager.switchTo(SceneID.SQL_PASSWORD); // Starts out at login, scenes change
                                                      // through action event triggers from there
-        
     }
 
     public static void main(String[] args)

@@ -36,8 +36,6 @@ public class GeneralScreenController
     @FXML private TableColumn<Event, LocalDate> dateColumn;
     @FXML private ComboBox<Venue> venueSelector;
 
-    @FXML private ImageView gifView;
-
     private ObservableList<Event> tableEvents;
 
     @FXML private Rectangle eventDetailsBackground;
