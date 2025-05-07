@@ -63,7 +63,7 @@ public class GeneralScreenController
 
         //This is here temporarily to show that the API works, it will go in the checkout screen
         //for when a purchase is complete.
-        GifUtil.loadRandomGifIntoImageView(gifView, "celebration");
+        GifUtil.loadRandomGifIntoImageView(gifView);
     }
 
     public void getActiveUser()

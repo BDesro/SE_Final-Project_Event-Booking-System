@@ -14,10 +14,10 @@ public class GifUtil {
 
     private static final String API_KEY = "YNEaBUYS6ptZZvwnoTx8kzblohsLTHEH";
 
-    public static void loadRandomGifIntoImageView(ImageView imageView, String tag) {
+    public static void loadRandomGifIntoImageView(ImageView imageView) {
         new Thread(() -> {
             try {
-                String apiUrl = "https://api.giphy.com/v1/gifs/random?api_key=" + API_KEY + "&tag=" + tag;
+                String apiUrl = "https://api.giphy.com/v1/gifs/CLC06Ar6dLcKFXgT3M?api_key=" + API_KEY;
                 HttpURLConnection conn = (HttpURLConnection) new URL(apiUrl).openConnection();
                 conn.setRequestMethod("GET");
 

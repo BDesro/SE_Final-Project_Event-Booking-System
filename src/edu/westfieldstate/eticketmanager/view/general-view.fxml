@@ -53,8 +53,6 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <ImageView fx:id="gifView" fitHeight="163.0" fitWidth="187.0" layoutX="453.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="453.0" AnchorPane.topAnchor="81.0" />
-      <Label layoutX="646.0" layoutY="154.0" text="Test GIF" AnchorPane.leftAnchor="646.0" AnchorPane.topAnchor="154.0" />
       <Rectangle fx:id="eventDetailsBackground" arcHeight="5.0" arcWidth="5.0" fill="#e1e1e1" height="589.0" layoutX="698.0" layoutY="117.0" stroke="BLACK" strokeType="INSIDE" width="568.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
       <VBox fx:id="eventDetailsVBox" layoutX="698.0" layoutY="114.0" prefHeight="589.0" prefWidth="568.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
          <children>
