@@ -160,3 +160,11 @@ CREATE VIEW event_venue AS
 	SELECT event_name, event_description, event_date, is_active, venue_name, address
     FROM event_list JOIN venues ON event_list.venue_id = venues.venue_id
 ) ;
+DROP VIEW IF EXISTS user_event;
+
+CREATE VIEW user_event AS
+(
+	SELECT event_name, username
+    FROM users u JOIN bookings b ON u.user_id = b.user_id
+				 JOIN event_list el ON b.event_id = el.event_id
+) ;
