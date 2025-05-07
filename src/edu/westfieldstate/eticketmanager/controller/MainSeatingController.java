@@ -2,6 +2,7 @@ package edu.westfieldstate.eticketmanager.controller;
 import edu.westfieldstate.eticketmanager.core.SceneID;
 import edu.westfieldstate.eticketmanager.core.SceneManager;
 import edu.westfieldstate.eticketmanager.model.Seat;
+import edu.westfieldstate.eticketmanager.util.SharedSeatingInfo;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -43,15 +44,8 @@ public class MainSeatingController { //This class is going to handle the mutlipl
 
     public void displaySeats() {
         List<Seat> selected = SeatController.getSelectSeat();
-        List<String> seatDescriptions = new ArrayList<>();
-        for (Seat seat : selected) {
-            String description = "Section " + seat.getSeatSection()
-                    + " Row " + seat.getSeatRow()
-                    + " Seat " + seat.getSeatNum();
-            seatDescriptions.add(description);
-        }
 
-        seatList.getItems().setAll(seatDescriptions);
+        seatList.getItems().setAll(selected);
     }
 
     public ListView allSeats (){
@@ -86,7 +80,12 @@ public class MainSeatingController { //This class is going to handle the mutlipl
         } catch (Exception e) {
             System.out.println("Error loading seats from database");
         }
-        goToCheck.setOnAction(e-> SceneManager.switchTo(SceneID.CHECKOUT));
+        goToCheck.setOnAction(e->
+        {
+            SharedSeatingInfo.setSeatList(seatList);
+            SharedSeatingInfo.setTotalPrice(total);
+            SceneManager.switchTo(SceneID.CHECKOUT);
+        });
 
     }
 

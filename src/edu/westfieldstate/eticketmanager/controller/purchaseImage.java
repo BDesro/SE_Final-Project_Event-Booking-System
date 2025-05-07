@@ -16,7 +16,7 @@ public class purchaseImage {
 
     @FXML
     public void initialize(){
-        checkMark.setImage(new Image(getClass().getResource("/greenCheckMark.png").toExternalForm()));
+        checkMark.setImage(new Image(getClass().getResource("/edu/westfieldstate/eticketmanager/resources/greenCheckMark.png").toExternalForm()));
         backToGeneral.setOnAction(e -> SceneManager.switchTo(SceneID.GENERAL_SCREEN));
     }
 }

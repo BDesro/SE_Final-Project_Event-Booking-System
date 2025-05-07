@@ -75,4 +75,9 @@ public class PremiumSeat implements Seat
     public boolean setActive(boolean active) {
         return this.active = active;
     }
+
+    public String toString()
+    {
+        return "Section:"+getSeatSection()+ " Row:"+ getSeatRow()+ " Number:" + getSeatNum();
+    }
 }

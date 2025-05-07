@@ -16,5 +16,6 @@ public interface Seat { //Possible example of strategy pattern
     String setSeatRow(String row);
     int setSeatNum(int num);
     boolean setActive(boolean active);
+    String toString();
 
 }

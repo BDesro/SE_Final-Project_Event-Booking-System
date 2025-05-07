@@ -1,6 +1,7 @@
 package edu.westfieldstate.eticketmanager.controller;
 import edu.westfieldstate.eticketmanager.core.SceneID;
 import edu.westfieldstate.eticketmanager.core.SceneManager;
+import edu.westfieldstate.eticketmanager.util.SharedSeatingInfo;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -21,12 +22,10 @@ public class CheckoutController {
     @FXML
     Button confirmPurchase;
 
-    MainSeatingController mainStuff = new MainSeatingController();
-
     @FXML
     public void initialize(){
-        checkoutSeats = mainStuff.allSeats();
-        checkPrice = mainStuff.getTotal();
+        checkoutSeats.getItems().addAll(SharedSeatingInfo.getSeatList().getItems());
+        checkPrice = SharedSeatingInfo.getTotalPrice();
         checkoutPrice.setText("Total Checkout Price: $" + checkPrice);
 
         if(yes.isSelected()) //Makes sure bot the chck boxes are not selected
