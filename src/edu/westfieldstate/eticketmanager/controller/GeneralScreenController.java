@@ -199,6 +199,11 @@ public class GeneralScreenController
         eventDetailsVBox.setVisible(visibility);
     }
 
+    public void onGetTicketsClick(ActionEvent e)
+    {
+        SceneManager.switchTo(SceneID.SEAT_CHART);
+    }
+
     @FXML
     public void updateTable(ActionEvent e)
     {

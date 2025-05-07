@@ -19,6 +19,10 @@ public class SharedSeatingInfo {
         SharedSeatingInfo.seatList = seatList;
     }
 
+    public static void clearSeatList() {
+        seatList.getItems().clear();
+    }
+
     public static Double getTotalPrice() {
         return totalPrice;
     }

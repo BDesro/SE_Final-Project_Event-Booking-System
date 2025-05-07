@@ -23,7 +23,7 @@ public class MainSeatingController { //This class is going to handle the mutlipl
     private GridPane seatLayout;
     @FXML private Label totalPrint;
     @FXML
-    ListView seatList;
+    ListView<Seat> seatList;
     public void updateTotal() {
         totalPrint.setText("Total: $" + total);
     }
@@ -48,13 +48,14 @@ public class MainSeatingController { //This class is going to handle the mutlipl
         seatList.getItems().setAll(selected);
     }
 
-    public ListView allSeats (){
+    public ListView<Seat> allSeats (){
         return seatList;
     }
 
     @FXML
     public void initialize() {
         seatLayout.getChildren().clear();
+        SeatController.getSelectSeat().clear();
         Map<Character, Integer> sectionColumnTracker = new HashMap<>();
         try {
             SeatController seatController = new SeatController();

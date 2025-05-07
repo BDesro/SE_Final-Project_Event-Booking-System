@@ -20,6 +20,6 @@ public class purchaseImage {
     public void initialize(){
         checkMark.setImage(new Image(getClass().getResource("/edu/westfieldstate/eticketmanager/resources/greenCheckMark.png").toExternalForm()));
         backToGeneral.setOnAction(e -> SceneManager.switchTo(SceneID.GENERAL_SCREEN));
-        GifUtil.loadRandomGifIntoImageView(gifView, "celebrate");
+        GifUtil.loadRandomGifIntoImageView(gifView);
     }
 }
