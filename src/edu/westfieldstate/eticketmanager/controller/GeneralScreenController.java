@@ -60,10 +60,6 @@ public class GeneralScreenController
         initializeTableView();
 
         setEventDetailsVisibility(false);
-
-        //This is here temporarily to show that the API works, it will go in the checkout screen
-        //for when a purchase is complete.
-        GifUtil.loadRandomGifIntoImageView(gifView);
     }
 
     public void getActiveUser()
