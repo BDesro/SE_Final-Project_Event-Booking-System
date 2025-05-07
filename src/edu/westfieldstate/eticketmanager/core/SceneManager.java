@@ -74,7 +74,7 @@ public class SceneManager
                 }
                 case SQL_PASSWORD ->
                 {
-                    scene = new Scene(loadFXML("/edu/westfieldstate/eticketmanager/view/sql-view.fxml"), resX, resY);
+                    scene = new Scene(loadFXML("/edu/westfieldstate/eticketmanager/view/sql-view.fxml"), resX, (resY*.75));
                     stage.setTitle("Enter Your SQL Password");
                 }
                 case PURCHASE_DONE ->
