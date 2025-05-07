@@ -37,3 +37,5 @@
 - [ ] Green-Black Colors
 - [x] Left Buttons Right Everything Else
 - [ ] Main Screen (Company Logo, Buttons to login, guest login, etc.)  
+
+java --module-path [File Path To Your Javafx SDK lib Folder] --add-modules javafx.controls,javafx.fxml -jar [File Path To The .jar]
