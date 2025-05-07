@@ -71,6 +71,7 @@ public class UserProfileController implements Initializable {
         avatarIMG.setImage(new Image(AvatarManager.getAvatarLocation(activeUser.getAvatar())));
         userCC.setText("Please Enter Your Credit Card Info; We Will Be Selling It On The Black Market");
         avatarBox.getItems().addAll(Avatar.getAll());
+        nickNameBox.setText(activeUser.getNickName());
     }
     //==================================================================================================================
     //                                             DATABASE FUNCTIONS
@@ -98,21 +99,26 @@ public class UserProfileController implements Initializable {
 
     public void updateActiveUser()
     {
-        String query = "UPDATE users SET nickname = ?, avatar = ? WHERE is_active = 1;";
-        try(Connection connection = JDBC.getConnection())
+        if (nickNameBox.getText().isEmpty())
         {
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1,nickNameBox.getText());
-            statement.setString(2, String.valueOf(activeUser.getAvatar()));
-            statement.executeUpdate();
-            successLabel.setText("Profile Saved");
-            statement.close();
-            userNickName.setText(nickNameBox.getText());
-        }
-        catch (Exception e)
-        {
+            errorLabel.setText("You Cannot Have An Empty Nick Name");
             successLabel.setText("");
-            errorLabel.setText("Cannot Save Profile: " + e.getMessage());
+        }
+        else {
+            String query = "UPDATE users SET nickname = ?, avatar = ? WHERE is_active = 1;";
+            try (Connection connection = JDBC.getConnection()) {
+                PreparedStatement statement = connection.prepareStatement(query);
+                statement.setString(1, nickNameBox.getText());
+                statement.setString(2, String.valueOf(activeUser.getAvatar()));
+                statement.executeUpdate();
+                successLabel.setText("Profile Saved");
+                errorLabel.setText("");
+                statement.close();
+                userNickName.setText(nickNameBox.getText());
+            } catch (Exception e) {
+                successLabel.setText("");
+                errorLabel.setText("Cannot Save Profile: " + e.getMessage());
+            }
         }
 
     }

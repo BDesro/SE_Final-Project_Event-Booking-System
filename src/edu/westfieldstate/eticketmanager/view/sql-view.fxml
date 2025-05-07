@@ -4,31 +4,40 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" scaleShape="false" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westfieldstate.eticketmanager.controller.SqlViewController">
    <children>
-      <Button layoutX="240.0" layoutY="230.0" mnemonicParsing="false" onAction="#submitPassword" prefHeight="106.0" prefWidth="175.0" text="SUBMIT">
-         <font>
-            <Font size="32.0" />
-         </font>
-      </Button>
-      <TextArea fx:id="passwordBox" layoutX="95.0" layoutY="135.0" prefHeight="39.0" prefWidth="491.0" promptText="Enter Password Here...">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </TextArea>
-      <Text layoutX="115.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please Enter Your MySQL Workbench Password." textAlignment="CENTER">
-         <font>
-            <Font size="50.0" />
-         </font>
-      </Text>
-      <Text fill="RED" layoutX="92.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ENTERING THE WRONG PASSWORD WILL RESULT IN OMNI-VENT TO NOT WORK CORRECTLY!!!" />
-      <Label fx:id="errorLabel" layoutX="10.0" layoutY="352.0" text="ENTER A PASSOWRD OR I WILL GO PLAY IN TRAFFIC" textFill="RED" visible="false">
-         <font>
-            <Font size="28.0" />
-         </font>
-      </Label>
+      <VBox layoutX="55.0" layoutY="167.0" AnchorPane.bottomAnchor="167.0" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="167.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Please Enter Your MySQL Workbench Password." textAlignment="CENTER" translateX="55.0">
+               <font>
+                  <Font size="50.0" />
+               </font>
+            </Text>
+            <TextArea fx:id="passwordBox" prefHeight="39.0" prefWidth="491.0" promptText="Enter Password Here...">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </TextArea>
+            <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="ENTERING THE WRONG PASSWORD WILL RESULT IN OMNI-VENT TO NOT WORK CORRECTLY!!!" textAlignment="CENTER" translateX="220.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Button mnemonicParsing="false" onAction="#submitPassword" prefHeight="106.0" prefWidth="175.0" text="SUBMIT" translateX="500.0">
+               <font>
+                  <Font size="32.0" />
+               </font>
+            </Button>
+            <Label fx:id="errorLabel" text="ENTER A PASSOWRD OR I WILL GO PLAY IN TRAFFIC" textFill="RED" translateX="300.0" visible="false">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>
