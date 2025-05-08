@@ -39,6 +39,21 @@ public class LoginPage {
         root.setPadding(new Insets(20));
         root.getChildren().addAll(usernameLabel, username, passwordLabel, password,
                 login, guestLogIn, createNewAccount);
+        //Sets the background to a dark greay
+        root.setStyle("-fx-background-color: #121212;");
+
+        //Labels are white
+        usernameLabel.setStyle("-fx-text-fill: white;");
+        passwordLabel.setStyle("-fx-text-fill: white;");
+
+        //Text in texftfield is what, darker greay border color and lighter greay backgrounf
+        username.setStyle("-fx-background-color: #1e1e1e; -fx-text-fill: white; -fx-border-color: #333;");
+        password.setStyle("-fx-background-color: #1e1e1e; -fx-text-fill: white; -fx-border-color: #333;");
+
+        //Color for buttons, background is spotify green with black text and bold font
+        login.setStyle("-fx-background-color: #1DB954; -fx-text-fill: black; -fx-font-weight: bold;");
+        guestLogIn.setStyle("-fx-background-color: #1DB954; -fx-text-fill: black; -fx-font-weight: bold;");
+        createNewAccount.setStyle("-fx-background-color: #1DB954; -fx-text-fill: black; -fx-font-weight: bold;");
 
         login.setOnAction(e ->{
             String user = username.getText();
