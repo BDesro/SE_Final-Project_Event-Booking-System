@@ -143,7 +143,7 @@
                   <Insets left="10.0" right="10.0" />
                </padding>
             </HBox>
-            <Button mnemonicParsing="false" text="Get Tickets" onAction="#onGetTicketsClick">
+            <Button mnemonicParsing="false" onAction="#onGetTicketsClick" text="Get Tickets">
                <VBox.margin>
                   <Insets left="10.0" right="10.0" />
                </VBox.margin>
@@ -153,5 +153,6 @@
             </Button>
          </children>
       </VBox>
+      <Button layoutX="386.0" layoutY="218.0" mnemonicParsing="false" onAction="#helpBox" style="-fx-background-color: #1DB954; -fx-font-weight: bold; -fx-text-fill: black;" text="Need Help?" />
    </children>
 </AnchorPane>
