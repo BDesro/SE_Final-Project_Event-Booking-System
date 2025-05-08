@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westfieldstate.eticketmanager.controller.purchaseImage">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #1e1e1e;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westfieldstate.eticketmanager.controller.purchaseImage">
    <children>
       <Text fill="#50d040" layoutX="37.0" layoutY="678.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Purchase Confirmed!!!!" underline="true" wrappingWidth="445.81634521484375">
          <font>
@@ -14,9 +14,9 @@
          </font>
       </Text>
       <ImageView fx:id="gifView" fitHeight="640.0" fitWidth="1140.0" layoutX="401.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="backToGeneral" layoutX="463.0" layoutY="649.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="182.0" text="Return to Events" />
+      <Button fx:id="backToGeneral" layoutX="463.0" style="-fx-background-color: #1DB954; -fx-text-fill: black; -fx-font-weight: bold;" layoutY="649.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="182.0" text="Return to Events" />
       <ImageView fx:id="checkMark" fitHeight="56.0" fitWidth="79.0" layoutX="684.0" layoutY="645.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="19.0" AnchorPane.leftAnchor="684.0" AnchorPane.rightAnchor="517.5999999999999" AnchorPane.topAnchor="645.0" />
-      <Text layoutX="25.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OMNI SAYS:">
+      <Text layoutX="25.0" layoutY="139.0" style="-fx-text-fill: #7fe856" strokeType="OUTSIDE" strokeWidth="0.0" text="OMNI SAYS:">
          <font>
             <Font size="64.0" />
          </font>
