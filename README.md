@@ -38,4 +38,7 @@
 - [x] Left Buttons Right Everything Else
 - [ ] Main Screen (Company Logo, Buttons to login, guest login, etc.)  
 
-java --module-path [File Path To Your Javafx SDK lib Folder] --add-modules javafx.controls,javafx.fxml -jar [File Path To The .jar]
+TYPE THIS INTO NOTEPAD AND INSERT CHANGE TO LOCATION FOR YOUR COMPUTER, ONCE DONE SAVE IT AS A '.bat' FILE AND OPEN THAT FILE TO RUN THIS
+@echo off
+java --module-path "C:\Program Files\Java\javafx-sdk-24\lib" --add-modules javafx.controls,javafx.fxml -jar [LOCATION OF THE .jar FILE]
+pause
