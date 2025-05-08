@@ -4,6 +4,7 @@ import edu.westfieldstate.eticketmanager.core.SceneManager;
 import edu.westfieldstate.eticketmanager.model.Seat;
 import edu.westfieldstate.eticketmanager.util.JDBC;
 import edu.westfieldstate.eticketmanager.util.SharedSeatingInfo;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -110,4 +111,8 @@ public class MainSeatingController { //This class is going to handle the mutlipl
         }
     }
 
+    public void goBackToGeneral(ActionEvent e)
+    {
+        SceneManager.switchTo(SceneID.GENERAL_SCREEN);
+    }
 }
