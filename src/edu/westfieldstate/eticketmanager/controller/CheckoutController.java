@@ -7,11 +7,15 @@ import edu.westfieldstate.eticketmanager.resources.Avatar;
 import edu.westfieldstate.eticketmanager.util.JDBC;
 import edu.westfieldstate.eticketmanager.util.SharedSeatingInfo;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.fxml.FXML;
+import javafx.stage.Stage;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -90,6 +94,19 @@ public class CheckoutController {
             return rs.getInt(1);
         } catch (Exception ex) {
             throw new RuntimeException(ex);
+        }
+    }
+
+    public void helpBox(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/westfieldstate/eticketmanager/view/help-view.fxml"));
+            Parent root = loader.load();
+            Stage helpStage = new Stage();
+            helpStage.setTitle("Help Screen");
+            helpStage.setScene(new Scene(root));
+            helpStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

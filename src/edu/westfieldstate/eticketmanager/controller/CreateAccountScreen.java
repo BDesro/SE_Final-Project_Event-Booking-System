@@ -45,6 +45,13 @@ public class CreateAccountScreen {
 
         Button returnToLogIn = new Button ("Back to Log In");
         Button submitNewAccount = new Button("Submit New Account");
+        Button help = new Button("Help");
+
+        help.setStyle("-fx-background-color: #1DB954; -fx-text-fill: black; -fx-font-weight: bold;");
+        help.setOnAction(e ->{
+            AdminController controller = new AdminController();
+            controller.helpBox();
+        });
 
         newPass.textProperty().addListener((observed, old, newValue) -> {
             double strength = calculateStrength(newValue);
@@ -123,7 +130,7 @@ public class CreateAccountScreen {
         HBox emailRow = new HBox(10, newEmailLabel, newEmail);
         VBox passRow = new VBox(5, new HBox(10, newPassLabel, newPass), passMessage, strengthBar, strengthLabel);
         HBox buttonRow = new HBox(10, submitNewAccount, returnToLogIn);
-        root.getChildren().addAll(userRow, emailRow, passRow, buttonRow, message);
+        root.getChildren().addAll(userRow, emailRow, passRow, buttonRow, help, message);
         root.setStyle("-fx-background-color: #121212;");
 
         newUserLabel.setStyle("-fx-text-fill: white;");

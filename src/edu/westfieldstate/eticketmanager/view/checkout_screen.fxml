@@ -6,13 +6,14 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="290.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westfieldstate.eticketmanager.controller.CheckoutController">
+<AnchorPane prefHeight="290.0" prefWidth="600.0" style="-fx-background-color: #121212;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westfieldstate.eticketmanager.controller.CheckoutController">
    <children>
       <ListView fx:id="checkoutSeats" layoutX="371.0" layoutY="54.0" prefHeight="200.0" prefWidth="200.0" />
-      <Label layoutX="371.0" layoutY="25.0" prefHeight="17.0" prefWidth="73.0" text="Your Seats:" />
-      <Label fx:id="checkoutPrice" layoutX="26.0" layoutY="34.0" prefHeight="17.0" text="Your Total:" textOverrun="CLIP" />
-      <Label layoutX="26.0" layoutY="70.0" prefHeight="17.0" prefWidth="165.0" text="Use associating credit card?" />
-      <CheckBox fx:id="yes" layoutX="27.0" layoutY="94.0" mnemonicParsing="false" text="Yes" />
-      <Button fx:id="confirmPurchase" layoutX="15.0" layoutY="185.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="143.0" text="Confirm Purchase" />
+      <Label layoutX="371.0" layoutY="25.0" prefHeight="17.0" prefWidth="73.0" text="Your Seats:" textFill="WHITE" />
+      <Label fx:id="checkoutPrice" layoutX="26.0" layoutY="34.0" prefHeight="17.0" text="Your Total:" textFill="WHITE" textOverrun="CLIP" />
+      <Label layoutX="26.0" layoutY="70.0" prefHeight="17.0" prefWidth="165.0" text="Use associating credit card?" textFill="WHITE" />
+      <CheckBox fx:id="yes" layoutX="27.0" layoutY="94.0" mnemonicParsing="false" text="Yes" textFill="WHITE" />
+      <Button fx:id="confirmPurchase" layoutX="15.0" layoutY="185.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="143.0" style="-fx-background-color: #1DB954; -fx-font-weight: BOLD; -fx-text-fill: black;" text="Confirm Purchase" />
+      <Button layoutX="174.0" layoutY="220.0" mnemonicParsing="false" onAction="#helpBox" prefHeight="0.0" prefWidth="95.0" style="-fx-background-color: #1DB954; -fx-font-weight: bold; -fx-text-fill: black;" text="Need Help?" />
    </children>
 </AnchorPane>

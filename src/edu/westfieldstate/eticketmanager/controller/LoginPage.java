@@ -32,13 +32,13 @@ public class LoginPage {
 
         Button login = new Button("Login");
         Button createNewAccount = new Button ("Make a new account"); //Case to add to user table with set action
-
+        Button help = new Button("Help");
         Button guestLogIn = new Button("Log In As Guest");
 
         VBox root = new VBox(10);
         root.setPadding(new Insets(20));
         root.getChildren().addAll(usernameLabel, username, passwordLabel, password,
-                login, guestLogIn, createNewAccount);
+                login, guestLogIn, createNewAccount, help);
         //Sets the background to a dark greay
         root.setStyle("-fx-background-color: #121212;");
 
@@ -54,6 +54,11 @@ public class LoginPage {
         login.setStyle("-fx-background-color: #1DB954; -fx-text-fill: black; -fx-font-weight: bold;");
         guestLogIn.setStyle("-fx-background-color: #1DB954; -fx-text-fill: black; -fx-font-weight: bold;");
         createNewAccount.setStyle("-fx-background-color: #1DB954; -fx-text-fill: black; -fx-font-weight: bold;");
+        help.setStyle("-fx-background-color: #1DB954; -fx-text-fill: black; -fx-font-weight: bold;");
+        help.setOnAction(e ->{
+            AdminController controller = new AdminController();
+            controller.helpBox();
+        });
 
         login.setOnAction(e ->{
             String user = username.getText();
