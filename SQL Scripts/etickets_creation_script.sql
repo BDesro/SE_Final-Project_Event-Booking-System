@@ -167,3 +167,17 @@ CREATE VIEW user_event AS
     FROM users u JOIN bookings b ON u.user_id = b.user_id
 				 JOIN event_list el ON b.event_id = el.event_id
 ) ;
+
+INSERT INTO venues (venue_name, address) VALUES
+('Omni Dome', '123 Main St, Metro City'),
+('Dimmsdale Dimmadome', '456 Victory Blvd, Dimmsdale'),
+('Uncle Jerry’s Basement (Legally a Venue)', '13 Suspicion St, Probably Legal, USA'),
+('Spirit Halloween (Still Here in July)', '125 Haunt Plaza, Eternal Lease, USA');
+
+INSERT INTO event_list (venue_id, event_name, event_description, is_active, event_date, start_time, end_time) VALUES
+(1, 'Tax Evasion for Beginners', 'A 3-hour workshop taught by someone definitely not a CPA. Bring cash.', 1, '2025-06-22', '18:00:00', '21:00:00'),
+(2, 'Live Action Emotional Baggage Claim', 'Reenact losing your luggage, except it’s your childhood trauma.', 1, '2025-07-02', '19:00:00', '22:00:00'),
+(3, 'Speed Dating But It’s a Job Interview', 'Answer “Where do you see this relationship in 5 years?” in under 30 seconds.', 1, '2025-07-10', '20:00:00', '22:00:00'),
+(4, 'PowerPoint Night: Defend the Indefensible', 'Can you convince a crowd that pineapple belongs on tacos? Now’s your chance.', 1, '2025-07-15', '19:30:00', '21:30:00'),
+(1, 'Cat Yoga Featuring Zero Trained Cats', 'It’s just a yoga class but 10 stray cats might show up. We don’t know.', 1, '2025-07-20', '08:00:00', '09:30:00'),
+(2, 'AI vs Human: Who Can Write Worse Poetry?', 'You vs a neural network in a haiku deathmatch. No winners, only cringe.', 1, '2025-08-01', '18:00:00', '20:00:00');
