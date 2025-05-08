@@ -34,7 +34,7 @@ public class CreateAccountScreen {
         strengthBar.setPrefWidth(200);
         strengthBar.setStyle("-fx-accent: red;");
         Label strengthLabel = new Label("Strength: ");
-        strengthLabel.setStyle("-fx-text-fill: red;");
+        strengthLabel.setStyle(" -fx-text-fill: red;");
 
         strengthBar.setVisible(false);
         strengthBar.setManaged(false);
@@ -47,11 +47,6 @@ public class CreateAccountScreen {
         Button submitNewAccount = new Button("Submit New Account");
         Button help = new Button("Help");
 
-        help.setStyle("-fx-background-color: #1DB954; -fx-text-fill: black; -fx-font-weight: bold;");
-        help.setOnAction(e ->{
-            AdminController controller = new AdminController();
-            controller.helpBox();
-        });
 
         newPass.textProperty().addListener((observed, old, newValue) -> {
             double strength = calculateStrength(newValue);
@@ -124,13 +119,18 @@ public class CreateAccountScreen {
         });
         returnToLogIn.setOnAction(e ->
             SceneManager.switchTo(SceneID.LOGIN_SCREEN));
+        help.setStyle("-fx-background-color: #1DB954; -fx-text-fill: black; -fx-font-weight: bold;");
+        help.setOnAction(e ->{
+            AdminController controller = new AdminController();
+            controller.helpBox();
+        });
         VBox root = new VBox(15);
         root.setPadding(new Insets(20));
         HBox userRow = new HBox(10, newUserLabel, newUser);
         HBox emailRow = new HBox(10, newEmailLabel, newEmail);
         VBox passRow = new VBox(5, new HBox(10, newPassLabel, newPass), passMessage, strengthBar, strengthLabel);
-        HBox buttonRow = new HBox(10, submitNewAccount, returnToLogIn);
-        root.getChildren().addAll(userRow, emailRow, passRow, buttonRow, help, message);
+        HBox buttonRow = new HBox(10, submitNewAccount, returnToLogIn, help);
+        root.getChildren().addAll(userRow, emailRow, passRow, buttonRow, message);
         root.setStyle("-fx-background-color: #121212;");
 
         newUserLabel.setStyle("-fx-text-fill: white;");
@@ -142,7 +142,8 @@ public class CreateAccountScreen {
         newPass.setStyle("-fx-background-color: #1e1e1e; -fx-text-fill: white; -fx-border-color: #333;");
         submitNewAccount.setStyle("-fx-background-color: #1DB954; -fx-text-fill: black; -fx-font-weight: bold;");
         returnToLogIn.setStyle("-fx-background-color: #1DB954; -fx-text-fill: black; -fx-font-weight: bold;");
-        strengthBar.setStyle("-fx-background-color: #1DB954;");
+        strengthBar.setStyle("-fx-background-color: #1e1e1e;");
+
         
         return root;
     }
