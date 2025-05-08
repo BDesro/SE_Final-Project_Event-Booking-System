@@ -15,17 +15,17 @@
 
 <VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westfieldstate.eticketmanager.controller.AdminController">
    <children>
-      <AnchorPane prefHeight="720.0" prefWidth="1280.0">
+      <AnchorPane prefHeight="719.0" prefWidth="1280.0" style="-fx-background-color: #121212;">
          <children>
-            <Button fx:id="createEventButton" layoutX="50.0" layoutY="40.0" mnemonicParsing="false" onAction="#createEvent" style="-fx-background-color: #21eb14;" text="Create Event" textFill="WHITE" />
+            <Button fx:id="createEventButton" layoutX="50.0" layoutY="40.0" mnemonicParsing="false" onAction="#createEvent" style="-fx-background-color: #1DB954; -fx-text-fill: BLACK; -fx-font-weight: bold;" text="Create Event" textFill="WHITE" />
             <TextArea fx:id="nameTextArea" layoutX="250.0" layoutY="40.0" prefHeight="45.0" prefWidth="200.0" promptText="Enter Event Name..." />
-            <TextArea fx:id="descriptionTextArea" layoutX="250.0" layoutY="140.0" prefHeight="45.0" prefWidth="200.0" promptText="Enter Event Description..." />
+            <TextArea fx:id="descriptionTextArea" layoutX="250.0" layoutY="140.0" prefHeight="45.0" prefWidth="200.0" promptText="Enter Event Description..." style="#1DB954: #1DB954;" />
             <DatePicker fx:id="datePicker" layoutX="250.0" layoutY="220.0" prefWidth="200.0" promptText="Select A Date" />
-            <Button layoutX="150.0" layoutY="680.0" mnemonicParsing="false" onAction="#goToLogin" text="Sign out" />
-            <Button fx:id="deleteButton" layoutX="50.0" layoutY="240.0" mnemonicParsing="false" onAction="#deleteEvent" text="Delete Event" />
-            <Button fx:id="editButton" layoutX="50.0" layoutY="160.0" mnemonicParsing="false" onAction="#editEvent" text="Edit Event" />
-            <Button fx:id="nextButton" layoutX="50.0" layoutY="120.0" mnemonicParsing="false" onAction="#nextEvent" text="Next Event" />
-            <GridPane alignment="TOP_CENTER" layoutX="677.0" layoutY="43.0" prefHeight="500.0" prefWidth="500.0">
+            <Button layoutX="160.0" layoutY="360.0" mnemonicParsing="false" onAction="#goToLogin" style="-fx-background-color: #1DB954; -fx-text-fill: black; -fx-font-weight: bold;" text="Sign out" />
+            <Button fx:id="deleteButton" layoutX="50.0" layoutY="240.0" mnemonicParsing="false" onAction="#deleteEvent" style="-fx-background-color: #1DB954; -fx-text-fill: black; -fx-font-weight: bold;" text="Delete Event" />
+            <Button fx:id="editButton" layoutX="50.0" layoutY="160.0" mnemonicParsing="false" onAction="#editEvent" style="-fx-background-color: #1DB954; -fx-text-fill: black; -fx-font-weight: bold;" text="Edit Event" />
+            <Button fx:id="nextButton" layoutX="50.0" layoutY="120.0" mnemonicParsing="false" onAction="#nextEvent" style="-fx-background-color: #1DB954; -fx-text-fill: black; -fx-font-weight: bold;" text="Next Event" />
+            <GridPane alignment="TOP_CENTER" layoutX="675.0" layoutY="23.0" prefHeight="500.0" prefWidth="500.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
@@ -45,67 +45,67 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="EVENT NAME " textAlignment="CENTER" translateX="170.0" GridPane.rowIndex="1">
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="EVENT NAME " textAlignment="CENTER" translateX="170.0" GridPane.rowIndex="1">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Text>
-                  <Label fx:id="name" text="NULL" GridPane.rowIndex="2">
+                  <Label fx:id="name" text="NULL" textFill="WHITE" GridPane.rowIndex="2">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="EVENT DESCRIPTION " translateX="140.0" wrappingWidth="228.6328125" GridPane.rowIndex="3">
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="EVENT DESCRIPTION " translateX="140.0" wrappingWidth="228.6328125" GridPane.rowIndex="3">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Text>
-                  <Label fx:id="description" text="NULL" GridPane.rowIndex="4">
+                  <Label fx:id="description" text="NULL" textFill="WHITE" GridPane.rowIndex="4">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="date" text="NULL" GridPane.rowIndex="6">
+                  <Label fx:id="date" text="NULL" textFill="WHITE" GridPane.rowIndex="6">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="EVENT DATE" textAlignment="CENTER" translateX="170.0" GridPane.rowIndex="5">
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="EVENT DATE" textAlignment="CENTER" translateX="170.0" GridPane.rowIndex="5">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="EVENT PUBLICITY " translateX="150.0" GridPane.rowIndex="7">
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="EVENT PUBLICITY " translateX="150.0" GridPane.rowIndex="7">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Text>
-                  <Label fx:id="publicity" text="NULL" GridPane.rowIndex="8">
+                  <Label fx:id="publicity" text="NULL" textFill="WHITE" GridPane.rowIndex="8">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CURRENT EVENT" translateX="130.0">
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="CURRENT EVENT" translateX="130.0">
                      <font>
                         <Font size="32.0" />
                      </font>
                   </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="VENUE NAME " translateX="160.0" GridPane.rowIndex="9">
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="VENUE NAME " translateX="160.0" GridPane.rowIndex="9">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="VENUE LOCATION" translateX="150.0" GridPane.rowIndex="11">
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="VENUE LOCATION" translateX="150.0" GridPane.rowIndex="11">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Text>
-                  <Label fx:id="venueName" text="NULL" GridPane.rowIndex="10">
+                  <Label fx:id="venueName" text="NULL" textFill="WHITE" GridPane.rowIndex="10">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="venueAddr" text="NULL" GridPane.rowIndex="12">
+                  <Label fx:id="venueAddr" text="NULL" textFill="WHITE" GridPane.rowIndex="12">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -115,9 +115,9 @@
             <Label fx:id="errorLabel" layoutX="250.0" layoutY="300.0" textFill="RED" />
             <Label fx:id="successLabel" layoutX="250.0" layoutY="300.0" textFill="LIME" />
             <Button fx:id="saveEventButton" layoutX="50.0" layoutY="40.0" mnemonicParsing="false" onAction="#saveEvent" text="Save Event To Database" visible="false" />
-            <Button fx:id="publishButton" layoutX="50.0" layoutY="200.0" mnemonicParsing="false" onAction="#publishEvent" text="Publish Event" />
+            <Button fx:id="publishButton" layoutX="50.0" layoutY="200.0" mnemonicParsing="false" onAction="#publishEvent" style="-fx-background-color: #1DB954; -fx-text-fill: black; -fx-font-weight: bold;" text="Publish Event" />
             <ComboBox fx:id="venuePicker" layoutX="250.0" layoutY="270.0" prefWidth="200.0" promptText="Select A Venue" />
-            <Button fx:id="createVenueButton" layoutX="50.0" layoutY="80.0" mnemonicParsing="false" onAction="#makeVenueBoxesVisible" text="Create Venue" />
+            <Button fx:id="createVenueButton" layoutX="50.0" layoutY="80.0" mnemonicParsing="false" onAction="#makeVenueBoxesVisible" style="-fx-background-color: #1DB954; -fx-text-fill: black; -fx-font-weight: bold;" text="Create Venue" />
             <TextArea fx:id="venueNameTextArea" layoutX="250.0" layoutY="40.0" prefHeight="45.0" prefWidth="200.0" promptText="Enter Venue Name..." visible="false" />
             <TextArea fx:id="venueLocationTextArea" layoutX="250.0" layoutY="140.0" prefHeight="45.0" prefWidth="200.0" promptText="Enter Venue Address..." visible="false" />
             <Button fx:id="saveVenueButton" layoutX="50.0" layoutY="40.0" mnemonicParsing="false" onAction="#saveVenue" text="Save Venue" visible="false" />
@@ -127,7 +127,7 @@
             <Label fx:id="enterVenueAddress" layoutX="300.0" layoutY="120.0" text="Enter Venue Address" visible="false" />
             <Label fx:id="enterEventVenue" layoutX="300.0" layoutY="250.0" text="Select Event Venue" visible="false" />
             <Label fx:id="enterEventDate" layoutX="300.0" layoutY="200.0" text="Enter Event Date" visible="false" />
-            <Button layoutX="50.0" layoutY="680.0" mnemonicParsing="false" onAction="#helpBox" text="Need Help?" />
+            <Button layoutX="39.0" layoutY="360.0" mnemonicParsing="false" onAction="#helpBox" style="-fx-background-color: #1DB954; -fx-text-fill: black; -fx-font-weight: bold;" text="Need Help?" />
          </children>
       </AnchorPane>
    </children>

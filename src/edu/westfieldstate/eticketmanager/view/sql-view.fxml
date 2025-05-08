@@ -12,7 +12,12 @@
    <children>
       <VBox layoutX="55.0" layoutY="167.0" AnchorPane.bottomAnchor="167.0" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="167.0">
          <children>
-            <Label style="-fx-background-color: #FFFFFF;" text="Please Enter Your MySQL Workbench Password." textAlignment="CENTER" translateX="55.0">
+            <Label text="WELCOME TO OMNI-VENT" textAlignment="CENTER" textFill="WHITE" translateX="370.0">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <Label text="Please Enter Your MySQL Workbench Password." textAlignment="CENTER" textFill="WHITE" translateX="55.0">
                <font>
                   <Font size="50.0" />
                </font>
@@ -27,7 +32,7 @@
                   <Font size="18.0" />
                </font>
             </Text>
-            <Button mnemonicParsing="false" onAction="#submitPassword" prefHeight="106.0" prefWidth="175.0" text="SUBMIT" translateX="500.0">
+            <Button mnemonicParsing="false" onAction="#submitPassword" prefHeight="106.0" prefWidth="175.0" style="-fx-background-color: #1DB954; -fx-text-fill: black;" text="SUBMIT" translateX="500.0">
                <font>
                   <Font size="32.0" />
                </font>

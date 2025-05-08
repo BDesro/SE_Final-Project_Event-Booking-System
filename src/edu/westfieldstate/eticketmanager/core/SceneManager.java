@@ -54,7 +54,7 @@ public class SceneManager
                 }
                 case ADMIN_SCREEN ->
                 {
-                    scene = new Scene(loadFXML("/edu/westfieldstate/eticketmanager/view/admin-view.fxml"), resX, resY);
+                    scene = new Scene(loadFXML("/edu/westfieldstate/eticketmanager/view/admin-view.fxml"), resX, 550);
                     stage.setTitle("Admin Screen");
                 }
                 case GENERAL_SCREEN ->
