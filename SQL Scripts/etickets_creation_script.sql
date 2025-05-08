@@ -180,4 +180,5 @@ INSERT INTO event_list (venue_id, event_name, event_description, is_active, even
 (3, 'Speed Dating But It’s a Job Interview', 'Answer “Where do you see this relationship in 5 years?” in under 30 seconds.', 1, '2025-07-10', '20:00:00', '22:00:00'),
 (4, 'PowerPoint Night: Defend the Indefensible', 'Can you convince a crowd that pineapple belongs on tacos? Now’s your chance.', 1, '2025-07-15', '19:30:00', '21:30:00'),
 (1, 'Cat Yoga Featuring Zero Trained Cats', 'It’s just a yoga class but 10 stray cats might show up. We don’t know.', 1, '2025-07-20', '08:00:00', '09:30:00'),
+(4, 'FNaF Roleplay: Survive the Shift','Dress up, roleplay, and try to survive your night shift with haunted animatronics. Flashlights encouraged, trauma unavoidable.', 1, '2025-08-10','21:00:00' ,'23:30:00'),
 (2, 'AI vs Human: Who Can Write Worse Poetry?', 'You vs a neural network in a haiku deathmatch. No winners, only cringe.', 1, '2025-08-01', '18:00:00', '20:00:00');
