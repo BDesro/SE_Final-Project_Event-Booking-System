@@ -1,3 +1,5 @@
+Run this in terminal after downloading the jar to open program: java --module-path "C:\Program Files\Java\javafx-sdk-24\lib" --add-modules javafx.controls,javafx.fxml -jar test.jar
+
 # SE_Final-Project_Event-Booking-System
 
 ## Product Backlog Sprint 2
