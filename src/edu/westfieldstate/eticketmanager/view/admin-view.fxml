@@ -121,12 +121,12 @@
             <TextArea fx:id="venueNameTextArea" layoutX="250.0" layoutY="40.0" prefHeight="45.0" prefWidth="200.0" promptText="Enter Venue Name..." visible="false" />
             <TextArea fx:id="venueLocationTextArea" layoutX="250.0" layoutY="140.0" prefHeight="45.0" prefWidth="200.0" promptText="Enter Venue Address..." visible="false" />
             <Button fx:id="saveVenueButton" layoutX="50.0" layoutY="40.0" mnemonicParsing="false" onAction="#saveVenue" text="Save Venue" visible="false" />
-            <Label fx:id="enterEventName" layoutX="300.0" layoutY="20.0" text="Enter Event Name" visible="false" />
-            <Label fx:id="enterEventDescription" layoutX="300.0" layoutY="120.0" text="Enter Event Description" visible="false" />
-            <Label fx:id="enterVenueName" layoutX="300.0" layoutY="20.0" text="Enter Venue Name" visible="false" />
-            <Label fx:id="enterVenueAddress" layoutX="300.0" layoutY="120.0" text="Enter Venue Address" visible="false" />
-            <Label fx:id="enterEventVenue" layoutX="300.0" layoutY="250.0" text="Select Event Venue" visible="false" />
-            <Label fx:id="enterEventDate" layoutX="300.0" layoutY="200.0" text="Enter Event Date" visible="false" />
+            <Label fx:id="enterEventName" layoutX="300.0" layoutY="20.0" text="Enter Event Name" textFill="WHITE" visible="false" />
+            <Label fx:id="enterEventDescription" layoutX="300.0" layoutY="120.0" text="Enter Event Description" textFill="WHITE" visible="false" />
+            <Label fx:id="enterVenueName" layoutX="300.0" layoutY="20.0" text="Enter Venue Name" textFill="WHITE" visible="false" />
+            <Label fx:id="enterVenueAddress" layoutX="300.0" layoutY="120.0" text="Enter Venue Address" textFill="WHITE" visible="false" />
+            <Label fx:id="enterEventVenue" layoutX="300.0" layoutY="250.0" text="Select Event Venue" textFill="WHITE" visible="false" />
+            <Label fx:id="enterEventDate" layoutX="300.0" layoutY="200.0" text="Enter Event Date" textFill="WHITE" visible="false" />
             <Button layoutX="39.0" layoutY="360.0" mnemonicParsing="false" onAction="#helpBox" style="-fx-background-color: #1DB954; -fx-text-fill: black; -fx-font-weight: bold;" text="Need Help?" />
          </children>
       </AnchorPane>
