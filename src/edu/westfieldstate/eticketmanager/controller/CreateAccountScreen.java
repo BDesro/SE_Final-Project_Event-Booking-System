@@ -29,6 +29,7 @@ public class CreateAccountScreen {
         Label passMessage = new Label("Must be 8+ characters long with 1 uppercase, special character, and number");
         passMessage.setStyle("-fx-text-fill: red;");
 
+
         ProgressBar strengthBar = new ProgressBar(0);
         strengthBar.setPrefWidth(200);
         strengthBar.setStyle("-fx-accent: red;");
@@ -123,6 +124,18 @@ public class CreateAccountScreen {
         VBox passRow = new VBox(5, new HBox(10, newPassLabel, newPass), passMessage, strengthBar, strengthLabel);
         HBox buttonRow = new HBox(10, submitNewAccount, returnToLogIn);
         root.getChildren().addAll(userRow, emailRow, passRow, buttonRow, message);
+        root.setStyle("-fx-background-color: #121212;");
+
+        newUserLabel.setStyle("-fx-text-fill: white;");
+        newEmailLabel.setStyle("-fx-text-fill: white;");
+        newPassLabel.setStyle("-fx-text-fill: white;");
+        strengthLabel.setStyle("-fx-text-fill: white;");
+        newUser.setStyle("-fx-background-color: #1e1e1e; -fx-text-fill: white; -fx-border-color: #333;");
+        newEmail.setStyle("-fx-background-color: #1e1e1e; -fx-text-fill: white; -fx-border-color: #333;");
+        newPass.setStyle("-fx-background-color: #1e1e1e; -fx-text-fill: white; -fx-border-color: #333;");
+        submitNewAccount.setStyle("-fx-background-color: #1DB954; -fx-text-fill: black; -fx-font-weight: bold;");
+        returnToLogIn.setStyle("-fx-background-color: #1DB954; -fx-text-fill: black; -fx-font-weight: bold;");
+        strengthBar.setStyle("-fx-background-color: #1DB954;");
         
         return root;
     }
