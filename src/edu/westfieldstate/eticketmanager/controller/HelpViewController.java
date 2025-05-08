@@ -63,6 +63,47 @@ public class HelpViewController {
         );
     }
     public void helpGeneral(){
-        helpLabel.setText("You Don't Need Help");
+        helpLabel.setText("""
+                This page allows you to browse events, view detailed information, and access ticket purchasing options.
+                🧑‍💼 User Info
+                    
+                    Welcome Banner: Displays your username and avatar.
+                    
+                    Click your username (green hyperlink) to open your profile.
+                    
+                📅 Event Table (Left Panel)
+                    
+                    This table lists events by:
+                    
+                        Event Name
+                    
+                        Description
+                    
+                        Date
+                    
+                    Select a row to view more information about an event in the right panel.
+                    
+                📍 Venue Filter
+                    
+                    Use the “Select a Venue” dropdown to filter events by location.
+                    
+                    Changing the selection automatically updates the event list.
+                    
+                ℹ️ Event Details (Right Panel)
+                    
+                When you select an event:
+                    
+                    Event Name appears in bold at the top.
+                    
+                    Description, Date, Venue Name, and Venue Address will fill in below.
+                    
+                    Press “Get Tickets” to proceed to the booking process.
+                    
+                🔄 Navigation Buttons
+                    
+                    Back to Login: Return to the login screen.
+                    
+                    Need Help?: Opens this help box.
+                """);
     }
 }

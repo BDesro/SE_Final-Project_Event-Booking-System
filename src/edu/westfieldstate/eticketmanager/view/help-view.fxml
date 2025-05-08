@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
@@ -24,6 +25,14 @@
             <Insets left="50.0" />
          </padding>
       </HBox>
-      <Label fx:id="helpLabel" layoutX="14.0" layoutY="49.0" prefHeight="348.0" prefWidth="570.0" textAlignment="JUSTIFY" textFill="WHITE" wrapText="true" />
+      <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="14.0" layoutY="49.0" prefHeight="348.0" prefWidth="570.0" style="-fx-background-color: black;">
+         <content>
+            <AnchorPane prefHeight="348.0" prefWidth="554.0" style="-fx-background-color: black;">
+               <children>
+                  <Label fx:id="helpLabel" style="-fx-text-fill: white;" textAlignment="JUSTIFY" textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
    </children>
 </AnchorPane>

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Text?>
 
-<VBox fx:id = "seatPane" xmlns:fx = "http://javafx.com/fxml" fx:controller = "edu.westfieldstate.eticketmanager.controller.SeatController"
-      spacing="2" alignment="CENTER" prefWidth="70" prefHeight="80" style="-fx-padding: 5;" onMouseClicked="#clickSeat">
-    <Rectangle fx:id="backrest" width="40" height="10" arcWidth="5" arcHeight="5" fill="LIGHTGREEN" />
+<VBox fx:id="seatPane" alignment="CENTER" onMouseClicked="#clickSeat" prefHeight="80" prefWidth="70" spacing="2" style="-fx-padding: 5;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="edu.westfieldstate.eticketmanager.controller.SeatController">
+    <Rectangle fx:id="backrest" arcHeight="5" arcWidth="5" fill="LIGHTGREEN" height="10" width="40" />
     <HBox alignment="CENTER" spacing="2">
-        <Rectangle fx:id="leftArm" width="5" height="25" arcWidth="2" arcHeight="2" fill="DARKGRAY" />
-        <Rectangle fx:id="base" width="40" height="25" arcWidth="5" arcHeight="5" fill="LIGHTGREEN" />
-        <Rectangle fx:id="rightArm" width="5" height="25" arcWidth="2" arcHeight="2" fill="DARKGRAY" />
+        <Rectangle fx:id="leftArm" arcHeight="2" arcWidth="2" fill="DARKGRAY" height="25" width="5" />
+        <Rectangle fx:id="base" arcHeight="5" arcWidth="5" fill="LIGHTGREEN" height="25" width="40" />
+        <Rectangle fx:id="rightArm" arcHeight="2" arcWidth="2" fill="DARKGRAY" height="25" width="5" />
     </HBox>
-    <Text fx:id="seatDesc" style="-fx-font-size: 12px;" />
+    <Text fx:id="seatDesc" fill="WHITE" style="-fx-font-size: 12px;" />
 
 </VBox>
