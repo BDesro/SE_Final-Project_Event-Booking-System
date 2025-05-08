@@ -71,10 +71,10 @@ public class LoginPage {
                 password.clear();
 
                 setActiveUser(user);
-                if(userRole.equals("user"))
-                    SceneManager.switchTo(SceneID.GENERAL_SCREEN);
-                else if(userRole.equals("admin"));
+                if(userRole.equals("admin"))
                     SceneManager.switchTo(SceneID.ADMIN_SCREEN);
+                else
+                    SceneManager.switchTo(SceneID.GENERAL_SCREEN);
             }
             else {
                 message.setText("Incorrect Username or password. Please try again");

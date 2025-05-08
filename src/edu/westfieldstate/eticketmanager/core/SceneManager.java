@@ -69,7 +69,7 @@ public class SceneManager
                 }
                 case USER_PROFILE ->
                 {
-                    scene = new Scene(loadFXML("/edu/westfieldstate/eticketmanager/view/profile-view.fxml"), resX, resY);
+                    scene = new Scene(loadFXML("/edu/westfieldstate/eticketmanager/view/profile-view.fxml"), 650, 500);
                     stage.setTitle("User Profile");
                 }
                 case SQL_PASSWORD ->

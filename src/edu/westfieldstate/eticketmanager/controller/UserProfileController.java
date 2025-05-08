@@ -7,13 +7,17 @@ import edu.westfieldstate.eticketmanager.resources.Avatar;
 import edu.westfieldstate.eticketmanager.resources.AvatarManager;
 import edu.westfieldstate.eticketmanager.util.JDBC;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -103,11 +107,11 @@ public class UserProfileController implements Initializable {
 
     public void updateActiveUser()
     {
+        if (!ccInfoBox.getText().isEmpty())
+            userCC.setVisible(true);
         if(activeUser.getUsername().equals("Guest User")) {
             errorLabel.setText("Guest Users Cannot Update Their Info");
             successLabel.setText("");
-            if (!ccInfoBox.getText().isEmpty())
-                userCC.setVisible(true);
         }
         else {
         if (nickNameBox.getText().isEmpty())
@@ -122,7 +126,6 @@ public class UserProfileController implements Initializable {
                 statement.setString(1, nickNameBox.getText());
                 statement.setString(2, String.valueOf(activeUser.getAvatar()));
                 statement.executeUpdate();
-                userCC.setVisible(true);
                 successLabel.setText("Profile Saved");
                 errorLabel.setText("");
                 statement.close();
@@ -156,7 +159,19 @@ public class UserProfileController implements Initializable {
         {
 
         }
-        //eventList
+    }
+
+    public void helpBox(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/westfieldstate/eticketmanager/view/help-view.fxml"));
+            Parent root = loader.load();
+            Stage helpStage = new Stage();
+            helpStage.setTitle("Help Screen");
+            helpStage.setScene(new Scene(root));
+            helpStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
