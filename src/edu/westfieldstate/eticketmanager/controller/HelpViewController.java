@@ -31,7 +31,7 @@ public class HelpViewController {
         );
     }
     public void helpCheckOut(){
-        helpLabel.setText("You Don't Need Help. Just Pay Us");
+        helpLabel.setText("Just Pay Us");
     }
     public void helpLogIn(){
         helpLabel.setText("You Don't Need Help");
