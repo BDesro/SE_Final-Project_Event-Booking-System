@@ -559,5 +559,6 @@ public class AdminController implements Initializable {
         }
     }
 
+    // THE PASSWORD FOR THE ADMIN ACCOUNT IS: 1234
 
 }
