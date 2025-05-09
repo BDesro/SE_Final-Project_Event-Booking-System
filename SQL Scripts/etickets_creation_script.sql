@@ -106,6 +106,23 @@ CREATE TABLE event_list
     ON DELETE CASCADE
     ON UPDATE CASCADE
 ) AUTO_INCREMENT = 1;
+-- -----------------------------------------------------
+-- Trigger blocking events schedule for the past
+-- -----------------------------------------------------
+DROP TRIGGER IF EXISTS previous_date_block;
+
+DELIMITER //
+CREATE TRIGGER previous_date_block
+BEFORE INSERT ON event_list
+FOR EACH ROW
+BEGIN
+	IF NEW.event_date < CURDATE() THEN
+    SIGNAL SQLSTATE '45000'
+    SET MESSAGE_TEXT = 'Make Sure Event Is Scheduled After Today';
+    END IF;
+END//
+
+DELIMITER ;
 
 
 -- -----------------------------------------------------
@@ -148,6 +165,7 @@ INSERT INTO users
     (username, password_hash, email_address, user_role)
 VALUES
     ('King Rhoam Bosphoramus Hyrule','$2a$10$sGToUTOEKwn7dYg79YobTO9dR3tksHqtke3M701Lu4fUH2/PGb59i', 'N/A1', 'admin');
+    -- The password is: 1234
 
 -- -----------------------------------------------------
 -- Adding View Table to Connect venue and event
